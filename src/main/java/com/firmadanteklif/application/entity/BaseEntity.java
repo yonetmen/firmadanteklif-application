@@ -20,7 +20,6 @@ import java.util.UUID;
 abstract class BaseEntity {
 
     @Id
-    @GeneratedValue
     private UUID guid;
 
     @CreatedDate
@@ -34,4 +33,9 @@ abstract class BaseEntity {
 
     @LastModifiedBy
     private String updatedBy;
+    
+    @PrePersist
+    public void generateGuid() {
+        guid = UUID.randomUUID();
+    }
 }
