@@ -1,8 +1,9 @@
 package com.firmadanteklif.application.entity;
 
-import com.firmadanteklif.application.entity.enums.VerificationType;
-
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "site_companies")
@@ -15,6 +16,4 @@ public class SiteCompany extends BaseEntity {
     private String confirmPassword;
     private String address;
     private String phoneNumber;
-    @Enumerated(EnumType.STRING)
-    private VerificationType verificationType;
 }
