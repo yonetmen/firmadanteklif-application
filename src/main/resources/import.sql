@@ -1,5 +1,5 @@
+DROP TABLE IF EXISTS firmadanteklif.cities;
 CREATE TABLE cities (id INTEGER PRIMARY KEY, name VARCHAR(30) NOT NULL);
-
 INSERT INTO cities (id, name) VALUES
   (1, 'İstanbul'),
   (2, 'Ankara'),
