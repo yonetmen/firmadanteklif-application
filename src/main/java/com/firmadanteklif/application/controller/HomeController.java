@@ -13,20 +13,18 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/home")
-public class IndexController {
+public class HomeController {
 
     private HomeService homeService;
-    private HomeRepository homeRepository;
 
     @Autowired
-    public IndexController(HomeService homeService, HomeRepository homeRepository) {
+    public HomeController(HomeService homeService) {
         this.homeService = homeService;
-        this.homeRepository = homeRepository;
     }
 
     @GetMapping("/cities")
     public String getAllCities(Model model) {
-        List<HomePage> all = homeRepository.findAll();
+        List<HomePage> all = homeService.findAll();
         model.addAttribute("cities", all);
         return "home";
     }
