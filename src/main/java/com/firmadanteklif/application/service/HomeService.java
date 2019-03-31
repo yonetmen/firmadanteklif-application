@@ -1,7 +1,7 @@
 package com.firmadanteklif.application.service;
 
-import com.firmadanteklif.application.entity.HomePage;
-import com.firmadanteklif.application.repository.HomeRepository;
+import com.firmadanteklif.application.entity.City;
+import com.firmadanteklif.application.repository.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,14 +10,14 @@ import java.util.List;
 @Service
 public class HomeService {
 
-    private HomeRepository homeRepository;
+    private CityRepository cityRepository;
 
     @Autowired
-    public HomeService(HomeRepository homeRepository) {
-        this.homeRepository = homeRepository;
+    public HomeService(CityRepository cityRepository) {
+        this.cityRepository = cityRepository;
     }
 
-    public List<HomePage> findAll() {
-        return homeRepository.findAll();
+    public List<City> getAllCityNames() {
+        return cityRepository.findAll();
     }
 }

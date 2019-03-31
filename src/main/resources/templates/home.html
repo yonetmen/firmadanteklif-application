@@ -1,10 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Firmadan Teklif | Ana sayfa</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{layout/main_layout :: head(title = 'Ana Sayfa')}">
 </head>
 <body>
+
+    <nav th:replace="~{layout/main_layout :: nav}"></nav>
+
+    <div class="container">
+
+        <jumbotron th:replace="~{layout/main_layout :: jumbotron}"></jumbotron>
+
+
+
+    </div>
+
+    <div th:replace="~{layout/main_layout :: footer}"></div>
 
 </body>
 </html>
