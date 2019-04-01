@@ -1,6 +1,7 @@
 package com.firmadanteklif.application.controller;
 
 import com.firmadanteklif.application.entity.City;
+import com.firmadanteklif.application.entity.SiteUser;
 import com.firmadanteklif.application.service.HomeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,7 @@ public class HomeController {
     public String getAllForHomePage(Model model) {
         List<City> all = homeService.getAllCityNames();
         model.addAttribute("cities", all);
+        model.addAttribute("loginUser", new SiteUser());
         return "home";
     }
 }
