@@ -1,20 +1,20 @@
 package com.firmadanteklif.application.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "home_page")
+@Table(name = "cities")
 @Data
-@AllArgsConstructor
-public class HomePage {
+public class City {
 
     @Id
     private int id;
+    @Column(name = "name")
     private String name;
 
 }

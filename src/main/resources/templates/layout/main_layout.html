@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:fragment="head(title)">
+    <meta charset="utf-8">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+          name='viewport'/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge,chrome=1">
+    <title th:text="${title}">Firmadan Teklif</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/css/mdb.min.css" rel="stylesheet">
+
+    <!--Change these icons later, Use something appropriated-->
+    <link rel="apple-touch-icon" sizes="76x76" th:href="@{img/apple-icon.png}"/>
+    <link rel="icon" sizes="76x76" th:href="@{img/favicon.png}"/>
+</head>
+<body>
+
+<!--Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark primary-color" th:fragment="navigation">
+    <a class="navbar-brand" href="#" th:text="#{company_name}"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
+            aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-user-alt"></i> Kullanici Girisi</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#"><i class="far fa-building"></i> Firma Girisi</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
+                   aria-haspopup="true"
+                   aria-expanded="false">
+                    <i class="fas fa-user-circle"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-dark"
+                     aria-labelledby="navbarDropdownMenuLink-333">
+                    <a class="dropdown-item " href="#">Profilim</a>
+                    <a class="dropdown-item" href="#">Mesajlarim</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Cikis</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!--/.Navbar -->
+
+<!-- Jumbotron -->
+<div class="jumbotron text-center" th:fragment="jumbotron">
+    <!-- Title -->
+    <h2 class="card-title h2" th:text="#{company_name}">FirmadanTeklif</h2>
+    <!-- Subtitle -->
+    <p class="blue-text my-4 font-weight-bold" style="font-size:120%;">Deneyimli ve köklu firmalar size yardima
+        hazir!</p>
+    <!-- Grid row -->
+    <div class="row d-flex justify-content-center">
+        <!-- Grid column -->
+        <div class="col-xl-7 pb-2">
+            <p class="card-text" style="font-size:120%;">FirmadanTeklif kendi alaninda uzman, her sektörden farkli
+                firmalari ayni cati altinda toplamayi hedefleyen ve bu sayede size ihtiyac duydugunuz her konuda, en
+                hizli ve guvenilir hizmeti sunmayi hedefleyen bir sitedir.</p>
+        </div>
+        <!-- Grid column -->
+    </div>
+    <!-- Grid row -->
+    <hr class="my-4">
+    <div class="pt-2">
+        <select class="btn btn-outline-primary waves-effect" data-live-search=true>
+            <option value="0">Sehir seciniz</option>
+            <option th:each="city : ${cities}"
+                    th:value="${city.id}"
+                    th:text="${city.name}"></option>
+        </select>
+        <button type="button" class="btn btn-outline-primary waves-effect">Ilan Ver <i class="fas fa-search ml-1"></i>
+        </button>
+    </div>
+</div>
+<!-- Jumbotron -->
+
+
+<footer class="footer" th:fragment="footer">
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js"></script>
+</footer>
+
+</body>
+</html>
