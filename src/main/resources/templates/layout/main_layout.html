@@ -73,7 +73,7 @@
     <!-- Grid row -->
     <br/>
     <div class="pt-2">
-        <form role="form" id="addNewPostForm" th:action="@{/add-new-post}" th:object="${selectedCity}" method="post">
+        <form role="form" id="addNewPostForm" th:action="@{/add-new-post}" th:object="${selectedCity}" th:method="post">
             <select class="btn waves-effect" data-live-search=true name="selectedCity">
                 <option disabled>Sehir seciniz</option>
                 <option th:each="city : ${cities}"
@@ -81,8 +81,7 @@
                         th:text="${city.name}"
                         th:data="${city.id}"></option>
             </select>
-            <!--<button type="button" class="btn text-white waves-effect" th:classappend="#{add_new_anons_button}">Ilan Ver <i class="fas fa-search ml-1"></i>-->
-            <input type="submit" class="btn text-white waves-effect" value="ILAN VER" th:classappend="#{add_new_anons_button}" />
+            <button type="submit" class="btn text-white waves-effect" th:classappend="#{add_new_anons_button}">Ilan Ver <i class="fas fa-search ml-1"></i></button>
         </form>
     </div>
 </div>
