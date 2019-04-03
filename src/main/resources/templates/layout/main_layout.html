@@ -23,7 +23,7 @@
 <body>
 
 <!--Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark primary-color" th:fragment="navigation">
+<nav class="navbar navbar-expand-lg navbar-dark" th:classappend="#{navbar_color}" th:fragment="navigation">
     <a class="navbar-brand" th:href="@{/}" th:text="#{company_name}"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -73,14 +73,17 @@
     <!-- Grid row -->
     <br/>
     <div class="pt-2">
-        <select class="btn btn-outline-primary waves-effect" data-live-search=true>
-            <option value="0">Sehir seciniz</option>
-            <option th:each="city : ${cities}"
-                    th:value="${city.id}"
-                    th:text="${city.name}"></option>
-        </select>
-        <button type="button" class="btn btn-outline-primary waves-effect">Ilan Ver <i class="fas fa-search ml-1"></i>
-        </button>
+        <form role="form" id="addNewPostForm" th:action="@{/add-new-post}" th:object="${selectedCity}" method="post">
+            <select class="btn waves-effect" data-live-search=true name="selectedCity">
+                <option disabled>Sehir seciniz</option>
+                <option th:each="city : ${cities}"
+                        th:value="${city.id}"
+                        th:text="${city.name}"
+                        th:data="${city.id}"></option>
+            </select>
+            <!--<button type="button" class="btn text-white waves-effect" th:classappend="#{add_new_anons_button}">Ilan Ver <i class="fas fa-search ml-1"></i>-->
+            <input type="submit" class="btn text-white waves-effect" value="ILAN VER" th:classappend="#{add_new_anons_button}" />
+        </form>
     </div>
 </div>
 <!-- Jumbotron -->
