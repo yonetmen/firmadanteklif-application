@@ -24,23 +24,20 @@
 
 <!--Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark primary-color" th:fragment="navigation">
-    <a class="navbar-brand" href="#" th:text="#{company_name}"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
-            aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" th:href="@{/}" th:text="#{company_name}"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
         <ul class="navbar-nav ml-auto nav-flex-icons">
             <li class="nav-item">
-                <a class="nav-link" href="#"><i class="fas fa-user-alt"></i> Kullanici Girisi</a>
+                <a class="nav-link" href="" data-toggle="modal" data-target="#modalLoginForm"><i class="fas fa-user-alt"></i> Kullanici Girisi</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"><i class="far fa-building"></i> Firma Girisi</a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
-                   aria-haspopup="true"
-                   aria-expanded="false">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-user-circle"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-dark"
@@ -57,7 +54,7 @@
 <!--/.Navbar -->
 
 <!-- Jumbotron -->
-<div class="jumbotron text-center" th:fragment="jumbotron">
+<div class="jumbotron text-center shadow-none" th:fragment="jumbotron">
     <!-- Title -->
     <h2 class="card-title h2" th:text="#{company_name}">FirmadanTeklif</h2>
     <!-- Subtitle -->
@@ -74,7 +71,7 @@
         <!-- Grid column -->
     </div>
     <!-- Grid row -->
-    <hr class="my-4">
+    <br/>
     <div class="pt-2">
         <select class="btn btn-outline-primary waves-effect" data-live-search=true>
             <option value="0">Sehir seciniz</option>
