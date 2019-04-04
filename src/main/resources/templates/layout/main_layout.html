@@ -31,10 +31,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
         <ul class="navbar-nav ml-auto nav-flex-icons">
             <li class="nav-item">
-                <a class="nav-link" href="" data-toggle="modal" data-target="#modalLoginForm"><i class="fas fa-user-alt"></i> Kullanici Girisi</a>
+                <a class="nav-link" href="" data-toggle="modal" data-target="#userLoginFormModal"><i class="fas fa-user-alt"></i> Uye Girisi</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><i class="far fa-building"></i> Firma Girisi</a>
+                <a class="nav-link" href="" data-toggle="modal" data-target="#companyLoginFormModal"><i class="far fa-building"></i> Firma Girisi</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -81,7 +81,7 @@
                         th:text="${city.name}"
                         th:data="${city.id}"></option>
             </select>
-            <button type="submit" class="btn text-white waves-effect" th:classappend="#{add_new_anons_button}">Ilan Ver <i class="fas fa-search ml-1"></i></button>
+            <button type="submit" class="btn text-white waves-effect" th:classappend="#{user_modal_buttons_color}">Ilan Ver <i class="fas fa-search ml-1"></i></button>
         </form>
     </div>
 </div>
