@@ -3,6 +3,7 @@ package com.firmadanteklif.application.controller;
 import com.firmadanteklif.application.entity.City;
 import com.firmadanteklif.application.entity.SiteUser;
 import com.firmadanteklif.application.service.HomeService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
+@Slf4j
 public class HomeController {
 
     private HomeService homeService;
@@ -34,8 +36,12 @@ public class HomeController {
 
     @PostMapping("/add-new-post")
     public String addNewPost(@ModelAttribute(value = "selectedCity") City selectedCityId) {
-        System.out.println("Selected City ID: " + selectedCityId.getId());
-        System.out.println("Selected City is: " + selectedCityId.getName());
+        log.info("Selected City is: " + selectedCityId.getId() + " - " + selectedCityId.getName());
+        if(selectedCityId.getId() == 0) {
+            return "redirect:/";
+        } else {
+            // Redirect user to "new post" page
+        }
         return "redirect:/";
     }
 }

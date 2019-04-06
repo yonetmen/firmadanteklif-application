@@ -17,16 +17,14 @@
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/css/mdb.min.css" rel="stylesheet">
 
-    <!--Change these icons later, Use something appropriated-->
-    <link rel="apple-touch-icon" sizes="76x76" th:href="@{img/apple-icon.png}"/>
-    <link rel="icon" sizes="76x76" th:href="@{img/favicon.png}"/>
+    <link rel="icon" sizes="16x16" th:href="@{/static/favicon.ico}"/>
 </head>
 <!--Head Fragment-->
 
 <body>
 
 <!--Navbar Fragment-->
-<nav class="navbar navbar-expand-lg navbar-dark" th:classappend="#{navbar_color}" th:fragment="navigation">
+<nav class="navbar navbar-expand-lg navbar-dark pt-4 pb-4" th:classappend="#{navbar_color}" th:fragment="navigation">
     <a class="navbar-brand" th:href="@{/}" th:text="#{company_name}"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -81,13 +79,13 @@
     <div class="pt-2">
         <form role="form" id="addNewPostForm" th:action="@{/add-new-post}" th:object="${selectedCity}" th:method="post">
             <select class="btn waves-effect" data-live-search=true name="selectedCity">
-                <option disabled>Sehir seciniz</option>
+                <option selected disabled>Sehir seciniz</option>
                 <option th:each="city : ${cities}"
                         th:value="${city.id}"
                         th:text="${city.name}"
                         th:data="${city.id}"></option>
             </select>
-            <button type="submit" class="btn text-white waves-effect" th:classappend="#{user_modal_buttons_color}">Ilan Ver <i class="fas fa-search ml-1"></i></button>
+            <button type="submit" class="btn text-white waves-effect" th:classappend="#{navbar_color}">Ilan Ver <i class="fas fa-search ml-1"></i></button>
         </form>
     </div>
 </div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:replace="~{layout/main_layout :: head(title = 'Ana Sayfa')}">
+<head th:replace="~{layout/main_layout :: head(title = 'FirmadanTeklif')}">
 </head>
 <body>
 
@@ -94,7 +94,7 @@
                 </div>
 
                 <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn text-white" th:classappend="#{user_login_modal_color}">GIRIS</button>
+                    <button class="btn text-white" th:classappend="#{user_modal_buttons_color}">GIRIS</button>
                 </div>
             </div>
         </div>
@@ -141,7 +141,7 @@
                         <a href="#" class="blue-text ml-1" data-dismiss="modal" data-toggle="modal" data-target="#userLoginFormModal">Uye girisi</a></p><br/>
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn text-white" th:classappend="#{user_register_modal_color}">UYE OL</button>
+                    <button class="btn text-white" th:classappend="#{user_modal_buttons_color}">UYE OL</button>
                 </div>
             </div>
         </div>
@@ -167,7 +167,7 @@
 
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
-                    <input type="submit" value="GÖNDER" class="btn text-white" th:classappend="#{user_forgot_pass_modal_color}"><i class="fas fa-paper-plane-o ml-1"></i></input>
+                    <input type="submit" value="GÖNDER" class="btn text-white" th:classappend="#{user_modal_buttons_color}"><i class="fas fa-paper-plane-o ml-1"></i></input>
                 </div>
             </div>
         </div>
