@@ -2,6 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
+<!--Head Fragment-->
 <head th:fragment="head(title)">
     <meta charset="utf-8">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
@@ -20,9 +21,11 @@
     <link rel="apple-touch-icon" sizes="76x76" th:href="@{img/apple-icon.png}"/>
     <link rel="icon" sizes="76x76" th:href="@{img/favicon.png}"/>
 </head>
+<!--Head Fragment-->
+
 <body>
 
-<!--Navbar -->
+<!--Navbar Fragment-->
 <nav class="navbar navbar-expand-lg navbar-dark" th:classappend="#{navbar_color}" th:fragment="navigation">
     <a class="navbar-brand" th:href="@{/}" th:text="#{company_name}"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,20 +43,23 @@
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-user-circle"></i>
                 </a>
-                <div class="dropdown-menu dropdown-menu-right dropdown-dark"
-                     aria-labelledby="navbarDropdownMenuLink-333">
-                    <a class="dropdown-item " href="#">Profilim</a>
-                    <a class="dropdown-item" href="#">Mesajlarim</a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-dark" aria-labelledby="navbarDropdownMenuLink-333">
+                    <a class="dropdown-item" href="#" onmouseover="this.style.backgroundColor='#4a148c';
+                    this.style.color='white'" onmouseleave="this.style.backgroundColor=''; this.style.color='';">Profilim</a>
+                    <a class="dropdown-item" href="#" onmouseover="this.style.backgroundColor='#4a148c';
+                    this.style.color='white'" onmouseleave="this.style.backgroundColor=''; this.style.color='';">Mesajlarim</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Cikis</a>
+                    <a class="dropdown-item" href="#" onmouseover="this.style.backgroundColor='#4a148c';
+                    this.style.color='white'" onmouseleave="this.style.backgroundColor=''; this.style.color='';">Cikis</a>
                 </div>
             </li>
         </ul>
     </div>
 </nav>
-<!--/.Navbar -->
+<!--Navbar Fragment-->
 
-<!-- Jumbotron -->
+
+<!-- Jumbotron Fragment-->
 <div class="jumbotron text-center shadow-none" th:fragment="jumbotron">
     <!-- Title -->
     <h2 class="card-title h2" th:text="#{company_name}">FirmadanTeklif</h2>
@@ -85,10 +91,76 @@
         </form>
     </div>
 </div>
-<!-- Jumbotron -->
+<!-- Jumbotron Fragment-->
 
 
-<footer class="footer" th:fragment="footer">
+<!--Footer Fragment-->
+<footer class="page-footer font-small blue-grey darken-3 pt-5" th:fragment="footer">
+
+        <!-- Footer Elements -->
+        <div class="container pb-4">
+
+            <!-- Grid row-->
+            <div class="row">
+                <!-- Grid column -->
+                <div class="col-md-4 mb-md-0 mb-4">
+                    <!-- Links -->
+                    <h5 class="text-uppercase">Firma</h5>
+                    <ul class="list-unstyled">
+                        <li class="pb-2"><a href="#">Hakkimizda</a></li>
+                        <li class="pb-2"><a href="#">Blog</a></li>
+                        <li class="pb-2"><a href="#">Kariyer</a></li>
+                        <li><a href="#">Iletisim</a></li>
+                    </ul>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-4 mb-md-0 mb-4">
+                    <!-- Links -->
+                    <h5 class="text-uppercase">Detaylar</h5>
+                    <ul class="list-unstyled">
+                        <li class="pb-2"><a href="#!">Destek hatti</a></li>
+                        <li class="pb-2"><a href="#!">Kadromuz</a></li>
+                        <li class="pb-2"><a href="#!">Kullanim sartlari</a></li>
+                        <li><a href="#!">Sik sorular Sorular</a></li>
+                    </ul>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-4 mb-md-0 mb-4">
+
+                    <!-- Links -->
+                    <h5 class="text-uppercase">Sosyal Media</h5>
+                        <!-- Facebook -->
+                        <a class="fb-ic"><i class="fab fa-facebook-f fa-lg white-text mr-md-5 mr-3 fa-2x pt-3"> </i></a>
+                        <!-- Twitter -->
+                        <a class="tw-ic"><i class="fab fa-twitter fa-lg white-text mr-md-5 mr-3 fa-2x pt-3"> </i></a>
+                        <!--Instagram-->
+                        <a class="ins-ic"><i class="fab fa-instagram fa-lg white-text mr-md-5 mr-3 fa-2x pt-3"> </i></a>
+                        <!--Blog-->
+                        <a class="ins-ic"><i class="fas fa-blog fa-lg white-text mr-md-5 mr-3 fa-2x pt-3"> </i></a>
+
+                        <form class="input-group pt-4">
+                            <input type="text" class="form-control form-control-sm" placeholder="Email" aria-label="Your email" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-sm btn-outline-white my-0" type="button">Haber et</button>
+                            </div>
+                        </form>
+                </div>
+                <!-- Grid column -->
+            </div>
+            <!-- Grid row-->
+        </div>
+        <!-- Footer Elements -->
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2019 Copyright:<a href="https://mdbootstrap.com/education/bootstrap/"> FirmadanTeklif.com</a>
+        </div>
+        <!-- Copyright -->
+
+
     <!-- JQuery -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- Bootstrap tooltips -->
@@ -101,6 +173,7 @@
     <script type="text/javascript"
             src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js"></script>
 </footer>
+<!--Footer Fragment-->
 
 </body>
 </html>
