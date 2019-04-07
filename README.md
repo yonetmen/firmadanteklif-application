@@ -30,7 +30,7 @@
 #### Now, we are going to install Maven (Project management tool)
 
 - Open your command line (Cmder)
-- Run: C:\> `C:\> choco install maven`
+- Run: C:\> `Y`
 - Restart your console and run `mvn -v` to verify installation.
 
 ___
