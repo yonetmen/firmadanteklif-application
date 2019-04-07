@@ -1,3 +1,40 @@
+# Setup envirenment (Prerequisites)
+
+1- Install the chocolatey
+-
+#### Chocolatey is a package manager for Windows. Let's use it!
+
+- Open your `cmd.exe` (Run as Administrator)
+- Go to the root of your C: drive `C:\>`
+- Copy `@"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"` and run it in the command promt to install Chocolatey onto your system.
+- After the installation is complete, restart your `cmd.exe` and type `choco -v` to verify the installation completed without a problem.
+
+2- Install Cmder
+-
+#### Using cmd.exe is not an alternative, you first thing to do is a download and install a good Console Emulator.
+
+- Open your `cmd.exe` (Run as Administrator) (for the last time)
+- Run: `C:\> choco install cmdermini`
+- Find the executable `Cmder.exe` file on your system and pin it to your taskbar for easy access.
+
+3- Install Java JDK 8
+-
+#### Now, we are ready to use Cmder to install all kind of applications from a command line.
+
+- Open your command line (Cmder)
+- Run: C:\> `choco install jdk8`
+- Restart your console and run `javac -version` to verify installation.
+
+4- Install Maven
+-
+#### Now, we are going to install Maven (Project management tool)
+
+- Open your command line (Cmder)
+- Run: C:\> `C:\> choco install maven`
+- Restart your console and run `mvn -v` to verify installation.
+
+___
+
 # How to install FirmadanTeklif
 
 1- Clone the project on your local pc
