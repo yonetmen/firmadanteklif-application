@@ -35,6 +35,7 @@
 #### At this point everything should be ready to start our application. In order to that go to Intellij and click on the little green play button (right under the top navigation menues) and watch the console . You should see something like this at the end of console output to confirm that everything worked fine.
 
 `Tomcat started on port(s): 8080 (http) with context path ''`
+
 `Started Application in 5.941 seconds (JVM running for 6.968)`
 
 Now you can open your browser and navigate to `http://localhost:8080` to test the application.
