@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS firmadanteklif.cities;
-CREATE TABLE cities (id INTEGER PRIMARY KEY, name VARCHAR(30) NOT NULL);
-INSERT INTO cities (id, name) VALUES
+CREATE TABLE cities (city_id INTEGER PRIMARY KEY, name VARCHAR(30) NOT NULL);
+INSERT INTO cities (city_id, name) VALUES
   (1, 'İstanbul'),
   (2, 'Ankara'),
   (3, 'İzmir'),
@@ -82,3 +82,49 @@ INSERT INTO cities (id, name) VALUES
   (79, 'Yalova'),
   (80, 'Yozgat'),
   (81, 'Zonguldak');
+
+DROP TABLE IF EXISTS firmadanteklif.categories;
+CREATE TABLE categories (category_id INTEGER PRIMARY KEY, name VARCHAR(50) NOT NULL);
+INSERT INTO categories (category_id, name) VALUES
+  (1, 'Ev temizligi'),
+  (2, 'Tasinma temizligi'),
+  (3, 'Ofis temizligi'),
+  (4, 'Magaza temizligi'),
+  (5, 'Apartman temizligi'),
+  (6, 'Is yeri temizligi'),
+  (7, 'Pencere temizligi'),
+  (8, 'Zemin temizligi'),
+  (9, 'Otel temizligi'),
+  (10, 'Restorant temizligi'),
+  (11, 'Depo temizligi'),
+  (12, 'Hali & Perde temizligi'),
+  (13, 'Arac temizligi'),
+  (14, 'Elbise temizligi'),
+  (15, 'Diger temizlik'),
+
+  (16, 'Ev tasima'),
+  (17, 'Esya tasima'),
+  (18, 'Ofis tasima'),
+  (19, 'Is yeri tasima'),
+  (20, 'Depo tasima'),
+  (21,	'Insaat malzeme tasima'),
+  (22, 'Diger tasima'),
+  (23, 'Moloz tasima'),
+
+  (24, 'Banyo yenileme'),
+  (25, 'Elektrik sistemi kurma'),
+  (26, 'Marangoz servisi'),
+  (27, 'Karo Fayans döseme'),
+  (28, 'Yerden isitma'),
+  (29, 'Yalitim'),
+  (30, 'Mutfat yenileme'),
+  (31, 'Boya badana'),
+  (32, 'Mobilya montaj'),
+  (33, 'Bina dis cephe tamir'),
+  (34, 'Havalandirma'),
+  (35, 'Cati tamir'),
+  (36, 'Temel atma'),
+  (37, 'Kapi pencere'),
+  (38, 'Duvar örme'),
+  (39, 'Yikim'),
+  (40, 'Gunes enerjisi');
