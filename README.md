@@ -11,7 +11,7 @@
 
 2- Install Cmder
 -
-#### Using cmd.exe is not an alternative, you first thing to do is a download and install a good Console Emulator.
+#### Using cmd.exe is not an alternative, first thing to do is download and install a good Console Emulator.
 
 - Open your `cmd.exe` (Run as Administrator) (for the last time)
 - Run: `C:\> choco install cmdermini`
@@ -19,7 +19,7 @@
 
 3- Install Java JDK 8
 -
-#### Now, we are ready to use Cmder to install all kind of applications from a command line.
+#### Now, we are ready to use Cmder to install all kind of applications from the command line.
 
 - Open your command line (Cmder)
 - Run: C:\> `choco install jdk8`
@@ -30,7 +30,7 @@
 #### Now, we are going to install Maven (Project management tool)
 
 - Open your command line (Cmder)
-- Run: C:\> `Y`
+- Run: `C:\> choco install maven`
 - Restart your console and run `mvn -v` to verify installation.
 
 ___
@@ -63,7 +63,7 @@ ___
 
 - Click [here](https://dev.mysql.com/downloads/file/?id=484920) and download the **mysql-installer-community-8.0.15.0.msi**
 - When you click on the link above, it will take you to mysql download page. At this point follow the instructions on this [youtube clip](https://youtu.be/u96rVINbAUI?t=80) from the current time. But read the next step before you doing that.
-- While you are watching it, when you come to [this point](https://youtu.be/u96rVINbAUI?t=150) you need to select one more component before continue to follow the instructions. You need to click on `MySQL Connectors`, expend the submenu of `Connector/J` and select the available version of that as well. Read next step as well.
+- While you are watching it, when you come to [this point](https://youtu.be/u96rVINbAUI?t=150) you need to select one more component before continue to follow the instructions. You need to click on `MySQL Connectors`, expend the submenu of `Connector/J` and select the available version as well. Read next step as well.
 - When you come to [this point](https://youtu.be/u96rVINbAUI?t=217) to choose a username and password, choose `admin` for both username and password since our application is configured to use these credentials to connect to the database.
 - When you complete installation and while your MySQL Workbench is open, click your `admin` connection to open up mysql console and type `CREATE SCHEMA firmadanteklif` and click `CTRL` + `Enter` in order to run the query & create the application database.
 
