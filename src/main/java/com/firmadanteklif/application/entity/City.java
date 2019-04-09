@@ -13,6 +13,7 @@ import javax.persistence.Table;
 public class City {
 
     @Id
+    @Column(name = "city_id")
     private int id;
     @Column(name = "name")
     private String name;
