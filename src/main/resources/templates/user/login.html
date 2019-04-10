@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="~{layout/main_layout :: head(title = 'Uye Girisi')}">
+</head>
+<body>
+
+<nav th:replace="~{layout/main_layout :: nav}"></nav>
+
+<div class="container"><!-- Container-->
+
+
+    <!--Login Form-->
+    <div class="center mt-5 pt-5 col-md-6 mb-5 pb-5 offset-md-3">
+        <form>
+            <div class="text-center">
+                <p class="h2 mb-4 font-weight-bold text-center pt-3 pb-3">Uye Girisi</p>
+            </div>
+
+            <div class="md-form mb-5">
+                <i class="fas fa-envelope prefix grey-text"></i>
+                <input type="email" id="userLoginFormEmail" class="form-control mb-4" placeholder="E-mail adresiniz">
+            </div>
+
+            <div class="md-form mb-5">
+                <i class="fas fa-lock prefix grey-text"></i>
+                <input type="password" id="userLoginFormPassword" class="form-control mb-4" placeholder="Sifreniz">
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <div>
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="defaultLoginFormRemember">
+                        <label class="custom-control-label" for="defaultLoginFormRemember">Beni Hatirla</label>
+                    </div>
+                </div>
+                <div>
+                    <a href="#" class="blue-text ml-1" data-toggle="modal" data-target="#userForgotPasswordModal">Sifremi unuttum</a></p>
+                    <!--<a href="">Sifremi unuttum!</a>-->
+                </div>
+            </div>
+
+            <button class="btn btn-deep-purple btn-block my-4" type="submit">Giris Yap</button>
+
+            <div class="text-center">
+                <p>Henuz uye degil misin?
+                    <a th:href="@{/user-register}">Uye Ol</a>
+                </p>
+            </div>
+        </form>
+    </div>
+    <!--Login Form-->
+
+    <!--User Sifre Hatirlatma Modal-->
+    <div class="modal fade" id="userForgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-center" th:classappend="#{user_forgot_pass_modal_color}">
+                    <h4 class="modal-title w-100 font-weight-bold text-white">Sifre Hatirlatma</h4>
+                    <button type="button" class="close text-white" data-dismiss="modal" data-toggle="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body mx-3">
+                    <div class="md-form mb-4">
+                        <i class="fas fa-envelope prefix grey-text"></i>
+                        <input type="email" id="user-forgot-password-input" class="form-control validate">
+                        <label data-error="hatali" data-success="gecerli" for="user-forgot-password-input">Email Adresiniz</label>
+                    </div>
+
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="submit" class="btn text-white waves-effect" th:classappend="#{user_modal_buttons_color}">Gönder</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--User Sifre Hatirlatma Modal-->
+
+    <br/><br/><br/><br/> <!-- Needed to avoid empty space below footer -->
+
+
+</div>  <!-- Container-->
+
+<div th:replace="~{layout/main_layout :: footer}"></div>
+
+</body>
+</html>

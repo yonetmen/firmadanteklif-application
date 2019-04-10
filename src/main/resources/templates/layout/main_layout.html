@@ -12,19 +12,20 @@
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link th:rel="stylesheet" type="text/css" th:href="@{/css/main.css}">
     <!-- Bootstrap core CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/css/mdb.min.css" rel="stylesheet">
 
-    <link rel="icon" sizes="16x16" th:href="@{/static/favicon.ico}"/>
+    <!--<link rel="icon" sizes="16x16" th:href="@{/static/favicon.ico}"/>-->
 </head>
 <!--Head Fragment-->
 
 <body>
 
 <!--Navbar Fragment-->
-<nav class="navbar navbar-expand-lg navbar-dark pt-4 pb-4" th:classappend="#{navbar_color}" th:fragment="navigation">
+<nav class="navbar navbar-expand-lg navbar-dark pt-3 pb-3" th:classappend="#{navbar_color}" th:fragment="navigation">
     <a class="navbar-brand" th:href="@{/}" th:text="#{company_name}"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -32,7 +33,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
         <ul class="navbar-nav ml-auto nav-flex-icons">
             <li class="nav-item">
-                <a class="nav-link" href="" data-toggle="modal" data-target="#userLoginFormModal"><i class="fas fa-user-alt"></i> Uye Girisi</a>
+                <a class="nav-link" th:href="@{/user-login}"><i class="fas fa-user-alt"></i> Uye Girisi</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="" data-toggle="modal" data-target="#companyLoginFormModal"><i class="far fa-building"></i> Firma Girisi</a>
@@ -93,7 +94,7 @@
 
 
 <!--Footer Fragment-->
-<footer class="page-footer font-small blue-grey darken-3 pt-5" th:fragment="footer">
+<footer class="page-footer navbar-fixed-bottom font-small blue-grey darken-3 pt-5" th:fragment="footer">
 
         <!-- Footer Elements -->
         <div class="container pb-4">

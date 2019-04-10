@@ -10,12 +10,12 @@
     <jumbotron th:replace="~{layout/main_layout :: jumbotron}"></jumbotron>
 
     <!--How it works-->
-    <div class="grey lighten-4" style="padding: 3em 0;">
+    <div class="grey lighten-4 py-5">
         <!-- Section: Features v.1 -->
         <section class="text-center my-5">
 
             <!-- Section heading -->
-            <h2 class="h1-responsive font-weight-bold my-5">FirmadanTeklif nasil calisiyor?</h2>
+            <h1 class="h1-responsive font-weight-bold my-5">FirmadanTeklif nasil calisiyor?</h1>
             <!-- Section description -->
             <p class="lead grey-text w-responsive mx-auto mb-5">Sitemize uye olur olmaz asagidaki adimlari takip ederek ilan verebilirsiniz.</p>
 
@@ -61,119 +61,53 @@
     </div>
     <!--How it works-->
 
-    <!--Kullanici Login Modal-->
-    <div class="modal fade" id="userLoginFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header text-center"  th:classappend="#{user_login_modal_color}">
-                    <h4 class="modal-title w-100 font-weight-bold text-white">Uye Girisi</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span class="text-white" aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+    <!--About-->
+    <div class="py-5">
+        <section><!-- Section -->
+            <div class="container"><!-- Container -->
+                <div class="row"><!-- Grid row -->
 
-                <div class="modal-body mx-3">
-                    <div class="md-form mb-5">
-                        <i class="fas fa-envelope prefix grey-text"></i>
-                        <input type="email" id="user-login-email-input" class="form-control validate">
-                        <label data-error="hatali" data-success="gecerli" for="user-login-email-input">Email Adresiniz</label>
+                    <!-- Grid column -->
+                    <div class="col-md-12 col-lg-6 my-3">
+                        <img style="width: 100%;" th:src="@{/img/about.jpg}" src="" alt="">
                     </div>
+                    <!-- Grid column -->
 
-                    <div class="md-form mb-4">
-                        <i class="fas fa-lock prefix grey-text"></i>
-                        <input type="password" id="user-login-password-input" class="form-control validate">
-                            <label data-error="hatali" data-success="gecerli" for="user-login-password-input">Sifreniz</label>
+                    <!-- Grid column -->
+                    <div class="col-md-12 col-lg-6 my-3">
+                        <!-- Section heading -->
+                        <h1 class="h1-responsive font-weight-bold mb-4">Hakkimizda</h1>
+                        <!-- Section description -->
+                        <p class="lead grey-text mx-auto">Firmadanteklif.com her sektorden en uygun fiyata ve
+                        kaliteli hizmet vermeyi taahhut eden firmalari bunyesine kaymayi amaclayan ve bu taahhutun takipcisi
+                        olmayi amaclayan online bir hizmettir. Firmadanteklif.com kullanici odakli bir hizmet olup,
+                        kullanicilarimizin ihtiyaclari ve önerileri dogrultusunda gerekli adimlari atarak is politikamizi
+                        tum kullanicilarimiz icin en uygun hale getirene kadar durmaksizin guncellemeyi hedeflemektedir.</p>
+
+                        <div class="row">
+                            <div class="col">
+                                <ul class="list-checkmarks">
+                                    <li>Guvenilir</li>
+                                    <li>Hizli</li>
+                                    <li>Kolay</li>
+                                </ul>
+                            </div>
+                            <div class="col">
+                                <ul class="list-checkmarks">
+                                    <li>Deneyimli</li>
+                                    <li>Garantili</li>
+                                    <li>Ucretsiz</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                    <!-- Grid column -->
 
-                <div class="mx-5 pt-3 mb-1">
-                    <p class="font-small grey-text d-flex justify-content-end float-left">
-                        <a href="#" class="blue-text ml-1" data-dismiss="modal" data-toggle="modal" data-target="#userForgotPasswordModal">Sifremi unuttum</a></p>
-                    <p class="font-small grey-text d-flex justify-content-end float-right">Uye degil misiniz?
-                        <a href="#" class="blue-text ml-1" data-dismiss="modal" data-toggle="modal" data-target="#userRegisterFormModal">Uye ol</a></p><br/>
-                </div>
-
-                <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn text-white" th:classappend="#{user_modal_buttons_color}">GIRIS</button>
-                </div>
-            </div>
-        </div>
+                </div><!-- Grid row -->
+            </div><!-- Container -->
+        </section><!-- Section -->
     </div>
-    <!--Kullanici Login Modal-->
-
-    <!--Kullanici Kayit Modal-->
-    <div class="modal fade" id="userRegisterFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header text-center" th:classappend="#{user_register_modal_color}">
-                    <h4 class="modal-title w-100 font-weight-bold text-white">Uye Kayit</h4>
-                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body mx-3">
-                    <div class="md-form mb-5">
-                        <i class="fas fa-user prefix grey-text"></i>
-                        <input type="text" id="user-register-name-input" class="form-control validate">
-                        <label data-error="hatali" data-success="gecerli" for="user-register-name-input">Adiniz & Soyadiniz</label>
-                    </div>
-                    <div class="md-form mb-5">
-                        <i class="fas fa-envelope prefix grey-text"></i>
-                        <input type="email" id="user-register-email-input" class="form-control validate">
-                        <label data-error="hatali" data-success="gecerli" for="user-register-email-input">Email Adresiniz</label>
-                    </div>
-
-                    <div class="md-form mb-4">
-                        <i class="fas fa-lock prefix grey-text"></i>
-                        <input type="password" id="user-register-password-input" class="form-control validate">
-                        <label data-error="hatali" data-success="gecerli" for="user-register-password-input">Sifreniz</label>
-                    </div>
-
-                    <div class="md-form mb-4">
-                        <i class="fas fa-lock prefix grey-text"></i>
-                        <input type="password" id="user-register-password-repeat-input" class="form-control validate">
-                        <label data-error="hatali" data-success="gecerli" for="user-register-password-repeat-input">Sifreniz (Tekrar)</label>
-                    </div>
-                </div>
-                <div class="mx-5 pt-3 mb-1">
-                    <p class="font-small grey-text d-flex justify-content-end float-right">Uyeliginiz var mi?
-                        <a href="#" class="blue-text ml-1" data-dismiss="modal" data-toggle="modal" data-target="#userLoginFormModal">Uye girisi</a></p><br/>
-                </div>
-                <div class="modal-footer d-flex justify-content-center">
-                    <button class="btn text-white" th:classappend="#{user_modal_buttons_color}">UYE OL</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Kullanici Kayit Modal-->
-
-    <!--User Sifre Hatirlatma Modal-->
-    <div class="modal fade" id="userForgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header text-center" th:classappend="#{user_forgot_pass_modal_color}">
-                    <h4 class="modal-title w-100 font-weight-bold text-white">Sifre Hatirlatma</h4>
-                    <button type="button" class="close text-white" data-dismiss="modal" data-toggle="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body mx-3">
-                    <div class="md-form mb-4">
-                        <i class="fas fa-envelope prefix grey-text"></i>
-                        <input type="email" id="user-forgot-password-input" class="form-control validate">
-                        <label data-error="hatali" data-success="gecerli" for="user-forgot-password-input">Email Adresiniz</label>
-                    </div>
-
-                </div>
-                <div class="modal-footer d-flex justify-content-center">
-                    <input type="submit" value="GÖNDER" class="btn text-white" th:classappend="#{user_modal_buttons_color}"><i class="fas fa-paper-plane-o ml-1"></i></input>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--User Sifre Hatirlatma Modal-->
-
+    <!--About-->
 
     <!--Firma Login Modal-->
     <div class="modal fade" id="companyLoginFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
