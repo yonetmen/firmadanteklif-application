@@ -58,41 +58,6 @@
 <!--Navbar Fragment-->
 
 
-<!-- Jumbotron Fragment-->
-<div class="jumbotron text-center shadow-none" th:fragment="jumbotron">
-    <!-- Title -->
-    <h2 class="card-title h2" th:text="#{company_name}">FirmadanTeklif</h2>
-    <!-- Subtitle -->
-    <p class="blue-text my-4 font-weight-bold" style="font-size:120%;">Deneyimli ve köklu firmalar size yardima
-        hazir!</p>
-    <!-- Grid row -->
-    <div class="row d-flex justify-content-center">
-        <!-- Grid column -->
-        <div class="col-xl-7 pb-2">
-            <p class="card-text" style="font-size:120%;">FirmadanTeklif kendi alaninda uzman, her sektörden farkli
-                firmalari ayni cati altinda toplamayi hedefleyen ve bu sayede size ihtiyac duydugunuz her konuda, en
-                hizli ve guvenilir hizmeti sunmayi hedefleyen bir sitedir.</p>
-        </div>
-        <!-- Grid column -->
-    </div>
-    <!-- Grid row -->
-    <br/>
-    <div class="pt-2">
-        <form role="form" id="addNewPostForm" th:action="@{/add-new-post}" th:object="${selectedCity}" th:method="post">
-            <select class="btn waves-effect" data-live-search=true name="selectedCity">
-                <option selected disabled>Sehir seciniz</option>
-                <option th:each="city : ${cities}"
-                        th:value="${city.id}"
-                        th:text="${city.name}"
-                        th:data="${city.id}"></option>
-            </select>
-            <button type="submit" class="btn text-white waves-effect" th:classappend="#{navbar_color}">Ilan Ver <i class="fas fa-search ml-1"></i></button>
-        </form>
-    </div>
-</div>
-<!-- Jumbotron Fragment-->
-
-
 <!--Footer Fragment-->
 <footer class="page-footer navbar-fixed-bottom font-small blue-grey darken-3 pt-5" th:fragment="footer">
 
