@@ -10,11 +10,11 @@
 <div class="container"><!-- Container-->
 
 
-    <!--Login Form-->
+    <!--Firma Kayit Formu-->
     <div class="center mt-5 pt-5 col-md-6 mb-5 pb-5 offset-md-3">
         <form>
             <div class="text-center">
-                <p class="h2 mb-4 font-weight-bold text-muted text-center pt-3 pb-3">Yeni Uye Kaydi</p>
+                <p class="h2 mb-4 font-weight-bold text-muted text-center pt-3 pb-3">Yeni Firma Kaydi</p>
             </div>
 
             <div class="md-form mb-5">
@@ -32,19 +32,18 @@
                 <input type="password" id="userRegisterFormPasswordRepeat" class="form-control mb-4" placeholder="Sifreniz (Tekrar)">
             </div>
 
-            <button th:class="|btn #{user_primary_color} text-white btn-block my-4|" type="submit">Kayit Ol</button>
+            <button th:class="|btn #{company_primary_color} text-white btn-block my-4|" type="submit">Kayit Ol</button>
 
             <div class="text-center">
-                <p>Uyeliginiz var mi?
-                    <a th:href="@{user-giris}">Uye Girisi</a>
+                <p>Firma kaydiniz var mi?
+                    <a th:href="@{firma-giris}">Firma Girisi</a>
                 </p>
             </div>
         </form>
     </div>
-    <!--Login Form-->
+    <!--Firma Kayit Formu-->
 
     <br/><br/><br/><br/> <!-- Needed to avoid empty space below footer -->
-
 
 </div>  <!-- Container-->
 

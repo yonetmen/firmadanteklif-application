@@ -25,7 +25,7 @@
 <body>
 
 <!--Navbar Fragment-->
-<nav class="navbar navbar-expand-lg navbar-dark pt-3 pb-3" th:classappend="#{navbar_color}" th:fragment="navigation">
+<nav class="navbar navbar-expand-lg navbar-dark py-3" th:classappend="#{navbar_color}" th:fragment="navigation">
     <a class="navbar-brand" th:href="@{/}" th:text="#{company_name}"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333" aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -33,17 +33,17 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent-333">
         <ul class="navbar-nav ml-auto nav-flex-icons">
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/user-login}"><i class="fas fa-user-alt"></i> Uye Girisi</a>
+                <a class="nav-link" th:href="@{/user-giris}"><i class="fas fa-user-alt"></i> Kullanici Girisi</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="" data-toggle="modal" data-target="#companyLoginFormModal"><i class="far fa-building"></i> Firma Girisi</a>
+                <a class="nav-link" th:href="@{/firma-giris}"><i class="far fa-building"></i> Firma Girisi</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fas fa-user-circle"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-dark" aria-labelledby="navbarDropdownMenuLink-333">
-                    <a class="dropdown-item" href="#" onmouseover="this.style.backgroundColor='#4a148c';
+                    <a class="dropdown-item" href="#" onmouseover="this.style.backgroundColor='#98a83d';
                     this.style.color='white'" onmouseleave="this.style.backgroundColor=''; this.style.color='';">Profilim</a>
                     <a class="dropdown-item" href="#" onmouseover="this.style.backgroundColor='#4a148c';
                     this.style.color='white'" onmouseleave="this.style.backgroundColor=''; this.style.color='';">Mesajlarim</a>
@@ -56,6 +56,33 @@
     </div>
 </nav>
 <!--Navbar Fragment-->
+
+
+<!--User Sifre Hatirlatma Modal Fragment-->
+<div class="modal fade" id="userForgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" th:fragment="pass-reminder">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center" th:classappend="#{modal_primary_color}">
+                <h4 class="modal-title w-100 font-weight-bold text-white">Sifre Hatirlatma</h4>
+                <button type="button" class="close text-white" data-dismiss="modal" data-toggle="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body mx-3">
+                <div class="md-form mb-4">
+                    <i class="fas fa-envelope prefix grey-text"></i>
+                    <input type="email" id="user-forgot-password-input" class="form-control validate">
+                    <label data-error="hatali" data-success="gecerli" for="user-forgot-password-input">Email Adresiniz</label>
+                </div>
+
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="submit" th:class="|btn #{modal_accent_color} text-white waves-effect|">Gönder</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--User Sifre Hatirlatma Modal Fragment-->
 
 
 <!--Footer Fragment-->

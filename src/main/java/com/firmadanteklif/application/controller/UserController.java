@@ -17,13 +17,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("user-login")
+    @GetMapping("user-giris")
     public String loginUser(Model model) {
         model.addAttribute("loginUser", new SiteUser());
         return "user/login";
     }
 
-    @GetMapping("user-register")
+    @GetMapping("user-kayit")
     public String registerUser(Model model) {
         model.addAttribute("registerUser", new SiteUser());
         return "user/register";

@@ -10,11 +10,11 @@
 <div class="container"><!-- Container-->
 
 
-    <!--User Login Formu-->
+    <!--Firma Login Formu-->
     <div class="center mt-5 pt-5 col-md-6 mb-5 pb-5 offset-md-3">
         <form>
             <div class="text-center">
-                <p class="h2 mb-4 font-weight-bold text-muted text-center pt-3 pb-3">Kullanici Girisi</p>
+                <p class="h2 mb-4 font-weight-bold text-muted text-center pt-3 pb-3">Firma Girisi</p>
             </div>
 
             <div class="md-form mb-5">
@@ -38,16 +38,16 @@
                     <a href="#" class="blue-text ml-1" data-toggle="modal" data-target="#userForgotPasswordModal">Sifremi unuttum</a></p>
                 </div>
             </div>
-            <button th:class="|btn #{user_primary_color} btn-block text-white my-4|" type="submit">Giris Yap</button>
+            <button th:class="|btn #{company_primary_color} text-white btn-block my-4|" type="submit">Giris Yap</button>
 
             <div class="text-center">
-                <p>Henuz uye degil misin?
-                    <a th:href="@{/user-kayit}">Uye Ol</a>
+                <p>Firma kaydiniz yok mu?
+                    <a th:href="@{/firma-kayit}">Kayit Olun</a>
                 </p>
             </div>
         </form>
     </div>
-    <!--User Login Formu-->
+    <!--Firma Login Formu-->
 
     <div th:replace="~{layout/main_layout :: pass-reminder}"></div>
 
