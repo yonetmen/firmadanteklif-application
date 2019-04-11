@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:replace="~{layout/main_layout :: head(title = 'Profil')}">
+<head th:replace="~{layout/fragments :: head(title = 'Profil')}">
 </head>
 <body>
 
-<nav th:replace="~{layout/main_layout :: nav}"></nav>
+<nav th:replace="~{layout/fragments :: nav}"></nav>
 
 <div class="container">
 
@@ -19,7 +19,7 @@
 <!--Page content between here-->
 </div>  <!-- Container-->
 
-<div th:replace="~{layout/main_layout :: footer}"></div>
+<div th:replace="~{layout/fragments :: footer}"></div>
 
 </body>
 </html>

@@ -30,7 +30,7 @@ public class UserIT {
         user.setPassword("kasim123");
 
         SiteUser created = userRepository.save(user);
-        System.out.println("USER ID: " + created.getGuid());
-        assertNotNull(created.getGuid());
+        System.out.println("USER ID: " + created.getUuid());
+        assertNotNull(created.getUuid());
     }
 }
