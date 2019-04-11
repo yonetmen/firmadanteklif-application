@@ -2,11 +2,18 @@ package com.firmadanteklif.application.controller;
 
 import com.firmadanteklif.application.entity.SiteUser;
 import com.firmadanteklif.application.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
+
+@Slf4j
 @Controller
 public class UserController {
 
@@ -25,7 +32,26 @@ public class UserController {
 
     @GetMapping("user-kayit")
     public String registerUser(Model model) {
-        model.addAttribute("registerUser", new SiteUser());
+        model.addAttribute("user",new SiteUser());
         return "user/register";
+    }
+
+    @PostMapping("/user-kayit")
+    public String registerNewUser(@Valid SiteUser user, BindingResult bindingResult,
+                                  Model model, RedirectAttributes redirectAttributes) {
+
+        if( bindingResult.hasErrors() ) {
+            log.info("Validation errors were found while registering a new user");
+            model.addAttribute("user", user);
+            model.addAttribute("validationErrors", bindingResult.getAllErrors());
+            return "user/register";
+        } else {
+            log.info("New User registration: " + user);
+            SiteUser newUser = userService.register(user);
+            redirectAttributes
+                    .addAttribute("id", newUser.getUuid())
+                    .addFlashAttribute("success",true);
+            return "redirect:/user-kayit";
+        }
     }
 }

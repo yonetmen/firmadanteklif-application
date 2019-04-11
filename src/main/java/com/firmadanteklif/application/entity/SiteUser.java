@@ -1,5 +1,6 @@
 package com.firmadanteklif.application.entity;
 
+import com.firmadanteklif.application.entity.enums.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -29,19 +30,33 @@ public class SiteUser {
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
 
-    @Size(min = 8, max = 50)
-    @NotEmpty(message = "Email .")
+    @Size(min = 8, max = 50, message = "email.length")
+    @NotEmpty(message = "email.not.empty")
     @Column(nullable = false, unique = true)
-    @Email(message = "Not valid email")
+    @Email(message = "email.format.error")
     private String email;
 
+    @NotEmpty(message = "password.not.empty")
+    @Column(length = 100, nullable = false)
+    @Size(min = 6, max = 100, message = "password.length")
     private String password;
 
     @Transient
+    @NotEmpty(message = "password.not.empty")
+    @Column(length = 100, nullable = false)
+    @Size(min = 6, max = 100, message = "password.length")
     private String confirmPassword;
+
+    private boolean active;
+
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @PrePersist
     public void generateUuid() {
         uuid = UUID.randomUUID();
+        active = false;
+        role = Role.ROLE_USER;
     }
 }
