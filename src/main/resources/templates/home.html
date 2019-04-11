@@ -7,10 +7,41 @@
 
     <nav th:replace="~{layout/main_layout :: nav}"></nav>
 
-    <jumbotron th:replace="~{layout/main_layout :: jumbotron}"></jumbotron>
+    <!-- Add new Post-->
+    <div class="py-5 my-5 text-center">
+        <!-- Title -->
+        <h2 class="card-title h2" th:text="#{company_name}">FirmadanTeklif</h2>
+        <!-- Subtitle -->
+        <p class="blue-text my-4 font-weight-bold" style="font-size:120%;">Deneyimli ve köklu firmalar size yardima hazir!</p>
+        <!-- Grid row -->
+        <div class="row d-flex justify-content-center">
+            <!-- Grid column -->
+            <div class="col-xl-7 pb-2">
+                <p class="card-text" style="font-size:120%;">FirmadanTeklif kendi alaninda uzman, her sektörden farkli
+                    firmalari ayni cati altinda toplamayi hedefleyen ve bu sayede size ihtiyac duydugunuz her konuda, en
+                    hizli ve guvenilir hizmeti sunmayi hedefleyen bir sitedir.</p>
+            </div>
+            <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+        <br/>
+        <div class="pt-2">
+            <form role="form" id="addNewPostForm" th:action="@{/add-new-post}" th:object="${selectedCity}" th:method="post">
+                <select class="btn waves-effect" data-live-search=true name="selectedCity">
+                    <option selected disabled>Sehir seciniz</option>
+                    <option th:each="city : ${cities}"
+                            th:value="${city.id}"
+                            th:text="${city.name}"
+                            th:data="${city.id}"></option>
+                </select>
+                <button type="submit" class="btn text-white waves-effect" th:classappend="#{navbar_color}">Ilan Ver <i class="fas fa-search ml-1"></i></button>
+            </form>
+        </div>
+    </div>
+    <!-- Add new Post-->
 
     <!--How it works-->
-    <div class="grey lighten-4 py-5">
+    <div class="grey lighten-3 py-5">
         <!-- Section: Features v.1 -->
         <section class="text-center my-5">
 
@@ -110,7 +141,7 @@
     <!--About-->
 
     <!--Categories-->
-    <div class="grey lighten-4 py-5">
+    <div class="grey lighten-3 py-5">
         <div class="container">
             <div class="section-title">
                 <h1 class="h1-responsive font-weight-bold mb-4 text-center pb-5">Kategoriler</h1>
