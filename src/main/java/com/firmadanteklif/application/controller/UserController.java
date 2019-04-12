@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -26,7 +27,7 @@ public class UserController {
 
     @GetMapping("user-giris")
     public String loginUser(Model model) {
-        model.addAttribute("loginUser", new SiteUser());
+        model.addAttribute("user", new SiteUser());
         return "user/login";
     }
 
@@ -37,7 +38,7 @@ public class UserController {
     }
 
     @PostMapping("/user-kayit")
-    public String registerNewUser(@Valid SiteUser user, BindingResult bindingResult,
+    public String registerNewUser(@Valid @ModelAttribute("user") SiteUser user, BindingResult bindingResult,
                                   Model model, RedirectAttributes redirectAttributes) {
 
         if( bindingResult.hasErrors() ) {
