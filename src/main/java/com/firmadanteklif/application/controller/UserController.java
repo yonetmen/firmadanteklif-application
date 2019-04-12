@@ -33,7 +33,7 @@ public class UserController {
 
     @GetMapping("user-kayit")
     public String registerUser(Model model) {
-        model.addAttribute("user",new SiteUser());
+        model.addAttribute("user", new SiteUser());
         return "user/register";
     }
 
@@ -41,21 +41,22 @@ public class UserController {
     public String registerNewUser(@Valid @ModelAttribute("user") SiteUser user, BindingResult bindingResult,
                                   Model model, RedirectAttributes redirectAttributes) {
 
-        if( bindingResult.hasErrors() ) {
+        if (bindingResult.hasErrors()) {
             log.info("Validation errors were found while registering a new user");
             model.addAttribute("user", user);
             model.addAttribute("validationErrors", bindingResult.getAllErrors());
+            if (!user.getPassword().equalsIgnoreCase(user.getConfirmPassword()))
+                bindingResult.rejectValue("password", "password.match.error");
+            return "user/register";
+        } else if (!user.getPassword().equalsIgnoreCase(user.getConfirmPassword())) {
+            bindingResult.rejectValue("password", "password.match.error");
             return "user/register";
         } else {
-            if(!user.getPassword().equalsIgnoreCase(user.getConfirmPassword())) {
-                bindingResult.rejectValue("password", "password.match.error");
-                return "user/register";
-            }
             log.info("New User registration: " + user);
             SiteUser newUser = userService.register(user);
             redirectAttributes
                     .addAttribute("id", newUser.getUuid())
-                    .addFlashAttribute("success",true);
+                    .addFlashAttribute("success", true);
             return "redirect:/user-kayit";
         }
     }
