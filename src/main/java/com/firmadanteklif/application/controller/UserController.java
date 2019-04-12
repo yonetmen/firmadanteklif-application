@@ -47,6 +47,10 @@ public class UserController {
             model.addAttribute("validationErrors", bindingResult.getAllErrors());
             return "user/register";
         } else {
+            if(!user.getPassword().equalsIgnoreCase(user.getConfirmPassword())) {
+                bindingResult.rejectValue("password", "password.match.error");
+                return "user/register";
+            }
             log.info("New User registration: " + user);
             SiteUser newUser = userService.register(user);
             redirectAttributes

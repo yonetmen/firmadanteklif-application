@@ -24,7 +24,11 @@
                        th:field="*{email}"
                        placeholder="E-mail adresiniz" />
             </div>
-            <p class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+            <ul class="text-danger" th:each="error: ${#fields.errors('email')}">
+                <li th:each="message : ${error?.split(',')}">
+                    <p class="text-danger" th:text="${message}"></p>
+                </li>
+            </ul>
 
             <div class="md-form mb-5">
                 <i class="fas fa-lock prefix grey-text"></i>
@@ -34,7 +38,11 @@
                        th:field="*{password}"
                        placeholder="Sifreniz" />
             </div>
-            <p class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+            <ul class="text-danger" th:each="error: ${#fields.errors('password')}">
+                <li th:each="message : ${error.split(',')}">
+                    <p class="text-danger" th:text="${message}"></p>
+                </li>
+            </ul>
 
             <div class="md-form mb-5">
                 <i class="fas fa-lock prefix grey-text"></i>
@@ -44,7 +52,11 @@
                        th:field="*{confirmPassword}"
                        placeholder="Sifreniz (Tekrar)" />
             </div>
-            <p class="text-danger" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></p>
+            <ul class="text-danger" th:each="error: ${#fields.errors('confirmPassword')}">
+                <li th:each="message : ${error?.split(',')}">
+                    <p class="text-danger" th:text="${message}"></p>
+                </li>
+            </ul>
 
             <button th:class="|btn #{user_primary_color} text-white btn-block my-4|" type="submit">Kayit Ol</button>
 
