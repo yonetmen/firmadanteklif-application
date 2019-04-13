@@ -35,7 +35,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/user-giris")
                 .successHandler(successLoginHandler)
                 .failureUrl("/user-giris?error=true")
-                .and().logout()
+                .and().logout().logoutSuccessUrl("/")
                 .and().rememberMe()
                 .and().csrf().disable()
                 .headers().frameOptions().disable();
