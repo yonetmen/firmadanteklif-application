@@ -1,5 +1,7 @@
 package com.firmadanteklif.application.config;
 
+import com.firmadanteklif.application.security.UserDetailsServiceImpl;
+import com.firmadanteklif.application.security.UserSuccessLoginHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,21 +10,30 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.util.matcher.RequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    private UserDetailsServiceImpl userDetailsService;
+    private UserSuccessLoginHandler successLoginHandler;
+
+    @Autowired
+    public SecurityConfiguration(UserDetailsServiceImpl userDetailsService, UserSuccessLoginHandler successLoginHandler) {
+        this.userDetailsService = userDetailsService;
+        this.successLoginHandler = successLoginHandler;
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/", "/static/**", "/user-giris", "/user-kayit").permitAll()
+                .anyRequest().authenticated()
                 .antMatchers("/user-profile").hasRole("USER")
                 .and().formLogin().loginPage("/user-giris")
                 .usernameParameter("email")
                 .loginProcessingUrl("/user-giris")
-                .defaultSuccessUrl("/user-profile", true)
+                .successHandler(successLoginHandler)
                 .failureUrl("/user-giris?error=true")
                 .and().logout()
                 .and().rememberMe()
@@ -32,13 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth
-            .inMemoryAuthentication()
-            .withUser("kasimgul@gmail.com")
-            .password(passwordEncoder().encode("ksm123")).roles("USER")
-            .and()
-            .withUser("admin@gmail.com")
-            .password(passwordEncoder().encode("ksm123")).roles("ADMIN");
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Bean

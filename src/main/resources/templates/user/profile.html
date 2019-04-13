@@ -11,8 +11,9 @@
 
 <!--Page content between here-->
 
-    <h1>Welcome back: <span th:text="${#request.getRemoteUser()}"></span></h1>
+    <h1>Welcome back: <span th:text="${session.user.getEmail()}"></span></h1>
 
+    <br/><br/><br/><br/><br/>
 
 <!--Page content between here-->
 </div>  <!-- Container-->
