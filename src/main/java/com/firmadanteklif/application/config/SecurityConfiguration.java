@@ -17,13 +17,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/static/**", "/user/login.html", "/user/register.html").permitAll()
-                .antMatchers("/user/profile.html").hasRole("USER")
-                .and().formLogin().loginPage("/user/login.html")
+                .antMatchers("/", "/static/**", "/user-giris", "/user-kayit").permitAll()
+                .antMatchers("/user-profile").hasRole("USER")
+                .and().formLogin().loginPage("/user-giris")
                 .usernameParameter("email")
                 .loginProcessingUrl("/user-giris")
                 .defaultSuccessUrl("/user-profile", true)
-                .failureUrl("/user/login.html?error=true")
+                .failureUrl("/user-giris?error=true")
                 .and().logout()
                 .and().rememberMe()
                 .and().csrf().disable()
