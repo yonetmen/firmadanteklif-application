@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:replace="~{layout/fragments :: head(title = 'Profil')}">
+<head th:replace="~{layout/fragments :: head(title = 'Kullanici Özel')}">
 </head>
 <body>
 
@@ -11,9 +11,7 @@
 
 <!--Page content between here-->
 
-
-
-
+    <h1>Welcome back: <span th:text="${#request.getRemoteUser()}"></span></h1>
 
 
 <!--Page content between here-->
