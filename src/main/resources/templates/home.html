@@ -7,7 +7,7 @@
 
     <nav th:replace="~{layout/fragments :: nav}"></nav>
 
-    <div class="alert alert-success  mt-5" role="alert" th:if="${userRegisterSuccess} == true">
+    <div class="container alert alert-success  mt-5" role="alert" th:if="${userRegisterSuccess} == true">
         Uyeliginizi <strong th:text="${userEmail}"></strong> adresine gönderdigimiz linke tiklayarak onaylayabilirsiniz.
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
