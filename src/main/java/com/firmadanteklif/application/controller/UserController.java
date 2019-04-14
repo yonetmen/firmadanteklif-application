@@ -66,9 +66,9 @@ public class UserController {
             user.setPassword(encodedPassword);
             SiteUser newUser = userService.register(user);
             redirectAttributes
-                    .addAttribute("id", newUser.getUuid())
-                    .addFlashAttribute("success", true);
-            return "redirect:/user-kayit";
+                    .addFlashAttribute("userEmail", newUser.getEmail())
+                    .addFlashAttribute("userRegisterSuccess", true);
+            return "redirect:/";
         }
     }
 }

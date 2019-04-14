@@ -22,7 +22,7 @@
                        id="userRegisterFormEmail"
                        class="form-control mb-4"
                        th:field="*{email}"
-                       placeholder="E-mail adresiniz" />
+                       placeholder="E-mail adresiniz" required />
             </div>
             <ul class="text-danger" th:each="error: ${#fields.errors('email')}">
                 <li th:each="message : ${error?.split(',')}">
@@ -36,7 +36,7 @@
                        id="userRegisterFormPassword"
                        class="form-control mb-4"
                        th:field="*{password}"
-                       placeholder="Sifreniz" />
+                       placeholder="Sifreniz" required />
             </div>
             <ul class="text-danger" th:each="error: ${#fields.errors('password')}">
                 <li th:each="message : ${error.split(',')}">
@@ -50,7 +50,7 @@
                        id="userRegisterFormPasswordRepeat"
                        class="form-control mb-4"
                        th:field="*{confirmPassword}"
-                       placeholder="Sifreniz (Tekrar)" />
+                       placeholder="Sifreniz (Tekrar)" required />
             </div>
             <ul class="text-danger" th:each="error: ${#fields.errors('confirmPassword')}">
                 <li th:each="message : ${error?.split(',')}">
