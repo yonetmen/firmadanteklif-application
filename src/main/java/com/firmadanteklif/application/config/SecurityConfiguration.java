@@ -27,9 +27,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/css/**", "/img/**", "/user-giris", "/user-kayit").permitAll()
+                .antMatchers("/", "/css/**", "/img/**", "/user-giris", "/user-kayit", "/firma-giris", "/firma-kayit").permitAll()
                 .anyRequest().authenticated()
                 .antMatchers("/user-profile").hasRole("USER")
+                .antMatchers("/new-post").hasRole("USER")
                 .and().formLogin().loginPage("/user-giris")
                 .usernameParameter("email")
                 .loginProcessingUrl("/user-giris")

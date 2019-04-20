@@ -9,15 +9,14 @@
 
 <div class="container"><!-- Container-->
 
-    <div class="alert alert-danger  mt-5" role="alert" th:if="${#request.getParameter('error')} == 'true'">
-        <strong>Kullanici adi / Sifre</strong> gecerli degil.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-
     <!--User Login Formu-->
     <div class="center mt-5 pt-5 col-md-6 mb-5 pb-5 offset-md-3">
+        <div class="alert alert-danger  mt-5" role="alert" th:if="${#request.getParameter('error')} == 'true'">
+            <strong>Kullanici adi / Sifre</strong> gecerli degil.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
         <form role="form" method="post" th:action="@{/user-giris}" th:object="${user}">
             <div class="text-center">
                 <p class="h2 mb-4 font-weight-bold text-muted text-center pt-3 pb-3">Kullanici Girisi</p>
