@@ -7,11 +7,18 @@
 
     <nav th:replace="~{layout/fragments :: nav}"></nav>
 
-    <div class="container alert alert-success  mt-5" role="alert" th:if="${userRegisterSuccess} == true">
-        Uyeliginizi <strong th:text="${userEmail}"></strong> adresine gönderdigimiz linke tiklayarak onaylayabilirsiniz.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
+    <div th:if="${userRegisterSuccess} == true">
+        <!--Uyeliginizi <strong th:text="${userEmail}"></strong> adresine gönderdigimiz linke tiklayarak onaylayabilirsiniz.-->
+        <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
+            <!--<span aria-hidden="true">&times;</span>-->
+        <!--</button>-->
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function(event) {
+                // Your code to run since DOM is loaded and ready
+                openRegisterSuccessModal();
+            });
+
+        </script>
     </div>
 
     <!-- Add new UserPost-->
@@ -26,7 +33,7 @@
         <br/>
         <div><br/><br/><br/><br/>
             <form role="form" id="addNewPostForm" th:action="@{/new-post}" th:method="get">
-                <button type="submit" class="btn btn-lg text-white waves-effect"
+                <button type="submit" class=""
                         th:classappend="#{home_new_post_button_color}">Ilan Ver <i class="ml-2 fas fa-search-plus"></i></button>
             </form>
         </div><br/><br/><br/><br/>
@@ -219,6 +226,30 @@
     </div> <!--Container - Main Content of the page-->
 
     <div th:replace="~{layout/fragments :: footer}"></div>
+
+    <script type="text/javascript">
+        function openRegisterSuccessModal() {
+            $('#userRegisterSuccessModal').modal('show');
+        };
+    </script>
+
+    <!--Modal: userRegisterSuccessModal-->
+    <div id="userRegisterSuccessModal" class="modal fade top" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="true">
+        <div class="modal-dialog modal-frame modal-top modal-notify modal-info" role="document">
+            <!--Content-->
+            <div class="modal-content">
+                <!--Body-->
+                <div class="modal-body">
+                    <div class="row d-flex justify-content-center align-items-center">
+
+                        <p class="pt-3 pr-2"> Uyeliginizi <strong th:text="${userEmail}"></strong> adresine gönderdigimiz linke tiklayarak onaylayabilirsiniz.</p>
+                        <a type="button" class="btn btn-success waves-effect" data-dismiss="modal">KAPAT</a>
+                    </div>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div><!--Modal: userRegisterSuccessModal-->
 
 </body>
 </html>

@@ -11,14 +11,20 @@ import javax.validation.Valid;
 public class UserService {
 
     private UserRepository userRepository;
+    private MailService mailService;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, MailService mailService) {
         this.userRepository = userRepository;
+        this.mailService = mailService;
     }
 
 
     public SiteUser register(SiteUser user) {
         return userRepository.save(user);
+    }
+
+    public void sendActivationEmail(SiteUser user) {
+        mailService.sendActivationEmail(user);
     }
 }

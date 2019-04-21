@@ -1,7 +1,11 @@
 package com.firmadanteklif.application.controller;
 
 import com.firmadanteklif.application.entity.SiteUser;
+import com.firmadanteklif.application.entity.VerificationCode;
+import com.firmadanteklif.application.entity.enums.VerificationType;
+import com.firmadanteklif.application.repository.VerificationRepository;
 import com.firmadanteklif.application.service.UserService;
+import com.firmadanteklif.application.service.VerificationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,19 +18,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Slf4j
 @Controller
 public class UserController {
 
     private UserService userService;
-
+    private VerificationService verificationService;
     private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserController(UserService userService, BCryptPasswordEncoder passwordEncoder) {
+    public UserController(UserService userService, BCryptPasswordEncoder passwordEncoder,
+                          VerificationService verificationService) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.verificationService = verificationService;
     }
 
     @GetMapping("user-giris")
@@ -64,11 +72,21 @@ public class UserController {
             log.info("New User registration: " + user);
             String encodedPassword = passwordEncoder.encode(user.getPassword());
             user.setPassword(encodedPassword);
+            String activationURL = sendActivationEmail(user);
             SiteUser newUser = userService.register(user);
             redirectAttributes
                     .addFlashAttribute("userEmail", newUser.getEmail())
                     .addFlashAttribute("userRegisterSuccess", true);
             return "redirect:/";
         }
+    }
+
+    private String sendActivationEmail(SiteUser user) {
+
+        VerificationCode activation = new VerificationCode();
+        activation.setVerificationType(VerificationType.REGISTER);
+        activation.setOwnerId(user.getUuid());
+        activation.setExpirationDate(LocalDateTime.now().plusDays(1));
+        UUID verificationID = verificationService.save(activation);
     }
 }

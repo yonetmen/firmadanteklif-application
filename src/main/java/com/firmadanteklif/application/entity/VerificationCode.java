@@ -30,9 +30,6 @@ public class VerificationCode {
     @Enumerated(EnumType.STRING)
     private VerificationType verificationType;
 
-    @Column(name = "verification_code")
-    private String verificationCode;
-
     @Column(name = "owner_id")
     private UUID ownerId;
 
