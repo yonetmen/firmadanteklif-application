@@ -69,11 +69,12 @@ public class UserController {
             bindingResult.rejectValue("password", "password.match.error");
             return "user/register";
         } else {
-            log.info("New User registration: " + user);
             String encodedPassword = passwordEncoder.encode(user.getPassword());
             user.setPassword(encodedPassword);
-            String activationURL = sendActivationEmail(user);
             SiteUser newUser = userService.register(user);
+            log.info("New User registration: " + newUser);
+            String activationURL = sendActivationEmail(newUser); // No need to return this String in production.
+            log.debug("ACTIVATION URL: " + activationURL);
             redirectAttributes
                     .addFlashAttribute("userEmail", newUser.getEmail())
                     .addFlashAttribute("userRegisterSuccess", true);
@@ -81,12 +82,13 @@ public class UserController {
         }
     }
 
+    // Returning activation URL. Implement Send Email in Production
     private String sendActivationEmail(SiteUser user) {
-
         VerificationCode activation = new VerificationCode();
         activation.setVerificationType(VerificationType.REGISTER);
         activation.setOwnerId(user.getUuid());
         activation.setExpirationDate(LocalDateTime.now().plusDays(1));
         UUID verificationID = verificationService.save(activation);
+        return "localhost:8090/activation/" + verificationID.toString();
     }
 }

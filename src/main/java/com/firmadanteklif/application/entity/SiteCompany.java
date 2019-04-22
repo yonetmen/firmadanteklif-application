@@ -3,6 +3,7 @@ package com.firmadanteklif.application.entity;
 import com.firmadanteklif.application.entity.enums.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -23,6 +24,8 @@ import java.util.UUID;
 public class SiteCompany {
 
     @Id
+    @Type(type = "uuid-char")
+    @Column(name = "company_id", length = 36)
     private UUID uuid;
 
     @CreatedDate
