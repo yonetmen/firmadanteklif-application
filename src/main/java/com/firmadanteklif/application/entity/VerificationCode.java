@@ -34,9 +34,6 @@ public class VerificationCode {
     @Column(name = "expiration_date")
     private LocalDateTime expirationDate;
 
-    @Column(name = "consumed")
-    private boolean isConsumed;
-
     @PrePersist
     public void generateUuid() {
         uuid = UUID.randomUUID();

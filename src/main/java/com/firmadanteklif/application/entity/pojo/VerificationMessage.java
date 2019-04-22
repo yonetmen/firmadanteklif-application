@@ -1,25 +1,25 @@
 package com.firmadanteklif.application.entity.pojo;
 
+import com.firmadanteklif.application.entity.enums.VerificationType;
 import lombok.Data;
 
 @Data
 public class VerificationMessage {
 
-    private String key;
+    private String type;
     private String value;
     private String email;
+    private String message;
 
-    enum Key {
-        REGISTER, FORGOT_PASS, CHANGE_EMAIL
+
+    public enum Value {
+        success, danger, warning, info
     }
 
-    enum Value {
-        SUCCESS, FAIL
-    }
-
-    public VerificationMessage(Key key, Value value, String email) {
-        this.key = key.name();
+    public VerificationMessage(VerificationType type, Value value, String email, String message) {
+        this.type = type.name();
         this.value = value.name();
         this.email = email;
+        this.message = message;
     }
 }

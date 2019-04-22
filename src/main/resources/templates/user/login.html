@@ -22,8 +22,8 @@
         <!--LOGIN ERROR ALERT-->
 
         <!--ACCOUNT ACTIVATED ALERT-->
-        <div class="alert alert-info  mt-5" role="alert" th:if="${user?.email != null}">
-            <strong>Hesabiniz aktiv edilmistir. Lutfen devam etmek icin giris yapin.</strong>
+        <div th:if="${verificationMessage != null}" th:class="|alert alert-${verificationMessage.value} alert-dismissable mt-5|" >
+            <strong th:text="${verificationMessage.message}"></strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>

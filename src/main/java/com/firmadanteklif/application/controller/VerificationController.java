@@ -2,6 +2,7 @@ package com.firmadanteklif.application.controller;
 
 import com.firmadanteklif.application.entity.SiteUser;
 import com.firmadanteklif.application.entity.enums.VerificationType;
+import com.firmadanteklif.application.entity.pojo.VerificationMessage;
 import com.firmadanteklif.application.service.VerificationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,12 @@ public class VerificationController {
     @GetMapping("/activation/{verificationId}")
     public String activateAccount(@PathVariable String verificationId, Model model) {
         log.info("VERIFICATION CONTROLLER: V.ID: " + verificationId);
-        String userEmail = verificationService.findByIdAndVerificationType(UUID.fromString(verificationId), VerificationType.REGISTER);
+        VerificationMessage verificationMessage = verificationService.findByIdAndVerificationType(verificationId, VerificationType.REGISTER);
         SiteUser user = new SiteUser();
-        user.setEmail(userEmail);
+        if(verificationMessage.getEmail() != null)
+            user.setEmail(verificationMessage.getEmail());
         model.addAttribute("user", user);
+        model.addAttribute("verificationMessage", verificationMessage);
         return "/user/login";
     }
 
