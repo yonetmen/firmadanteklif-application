@@ -134,6 +134,6 @@ public class UserController {
         activation.setOwnerId(user.getUuid());
         activation.setExpirationDate(LocalDateTime.now().plusDays(1));
         UUID verificationID = verificationService.save(activation);
-        return "localhost:8090/activation/" + verificationID.toString();
+        return "localhost:8090/activation/" + user.getEmail() + "/" + verificationID.toString();
     }
 }

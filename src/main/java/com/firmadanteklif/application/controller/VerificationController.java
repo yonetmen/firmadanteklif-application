@@ -11,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.UUID;
-
 @Slf4j
 @Controller
 public class VerificationController {
@@ -24,10 +22,10 @@ public class VerificationController {
         this.verificationService = verificationService;
     }
 
-    @GetMapping("/activation/{verificationId}")
-    public String activateAccount(@PathVariable String verificationId, Model model) {
+    @GetMapping("/activation/{email}/{verificationId}")
+    public String activateAccount(@PathVariable String verificationId, @PathVariable String email, Model model) {
         log.info("VERIFICATION CONTROLLER: V.ID: " + verificationId);
-        VerificationMessage verificationMessage = verificationService.findByIdAndVerificationType(verificationId, VerificationType.REGISTER);
+        VerificationMessage verificationMessage = verificationService.findByIdAndVerificationType(verificationId, VerificationType.REGISTER, email);
         SiteUser user = new SiteUser();
         if(verificationMessage.getEmail() != null)
             user.setEmail(verificationMessage.getEmail());
