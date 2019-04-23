@@ -7,48 +7,47 @@
 
     <nav th:replace="~{layout/fragments :: nav}"></nav>
 
-    <!-- Add new Post-->
-    <div class="py-5 my-5 text-center">
+    <div th:if="${userRegisterSuccess} == true">
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function(event) {
+                // Your code to run since DOM is loaded and ready
+                openRegisterSuccessModal();
+            });
+
+        </script>
+    </div>
+
+    <!-- Add new UserPost-->
+    <div id="home-intro" class="text-center py-5">
         <!-- Title -->
-        <h2 class="card-title h2" th:text="#{company_name}">FirmadanTeklif</h2>
+        <h1 class="h1-responsive font-weight-bold pt-5" th:text="#{company_name}">FirmadanTeklif</h1>
         <!-- Subtitle -->
-        <p class="blue-text my-4 font-weight-bold" style="font-size:120%;">Deneyimli ve köklu firmalar size yardima hazir!</p>
+        <p class="blue-text pt-2 font-weight-bold" style="font-size:120%;">Deneyimli ve köklu firmalar yardiminiza hazir bekliyor!</p>
         <!-- Grid row -->
-        <div class="row d-flex justify-content-center">
-            <!-- Grid column -->
-            <div class="col-xl-7 pb-2">
-                <p class="card-text" style="font-size:120%;">FirmadanTeklif kendi alaninda uzman, her sektörden farkli
-                    firmalari ayni cati altinda toplamayi hedefleyen ve bu sayede size ihtiyac duydugunuz her konuda, en
-                    hizli ve guvenilir hizmeti sunmayi hedefleyen bir sitedir.</p>
-            </div>
-            <!-- Grid column -->
-        </div>
+
         <!-- Grid row -->
         <br/>
-        <div class="pt-2">
-            <form role="form" id="addNewPostForm" th:action="@{/add-new-post}" th:object="${selectedCity}" th:method="post">
-                <select class="btn waves-effect" data-live-search=true name="selectedCity">
-                    <option selected disabled>Sehir seciniz</option>
-                    <option th:each="city : ${cities}"
-                            th:value="${city.id}"
-                            th:text="${city.name}"
-                            th:data="${city.id}"></option>
-                </select>
-                <button type="submit" class="btn text-white waves-effect" th:classappend="#{navbar_color}">Ilan Ver <i class="fas fa-search ml-1"></i></button>
+        <div><br/><br/><br/><br/>
+            <form role="form" id="addNewPostForm" th:action="@{/new-post}" th:method="get">
+                <button type="submit" class=""
+                        th:classappend="#{home_new_post_button_color}">Ilan Ver <i class="ml-2 fas fa-search-plus"></i></button>
             </form>
-        </div>
+        </div><br/><br/><br/><br/>
     </div>
-    <!-- Add new Post-->
+    <!-- Add new UserPost-->
 
     <!--How it works-->
-    <div class="grey lighten-3 py-5">
+    <div>
         <!-- Section: Features v.1 -->
         <section class="text-center my-5">
 
             <!-- Section heading -->
             <h1 class="h1-responsive font-weight-bold my-5">FirmadanTeklif nasil calisiyor?</h1>
             <!-- Section description -->
-            <p class="lead grey-text w-responsive mx-auto mb-5">Sitemize uye olur olmaz asagidaki adimlari takip ederek ilan verebilirsiniz.</p>
+            <p class="px-4 text-justify lead grey-text w-responsive mx-auto mb-5">Sitemize uye olur olmaz asagidaki adimlari takip ederek
+                ilan verebilirsiniz. FirmadanTeklif kendi alaninda uzman, her sektörden farkli firmalari ayni cati
+                altinda toplamayi hedefleyen ve bu sayede size ihtiyac duydugunuz her konuda, en hizli ve guvenilir
+                hizmeti sunmayi hedefleyen bir sitedir.</p>
 
             <div class="container">
                 <!-- Grid row -->
@@ -93,7 +92,7 @@
     <!--How it works-->
 
     <!--About-->
-    <div class="py-5">
+    <div class="grey lighten-3 py-5 py-5">
         <section><!-- Section -->
             <div class="container"><!-- Container -->
                 <div class="row"><!-- Grid row -->
@@ -141,7 +140,7 @@
     <!--About-->
 
     <!--Categories-->
-    <div class="grey lighten-3 py-5">
+    <div class="py-5">
         <div class="container">
             <div class="section-title">
                 <h1 class="h1-responsive font-weight-bold mb-4 text-center pb-5">Kategoriler</h1>
@@ -220,8 +219,33 @@
     </div>
     <!--Categories-->
 
+    </div> <!--Container - Main Content of the page-->
 
     <div th:replace="~{layout/fragments :: footer}"></div>
+
+    <script type="text/javascript">
+        function openRegisterSuccessModal() {
+            $('#userRegisterSuccessModal').modal('show');
+        };
+    </script>
+
+    <!--Modal: userRegisterSuccessModal-->
+    <div id="userRegisterSuccessModal" class="modal fade top" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="true">
+        <div class="modal-dialog modal-frame modal-top modal-notify modal-info" role="document">
+            <!--Content-->
+            <div class="modal-content">
+                <!--Body-->
+                <div class="modal-body">
+                    <div class="row d-flex justify-content-center align-items-center">
+
+                        <p class="pt-3 pr-2"> Uyeliginizi <strong th:text="${userEmail}"></strong> adresine gönderdigimiz linke tiklayarak onaylayabilirsiniz.</p>
+                        <a type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">KAPAT</a>
+                    </div>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div><!--Modal: userRegisterSuccessModal-->
 
 </body>
 </html>

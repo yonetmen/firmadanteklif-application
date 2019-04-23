@@ -12,5 +12,30 @@
     width: 1em;
     content: url('../img/check-solid.svg');
     margin:0 10px 0 -28px;
+}  /*List item with checkmark */
+
+/*Fixed div background image*/
+#home-intro {
+    position: relative;
 }
-/*List item with checkmark */
+
+#home-intro:after {
+    content : "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: url("/img/navbar-bg.jpg") no-repeat fixed center;
+    width: 100%;
+    height: 100%;
+    opacity : 1;
+    z-index: -1;
+} /*Fixed div background image*/
+
+#login-form {
+    background: url("/img/login-bg.jpg") no-repeat fixed center;
+    width: 100%;
+    height: 100%;
+    opacity : 1;
+    z-index: -1;
+}

@@ -9,28 +9,54 @@
 
 <div class="container"><!-- Container-->
 
-
     <!--Login Form-->
     <div class="center mt-5 pt-5 col-md-6 mb-5 pb-5 offset-md-3">
-        <form>
+        <form role="form" method="post" th:action="@{/user-kayit}" th:object="${user}">
             <div class="text-center">
                 <p class="h2 mb-4 font-weight-bold text-muted text-center pt-3 pb-3">Yeni Uye Kaydi</p>
             </div>
 
             <div class="md-form mb-5">
                 <i class="fas fa-envelope prefix grey-text"></i>
-                <input type="email" id="userRegisterFormEmail" class="form-control mb-4" placeholder="E-mail adresiniz">
+                <input type="email"
+                       id="userRegisterFormEmail"
+                       class="form-control mb-4"
+                       th:field="*{email}"
+                       placeholder="E-mail adresiniz" required />
             </div>
+            <ul class="text-danger" th:each="error: ${#fields.errors('email')}">
+                <li th:each="message : ${error?.split(',')}">
+                    <p class="text-danger" th:text="${message}"></p>
+                </li>
+            </ul>
 
             <div class="md-form mb-5">
                 <i class="fas fa-lock prefix grey-text"></i>
-                <input type="password" id="userRegisterFormPassword" class="form-control mb-4" placeholder="Sifreniz">
+                <input type="password"
+                       id="userRegisterFormPassword"
+                       class="form-control mb-4"
+                       th:field="*{password}"
+                       placeholder="Sifreniz" required />
             </div>
+            <ul class="text-danger" th:each="error: ${#fields.errors('password')}">
+                <li th:each="message : ${error.split(',')}">
+                    <p class="text-danger" th:text="${message}"></p>
+                </li>
+            </ul>
 
             <div class="md-form mb-5">
                 <i class="fas fa-lock prefix grey-text"></i>
-                <input type="password" id="userRegisterFormPasswordRepeat" class="form-control mb-4" placeholder="Sifreniz (Tekrar)">
+                <input type="password"
+                       id="userRegisterFormPasswordRepeat"
+                       class="form-control mb-4"
+                       th:field="*{confirmPassword}"
+                       placeholder="Sifreniz (Tekrar)" required />
             </div>
+            <ul class="text-danger" th:each="error: ${#fields.errors('confirmPassword')}">
+                <li th:each="message : ${error?.split(',')}">
+                    <p class="text-danger" th:text="${message}"></p>
+                </li>
+            </ul>
 
             <button th:class="|btn #{user_primary_color} text-white btn-block my-4|" type="submit">Kayit Ol</button>
 

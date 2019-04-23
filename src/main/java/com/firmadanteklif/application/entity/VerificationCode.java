@@ -3,6 +3,7 @@ package com.firmadanteklif.application.entity;
 import com.firmadanteklif.application.entity.enums.VerificationType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -19,20 +20,14 @@ import java.util.UUID;
 public class VerificationCode {
 
     @Id
+    @Type(type = "uuid-char")
+    @Column(name = "code_id", length = 36)
     private UUID uuid;
-
-    @CreatedDate
-    private LocalDateTime createdDate;
-
-    @CreatedBy
-    private String createdBy;
 
     @Enumerated(EnumType.STRING)
     private VerificationType verificationType;
 
-    @Column(name = "verification_code")
-    private String verificationCode;
-
+    @Type(type = "uuid-char")
     @Column(name = "owner_id")
     private UUID ownerId;
 

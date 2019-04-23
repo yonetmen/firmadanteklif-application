@@ -8,10 +8,10 @@
 <nav th:replace="~{layout/fragments :: nav}"></nav>
 
 <div class="container">
-
 <!--Page content between here-->
 
-    <h1>Welcome back: <span th:text="${session.user.getEmail()}"></span></h1>
+    <!--<span th:text="${session.city.getName()}"></span>-->
+    <h1>Yeni ilan verin. Sectiginiz sehir: <span th:text="${post.city.getName()}"></span></h1>
 
     <br/><br/><br/><br/><br/>
 
