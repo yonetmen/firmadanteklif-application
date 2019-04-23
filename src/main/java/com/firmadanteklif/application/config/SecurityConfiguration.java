@@ -5,6 +5,7 @@ import com.firmadanteklif.application.security.UserSuccessLoginHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -31,11 +32,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .antMatchers("/user-profile").hasRole("USER")
                 .antMatchers("/new-post").hasRole("USER")
-                .and().formLogin().loginPage("/user-giris")
-                .usernameParameter("email")
-                .loginProcessingUrl("/user-giris")
-                .successHandler(successLoginHandler)
-                .failureUrl("/user-giris?error=true")
+//                .and().formLogin().loginPage("/user-giris")
+//                .usernameParameter("email")
+//                .loginProcessingUrl("/user-giris")
+//                .successHandler(successLoginHandler)
+//                .failureUrl("/user-giris?error=true")
                 .and().logout().logoutSuccessUrl("/")
                 .and().rememberMe()
                 .and().csrf().disable()
@@ -45,6 +46,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     @Bean

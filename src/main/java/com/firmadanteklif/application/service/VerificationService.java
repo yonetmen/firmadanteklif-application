@@ -38,7 +38,7 @@ public class VerificationService {
             uuid = UUID.fromString(verificationId);
         } catch (Exception ex) {
             return new VerificationMessage(type, VerificationMessage.Value.danger, null,
-                    messageSource.getMessage("user.register.fail", null, Locale.getDefault()));
+                    messageSource.getMessage("user.activation.fail", null, Locale.getDefault()));
         }
 
         Optional<VerificationCode> codeOptional = verificationRepository.findByUuidAndVerificationType(uuid, type);
@@ -49,11 +49,11 @@ public class VerificationService {
             if(userEmail != null) {
                 verificationRepository.delete(code);
                 return new VerificationMessage(type, VerificationMessage.Value.success, userEmail,
-                        messageSource.getMessage("user.register.success", null, Locale.getDefault()));
+                        messageSource.getMessage("user.activation.success", null, Locale.getDefault()));
             }
         }
         return new VerificationMessage(type, VerificationMessage.Value.danger, null,
-                messageSource.getMessage("user.register.fail", null, Locale.getDefault()));
+                messageSource.getMessage("user.activation.fail", null, Locale.getDefault()));
     }
 
     private String updateUserStatus(UUID userId) {

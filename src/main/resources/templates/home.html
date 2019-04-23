@@ -8,10 +8,6 @@
     <nav th:replace="~{layout/fragments :: nav}"></nav>
 
     <div th:if="${userRegisterSuccess} == true">
-        <!--Uyeliginizi <strong th:text="${userEmail}"></strong> adresine gönderdigimiz linke tiklayarak onaylayabilirsiniz.-->
-        <!--<button type="button" class="close" data-dismiss="alert" aria-label="Close">-->
-            <!--<span aria-hidden="true">&times;</span>-->
-        <!--</button>-->
         <script type="text/javascript">
             document.addEventListener("DOMContentLoaded", function(event) {
                 // Your code to run since DOM is loaded and ready
@@ -243,7 +239,7 @@
                     <div class="row d-flex justify-content-center align-items-center">
 
                         <p class="pt-3 pr-2"> Uyeliginizi <strong th:text="${userEmail}"></strong> adresine gönderdigimiz linke tiklayarak onaylayabilirsiniz.</p>
-                        <a type="button" class="btn btn-success waves-effect" data-dismiss="modal">KAPAT</a>
+                        <a type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">KAPAT</a>
                     </div>
                 </div>
             </div>

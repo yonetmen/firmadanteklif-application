@@ -52,7 +52,7 @@
             <div th:if="${#request.isUserInRole('USER')}"><!--USER DROPDOWN MENU-->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user-circle"></i><span th:text="${#request.getRemoteUser()}">
+                        <span th:text="${#strings.substringBefore(#request.getRemoteUser(), '@')}"></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-dark dropdown-mobile-location" aria-labelledby="navbarDropdownMenuLink-333">
                         <a class="dropdown-item" href="#" onmouseover="this.style.backgroundColor='#4297db';
