@@ -39,7 +39,7 @@ public class VerificationService {
             uuid = UUID.fromString(verificationId);
         } catch (Exception ex) {
             return new VerificationMessage(type, VerificationMessage.Value.danger, null,
-                    messageSource.getMessage("user.activation.fail", null, Locale.getDefault()));
+                    messageSource.getMessage("user.activation.fail", null, Locale.forLanguageTag("tr-TR")));
         }
 
         Optional<VerificationCode> codeOptional = verificationRepository.findByUuidAndVerificationType(uuid, type);
