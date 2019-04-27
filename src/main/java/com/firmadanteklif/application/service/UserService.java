@@ -21,19 +21,15 @@ public class UserService {
     private MessageSource messageSource;
 
     @Autowired
-    public UserService(UserRepository userRepository, MailService mailService, @Qualifier("messageSource") MessageSource messageSource) {
+    public UserService(UserRepository userRepository, MailService mailService,
+                       @Qualifier("messageSource") MessageSource messageSource) {
         this.userRepository = userRepository;
         this.mailService = mailService;
         this.messageSource = messageSource;
     }
 
-
     public SiteUser register(SiteUser user) {
         return userRepository.save(user);
-    }
-
-    public void sendActivationEmail(SiteUser user) {
-        mailService.sendActivationEmail(user);
     }
 
 

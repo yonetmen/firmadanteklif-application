@@ -6,9 +6,9 @@
     <title>Your Message Subject or Title</title>
 </head>
 <body>
-    <h1>Springit User Activation</h1>
+    <h1>Firmadan Teklif Uyelik Onayi</h1>
     <p th:text="|Sayin: ${user.getEmail()}|">Sayin uyemiz,</p>
-    <p>Aramiza hosgeldiniz. Hesabinizi aktif etmek icin asagidaki linke tiklayin.</p>
-    <a th:href="${baseURL} + '/activate/' + ${user.getActivationCode()}">Hesabimi aktiv et</a>
+    <p>Aramiza hosgeldiniz! Hesabinizi aktif etmek icin asagidaki linke tiklayin.</p>
+    <a th:href="${baseURL} + ${user.getEmail()} + '/' + ${verificationCode}">Uyeligimi onayla</a>
 </body>
 </html>

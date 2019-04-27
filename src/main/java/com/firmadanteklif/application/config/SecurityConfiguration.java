@@ -20,7 +20,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private UserSuccessLoginHandler successLoginHandler;
 
     @Autowired
-    public SecurityConfiguration(UserDetailsServiceImpl userDetailsService, UserSuccessLoginHandler successLoginHandler) {
+    public SecurityConfiguration(UserDetailsServiceImpl userDetailsService,
+                                 UserSuccessLoginHandler successLoginHandler) {
         this.userDetailsService = userDetailsService;
         this.successLoginHandler = successLoginHandler;
     }
@@ -28,15 +29,27 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/css/**", "/img/**", "/user-giris", "/user-kayit", "/firma-giris", "/firma-kayit", "/activation/**").permitAll()
-                .anyRequest().authenticated()
-                .antMatchers("/user-profile").hasRole("USER")
-                .antMatchers("/new-post").hasRole("USER")
-                .and().formLogin().loginPage("/user-giris")
-                .usernameParameter("email")
-                .loginProcessingUrl("/user-giris")
-                .successHandler(successLoginHandler)
-                .failureUrl("/user-giris?error=true")
+                .antMatchers("/",
+                        "/css/**",
+                        "/img/**",
+                        "/user-giris",
+                        "/user-kayit",
+                        "/firma-giris",
+                        "/firma-kayit",
+                        "/activation/**").permitAll()
+                .anyRequest()
+                    .authenticated()
+                .antMatchers("/user-profile")
+                    .hasRole("USER")
+                .antMatchers("/new-post")
+                    .hasRole("USER")
+                .and()
+                .formLogin()
+                    .loginPage("/user-giris")
+                    .usernameParameter("email")
+                    .loginProcessingUrl("/user-giris")
+                    .successHandler(successLoginHandler)
+                    .failureUrl("/user-giris?error=true")
                 .and()
                 .logout()
                     .logoutSuccessUrl("/")
@@ -45,8 +58,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .rememberMe()
                     .key("cekoslavakyalilastiramadiklarimizdanmisiniz")
                     .tokenValiditySeconds(604800) // 1 week
-                .and().csrf().disable()
-                .headers().frameOptions().disable();
+                .and()
+                    .csrf().disable()
+                    .headers().frameOptions().disable();
     }
 
     @Autowired
