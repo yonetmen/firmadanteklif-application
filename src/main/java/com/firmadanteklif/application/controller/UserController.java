@@ -75,10 +75,8 @@ public class UserController {
             String encodedPassword = passwordEncoder.encode(user.getPassword());
             user.setPassword(encodedPassword);
             SiteUser newUser = userService.register(user);
-            log.info("New User registration: " + newUser);
-            String verificationCode = getVerificationCodeForRegister(newUser); // No need to return this String in production.
-            log.debug("ACTIVATION URL: " + verificationCode);
-            mailService.sendActivationEmail(newUser, verificationCode);
+            String verificationCodeId = createVerificationCodeForRegister(newUser);
+            mailService.sendActivationEmail(newUser, verificationCodeId);
             redirectAttributes
                     .addFlashAttribute("userEmail", newUser.getEmail())
                     .addFlashAttribute("userRegisterSuccess", true);
@@ -86,7 +84,7 @@ public class UserController {
         }
     }
 
-    private String getVerificationCodeForRegister(SiteUser user) {
+    private String createVerificationCodeForRegister(SiteUser user) {
         VerificationCode activation = new VerificationCode();
         activation.setVerificationEvent(VerificationEvent.REGISTER);
         activation.setOwnerId(user.getUuid());
