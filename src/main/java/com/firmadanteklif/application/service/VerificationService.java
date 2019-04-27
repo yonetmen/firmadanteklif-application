@@ -2,12 +2,11 @@ package com.firmadanteklif.application.service;
 
 import com.firmadanteklif.application.entity.SiteUser;
 import com.firmadanteklif.application.entity.VerificationCode;
-import com.firmadanteklif.application.entity.enums.VerificationType;
+import com.firmadanteklif.application.entity.enums.VerificationEvent;
 import com.firmadanteklif.application.entity.pojo.VerificationMessage;
 import com.firmadanteklif.application.repository.UserRepository;
 import com.firmadanteklif.application.repository.VerificationRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
@@ -33,27 +32,27 @@ public class VerificationService {
         this.messageSource = messageSource;
     }
 
-    public VerificationMessage findByIdAndVerificationType(String verificationId, VerificationType type, String email) {
+    public VerificationMessage findByIdAndVerificationType(String verificationId, VerificationEvent event, String email) {
         UUID uuid;
         try { // Check if incoming UUID has the right format.
             uuid = UUID.fromString(verificationId);
         } catch (Exception ex) {
-            return new VerificationMessage(type, VerificationMessage.Value.danger, null,
+            return new VerificationMessage(event, VerificationMessage.Type.danger, null,
                     messageSource.getMessage("user.activation.fail", null, Locale.getDefault()));
         }
 
-        Optional<VerificationCode> codeOptional = verificationRepository.findByUuidAndVerificationType(uuid, type);
+        Optional<VerificationCode> codeOptional = verificationRepository.findByUuidAndVerificationEvent(uuid, event);
         if(codeOptional.isPresent()) { // Check if there is a valid pending activation code
             VerificationCode code = codeOptional.get();
             UUID userId = code.getOwnerId();
             boolean updated = updateUserStatus(userId);
             if(updated) {
                 verificationRepository.delete(code);
-                return new VerificationMessage(type, VerificationMessage.Value.success, email,
+                return new VerificationMessage(event, VerificationMessage.Type.success, email,
                         messageSource.getMessage("user.activation.success", null, Locale.getDefault()));
             }
         }
-        return new VerificationMessage(type, VerificationMessage.Value.danger, email,
+        return new VerificationMessage(event, VerificationMessage.Type.danger, email,
                 messageSource.getMessage("user.activation.fail", null, Locale.getDefault()));
     }
 

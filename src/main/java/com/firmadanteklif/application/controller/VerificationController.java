@@ -1,7 +1,7 @@
 package com.firmadanteklif.application.controller;
 
 import com.firmadanteklif.application.entity.SiteUser;
-import com.firmadanteklif.application.entity.enums.VerificationType;
+import com.firmadanteklif.application.entity.enums.VerificationEvent;
 import com.firmadanteklif.application.entity.pojo.VerificationMessage;
 import com.firmadanteklif.application.service.VerificationService;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ public class VerificationController {
     @GetMapping("/activation/{email}/{verificationId}")
     public String activateAccount(@PathVariable String verificationId, @PathVariable String email, Model model) {
         log.info("VERIFICATION CONTROLLER: V.ID: " + verificationId);
-        VerificationMessage verificationMessage = verificationService.findByIdAndVerificationType(verificationId, VerificationType.REGISTER, email);
+        VerificationMessage verificationMessage = verificationService.findByIdAndVerificationType(verificationId, VerificationEvent.REGISTER, email);
         SiteUser user = new SiteUser();
         if(verificationMessage.getEmail() != null)
             user.setEmail(verificationMessage.getEmail());

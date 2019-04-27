@@ -1,5 +1,8 @@
 package com.firmadanteklif.application.security;
 
+import com.firmadanteklif.application.entity.SiteUser;
+import com.firmadanteklif.application.entity.pojo.VerificationMessage;
+import com.firmadanteklif.application.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -15,19 +18,33 @@ import java.io.IOException;
 @Component
 public class UserSuccessLoginHandler implements AuthenticationSuccessHandler {
 
+    private UserService userService;
+
+    public UserSuccessLoginHandler(UserService userService) {
+        this.userService = userService;
+    }
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
-        log.info("AuthenticationSuccessHandler # onAuthenticationSuccess() function!");
-
-        response.setStatus(HttpServletResponse.SC_OK);
 
         HttpSession session = request.getSession();
 
         if(session != null) {
             UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
-            session.setAttribute("user", userPrincipal.getUser());
-            response.sendRedirect("/user-profile");
+            SiteUser siteUser = userPrincipal.getUser();
+            if(siteUser.isActive()) {
+                log.info("USER IS ACTIVE");
+                response.setStatus(HttpServletResponse.SC_OK);
+                session.setAttribute("user", siteUser);
+                response.sendRedirect("/user-profile");
+            } else {
+                log.info("USER IS NOT ACTIVE");
+                authentication.setAuthenticated(false);
+                VerificationMessage verificationMessage = userService.generateActivationNeededMessage(siteUser.getEmail());
+                session.setAttribute("verificationMessage", verificationMessage);
+                response.sendRedirect("/user-giris");
+            }
         }
     }
 }
