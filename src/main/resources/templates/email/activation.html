@@ -1,14 +1,118 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Your Message Subject or Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Uyelik Onayi</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/css/mdb.min.css" rel="stylesheet">
 </head>
+
 <body>
-    <h1>Firmadan Teklif Uyelik Onayi</h1>
-    <p th:text="|Sayin: ${user.getEmail()}|">Sayin uyemiz,</p>
-    <p>Aramiza hosgeldiniz! Hesabinizi aktif etmek icin asagidaki linke tiklayin.</p>
-    <a th:href="${baseURL} + ${user.getEmail()} + '/' + ${verificationCode}">Uyeligimi onayla</a>
+<div class="container text-center mt-5">
+    <!--Container - Main Content of the page-->
+
+    <!-- big image section -->
+    <table border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="ffffff" class="bg_color">
+        <tr>
+            <td align="center">
+                <table border="0" align="center" width="590" cellpadding="0" cellspacing="0" class="container590">
+                    <tr>
+                        <td align="center" style="color: #343434; font-size: 24px; font-family: Quicksand, Calibri, sans-serif; font-weight:700;letter-spacing: 3px; line-height: 35px;"
+                            class="main-header">
+                            <!-- section text ======-->
+
+                            <div style="line-height: 35px">
+                                <span style="color: #5caad2;">FirmadanTeklif</span> Uyelik Onayi
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="10" style="font-size: 10px; line-height: 10px;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                            <table border="0" width="40" align="center" cellpadding="0" cellspacing="0" bgcolor="eeeeee">
+                                <tr>
+                                    <td height="2" style="font-size: 2px; line-height: 2px;">&nbsp;</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td align="left">
+                            <table border="0" width="590" align="center" cellpadding="0" cellspacing="0" class="container590">
+                                <tr>
+                                    <td align="left" style="color: #888888; font-size: 16px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
+                                        <!-- section text ======-->
+                                        <p style="line-height: 24px; margin-bottom:15px; font-weight: bold;" th:text="${user.getEmail()}">
+                                        Merhaba,
+                                    </p>
+                                        <p style="line-height: 24px;margin-bottom:15px;">
+                                            Aramiza hosgeldiniz! Hesabinizi aktif etmek icin lutfen 'Uyeligimi Onayla' butonuna tiklayin.
+                                        </p>
+                                        <p style="line-height: 24px; margin-bottom:20px; font-size: 12px;">
+                                            <strong>Dikkat:</strong> Böyle bir uyelik basvuru yapmadiysaniz luften bu email'i hemen silin ve email adresinizin guvenliginden emin olun.
+                                        </p>
+                                        <table border="0" align="center" width="180" cellpadding="0" cellspacing="0" bgcolor="5caad2" style="margin-bottom:20px;">
+                                            <tr>
+                                                <td height="10" style="font-size: 10px; line-height: 10px;">&nbsp;</td>
+                                            </tr>
+                                            <tr>
+                                                <td align="center" style="color: #ffffff; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 22px; letter-spacing: 2px;">
+                                                    <!-- main section button -->
+
+                                                    <div style="line-height: 22px;">
+                                                        <a style="color: #ffffff; text-decoration: none;" th:href="${baseURL} + ${user.getEmail()} + '/' + ${verificationCode}">Uyeligimi onayla</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td height="10" style="font-size: 10px; line-height: 10px;">&nbsp;</td>
+                                            </tr>
+                                        </table>
+                                        <p style="line-height: 24px">
+                                            Iyi gunler dileriz,</br>
+                                            FirmadanTeklif.com
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td height="40" style="font-size: 40px; line-height: 40px;">&nbsp;</td>
+        </tr>
+    </table>
+
+    <!--Container - Main Content of the page-->
+</div>
+
+<!-- JQuery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Bootstrap tooltips -->
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js"></script>
+
 </body>
+
 </html>
