@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -20,14 +19,26 @@ import java.util.Locale;
 public class MailService {
 
     private static final Logger log = LoggerFactory.getLogger(MailService.class);
-    private static final String BASE_URL = "http://localhost:8080";
+    private static final String BASE_ACTIVATION_URL = "http://localhost:8080/activation/";
     private final SpringTemplateEngine templateEngine;
     private final JavaMailSender javaMailSender;
 
     @Autowired
-    public MailService(@Qualifier("getJavaMailSender") JavaMailSender javaMailSender) {
+    public MailService(@Qualifier("getJavaMailSender") JavaMailSender javaMailSender,
+                       @Qualifier("templateEngine") SpringTemplateEngine templateEngine) {
         this.javaMailSender = javaMailSender;
-        this.templateEngine = new SpringTemplateEngine();
+        this.templateEngine = templateEngine;
+    }
+
+    @Async
+    public void sendEmailFromTemplate(SiteUser user, String templateName, String subject, String verificationCode) {
+        Locale locale = Locale.getDefault();
+        Context context = new Context(locale);
+        context.setVariable("user", user);
+        context.setVariable("verificationCode", verificationCode);
+        context.setVariable("baseURL", BASE_ACTIVATION_URL);
+        String content = templateEngine.process(templateName, context);
+        sendEmail(user.getEmail(), subject, content,false,true);
     }
 
     @Async
@@ -37,9 +48,9 @@ public class MailService {
         try {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, "UTF-8");
             message.setTo(to);
-            message.setFrom("noreply@firmadanteklif.com");
+            message.setFrom("kasimgul@gmail.com");
             message.setSubject(subject);
-            message.setText(content,isHtml);
+            message.setText(content, isHtml);
             javaMailSender.send(mimeMessage);
         } catch (Exception e) {
             log.error("Email could not be sent to user '{}': {}", to, e);
@@ -47,24 +58,14 @@ public class MailService {
     }
 
     @Async
-    public void sendEmailFromTemplate(SiteUser user, String templateName, String subject) {
-        Locale locale = Locale.getDefault();
-        Context context = new Context(locale);
-        context.setVariable("user", user);
-        context.setVariable("baseURL", BASE_URL);
-        String content = templateEngine.process(templateName, context);
-        sendEmail(user.getEmail(), subject, content,false,true);
-    }
-
-    @Async
-    public void sendActivationEmail(SiteUser user) {
+    public void sendActivationEmail(SiteUser user, String verificationCode) {
         log.debug("Sending activation email to '{}'", user.getEmail());
-        sendEmailFromTemplate(user, "email/activation", "Firmadan Teklif Uyelik Onayi");
+        sendEmailFromTemplate(user, "email/activation", "Firmadan Teklif Uyelik Onayi", verificationCode);
     }
 
     @Async
     public void sendWelcomeEmail(SiteUser user) {
         log.debug("Sending welcome email to '{}'", user.getEmail());
-        sendEmailFromTemplate(user, "email/welcome", "FirmadanTeklif'e hosgeldiniz!");
+        sendEmailFromTemplate(user, "email/welcome", "FirmadanTeklif'e hosgeldiniz!", null);
     }
 }

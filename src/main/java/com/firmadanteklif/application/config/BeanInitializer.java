@@ -9,6 +9,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
@@ -38,10 +39,10 @@ public class BeanInitializer implements WebMvcConfigurer {
     @Bean
     public JavaMailSender getJavaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-        mailSender.setHost("smtp.gmail.com");
+        mailSender.setHost("in-v3.mailjet.com");
         mailSender.setPort(587);
-        mailSender.setUsername("my.gmail@gmail.com");
-        mailSender.setPassword("password");
+        mailSender.setUsername("12ada582463d12c329f6ead145d49e21");
+        mailSender.setPassword("7e3032d6eb58ba5f5027d3532918947b");
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
         props.put("mail.smtp.auth", "true");
@@ -49,33 +50,4 @@ public class BeanInitializer implements WebMvcConfigurer {
         props.put("mail.debug", "true");
         return mailSender;
     }
-
-//    @Bean
-//    @Description("Thymeleaf view resolver")
-//    public ViewResolver viewResolver() {
-//        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-//        viewResolver.setTemplateEngine(templateEngine());
-//        viewResolver.setCharacterEncoding("UTF-8");
-//        return viewResolver;
-//    }
-//
-//    @Bean
-//    @Description("Thymeleaf template engine with Spring integration")
-//    public SpringTemplateEngine templateEngine() {
-//        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-//        templateEngine.setTemplateResolver(templateResolver());
-//        return templateEngine;
-//    }
-//
-//    @Bean
-//    @Description("Thymeleaf template resolver serving HTML 5")
-//    public ClassLoaderTemplateResolver templateResolver() {
-//        ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
-//        templateResolver.setPrefix("templates/");
-//        templateResolver.setCacheable(false);
-//        templateResolver.setSuffix(".html");
-//        templateResolver.setTemplateMode("HTML5");
-//        templateResolver.setCharacterEncoding("UTF-8");
-//        return templateResolver;
-//    }
 }

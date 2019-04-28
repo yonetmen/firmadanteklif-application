@@ -1,6 +1,6 @@
 package com.firmadanteklif.application.entity.enums;
 
-public enum VerificationType {
+public enum VerificationEvent {
     REGISTER,
     FORGOT_PASSWORD,
     CHANGE_EMAIL;

@@ -40,19 +40,19 @@
     <div class="collapse navbar-collapse px-2" id="navbarSupportedContent-333">
         <ul class="navbar-nav ml-auto nav-flex-icons">
             <div th:if="${#request.getRemoteUser() == null}"><!--USER LOGIN LINK-->
-                <li class="nav-item">
-                    <a class="btn btn-sm btn-outline-white btn-rounded" th:href="@{/user-giris}"><i class="fas fa-user-alt"></i> Kullanici Girisi</a>
+                <li class="nav-item text-white">
+                    <a class="nav-link" th:href="@{/user-giris}"><i class="fas fa-user-alt"></i> Kullanici Girisi</a>
                 </li>
             </div>
             <div class="form-inline" th:if="${#request.getRemoteUser() == null}"><!--FIRMA LOGIN LINK-->
                 <li class="nav-item text-white">
-                    <a class="btn btn-sm align-middle btn-secondary" th:href="@{/firma-giris}"><i class="far fa-building"></i> Firmaya Özel</a>
+                    <a class="nav-link" th:href="@{/firma-giris}"><i class="far fa-building"></i> Firmaya Özel</a>
                 </li>
             </div>
             <div th:if="${#request.isUserInRole('USER')}"><!--USER DROPDOWN MENU-->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span th:text="${#strings.substringBefore(#request.getRemoteUser(), '@')}"></span>
+                        <i class="fas fa-user-circle pr-2"></i><span>Bana Özel</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right dropdown-dark dropdown-mobile-location" aria-labelledby="navbarDropdownMenuLink-333">
                         <a class="dropdown-item" href="#" onmouseover="this.style.backgroundColor='#4297db';

@@ -1,24 +1,24 @@
 package com.firmadanteklif.application.entity.pojo;
 
-import com.firmadanteklif.application.entity.enums.VerificationType;
+import com.firmadanteklif.application.entity.enums.VerificationEvent;
 import lombok.Data;
 
 @Data
 public class VerificationMessage {
 
+    private String event;
     private String type;
-    private String value;
     private String email;
     private String message;
 
 
-    public enum Value {
+    public enum Type {
         success, danger, warning, info
     }
 
-    public VerificationMessage(VerificationType type, Value value, String email, String message) {
+    public VerificationMessage(VerificationEvent event, Type type, String email, String message) {
+        this.event = event.name();
         this.type = type.name();
-        this.value = value.name();
         this.email = email;
         this.message = message;
     }

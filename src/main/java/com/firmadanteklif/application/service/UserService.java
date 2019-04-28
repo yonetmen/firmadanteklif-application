@@ -1,7 +1,7 @@
 package com.firmadanteklif.application.service;
 
 import com.firmadanteklif.application.entity.SiteUser;
-import com.firmadanteklif.application.entity.enums.VerificationType;
+import com.firmadanteklif.application.entity.enums.VerificationEvent;
 import com.firmadanteklif.application.entity.pojo.VerificationMessage;
 import com.firmadanteklif.application.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,24 +21,20 @@ public class UserService {
     private MessageSource messageSource;
 
     @Autowired
-    public UserService(UserRepository userRepository, MailService mailService, @Qualifier("messageSource") MessageSource messageSource) {
+    public UserService(UserRepository userRepository, MailService mailService,
+                       @Qualifier("messageSource") MessageSource messageSource) {
         this.userRepository = userRepository;
         this.mailService = mailService;
         this.messageSource = messageSource;
     }
 
-
     public SiteUser register(SiteUser user) {
         return userRepository.save(user);
     }
 
-    public void sendActivationEmail(SiteUser user) {
-        mailService.sendActivationEmail(user);
-    }
-
 
     public VerificationMessage generateActivationNeededMessage(String email) {
-        return new VerificationMessage(VerificationType.REGISTER, VerificationMessage.Value.danger,
+        return new VerificationMessage(VerificationEvent.REGISTER, VerificationMessage.Type.danger,
                 email, messageSource.getMessage("user.activation.awaits", null, Locale.getDefault()));
     }
 
