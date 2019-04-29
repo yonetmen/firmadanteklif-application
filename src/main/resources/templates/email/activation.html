@@ -30,6 +30,12 @@
                             class="main-header">
                             <!-- section text ======-->
 
+                            <a style="line-height: 35px" class="my-5" href="http://localhost:8080">
+                                <div class="mb-5">
+                                    <img src="../../static/img/email-logo.png" th:src="|cid:${logo}|" height="65"/>
+                                </div>
+                            </a>
+
                             <div style="line-height: 35px">
                                 <span style="color: #5caad2;">FirmadanTeklif</span> Uyelik Onayi
                             </div>
@@ -74,7 +80,7 @@
                                                     <!-- main section button -->
 
                                                     <div style="line-height: 22px;">
-                                                        <a style="color: #ffffff; text-decoration: none;" th:href="${baseURL} + ${user.getEmail()} + '/' + ${verificationCode}">Uyeligimi onayla</a>
+                                                        <a class="px-2" style="color: #ffffff; text-decoration: none;" th:href="${baseURL} + ${user.getEmail()} + '/' + ${verificationCode}">Uyeligimi onayla</a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -99,20 +105,8 @@
         </tr>
     </table>
 
-    <!--Container - Main Content of the page-->
+<!--Container - Main Content of the page-->
 </div>
 
-<!-- JQuery -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- Bootstrap tooltips -->
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-<!-- Bootstrap core JavaScript -->
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<!-- MDB core JavaScript -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/js/mdb.min.js"></script>
-
 </body>
-
 </html>
