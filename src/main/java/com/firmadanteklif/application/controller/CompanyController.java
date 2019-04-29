@@ -1,6 +1,6 @@
 package com.firmadanteklif.application.controller;
 
-import com.firmadanteklif.application.entity.SiteCompany;
+import com.firmadanteklif.application.domain.entity.SiteCompany;
 import com.firmadanteklif.application.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

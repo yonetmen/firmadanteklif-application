@@ -1,4 +1,4 @@
-package com.firmadanteklif.application.entity.enums;
+package com.firmadanteklif.application.domain.enums;
 
 public enum Role {
 

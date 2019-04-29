@@ -1,8 +1,8 @@
 package com.firmadanteklif.application.controller;
 
-import com.firmadanteklif.application.entity.SiteUser;
-import com.firmadanteklif.application.entity.enums.VerificationEvent;
-import com.firmadanteklif.application.entity.pojo.VerificationMessage;
+import com.firmadanteklif.application.domain.entity.SiteUser;
+import com.firmadanteklif.application.domain.enums.VerificationEvent;
+import com.firmadanteklif.application.domain.dto.VerificationMessage;
 import com.firmadanteklif.application.service.VerificationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

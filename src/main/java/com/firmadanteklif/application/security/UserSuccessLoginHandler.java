@@ -1,7 +1,7 @@
 package com.firmadanteklif.application.security;
 
-import com.firmadanteklif.application.entity.SiteUser;
-import com.firmadanteklif.application.entity.pojo.VerificationMessage;
+import com.firmadanteklif.application.domain.entity.SiteUser;
+import com.firmadanteklif.application.domain.dto.VerificationMessage;
 import com.firmadanteklif.application.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;

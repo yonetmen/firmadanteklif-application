@@ -1,7 +1,7 @@
 package com.firmadanteklif.application.controller;
 
-import com.firmadanteklif.application.entity.City;
-import com.firmadanteklif.application.entity.UserPost;
+import com.firmadanteklif.application.domain.entity.City;
+import com.firmadanteklif.application.domain.entity.UserPost;
 import com.firmadanteklif.application.repository.CityRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

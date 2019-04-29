@@ -1,6 +1,6 @@
 package com.firmadanteklif.application.service;
 
-import com.firmadanteklif.application.entity.City;
+import com.firmadanteklif.application.domain.entity.City;
 import com.firmadanteklif.application.repository.CityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

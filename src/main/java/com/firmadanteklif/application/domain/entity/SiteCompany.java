@@ -1,31 +1,31 @@
-package com.firmadanteklif.application.entity;
+package com.firmadanteklif.application.domain.entity;
 
-import com.firmadanteklif.application.entity.enums.Role;
+import com.firmadanteklif.application.domain.enums.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "site_users")
+@Table(name = "site_companies")
 @EntityListeners(AuditingEntityListener.class)
-public class SiteUser implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class SiteCompany {
 
     @Id
     @Type(type = "uuid-char")
-    @Column(name = "user_id", length = 36)
+    @Column(name = "company_id", length = 36)
     private UUID uuid;
 
     @CreatedDate
@@ -33,6 +33,12 @@ public class SiteUser implements Serializable {
 
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
+
+    @CreatedBy
+    private String createdBy;
+
+    @LastModifiedBy
+    private String updatedBy;
 
     @Size.List({
             @Size(min = 5, message = "{email.size.min.message}"),
@@ -58,10 +64,12 @@ public class SiteUser implements Serializable {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    private String address;
+
+    private String phoneNumber;
+
     @PrePersist
     public void generateUuid() {
         uuid = UUID.randomUUID();
-        active = false;
-        role = Role.ROLE_USER;
     }
 }

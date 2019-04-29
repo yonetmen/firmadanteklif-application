@@ -1,6 +1,6 @@
 package com.firmadanteklif.application.security;
 
-import com.firmadanteklif.application.entity.SiteUser;
+import com.firmadanteklif.application.domain.entity.SiteUser;
 import com.firmadanteklif.application.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

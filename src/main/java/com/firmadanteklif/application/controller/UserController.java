@@ -1,8 +1,8 @@
 package com.firmadanteklif.application.controller;
 
-import com.firmadanteklif.application.entity.SiteUser;
-import com.firmadanteklif.application.entity.VerificationCode;
-import com.firmadanteklif.application.entity.enums.VerificationEvent;
+import com.firmadanteklif.application.domain.entity.SiteUser;
+import com.firmadanteklif.application.domain.entity.VerificationCode;
+import com.firmadanteklif.application.domain.enums.VerificationEvent;
 import com.firmadanteklif.application.service.MailService;
 import com.firmadanteklif.application.service.UserService;
 import com.firmadanteklif.application.service.VerificationService;
