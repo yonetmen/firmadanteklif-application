@@ -1,6 +1,6 @@
 package com.firmadanteklif.application.security;
 
-import com.firmadanteklif.application.entity.SiteUser;
+import com.firmadanteklif.application.domain.entity.SiteUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

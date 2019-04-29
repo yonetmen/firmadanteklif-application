@@ -1,4 +1,4 @@
-package com.firmadanteklif.application.entity;
+package com.firmadanteklif.application.domain.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

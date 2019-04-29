@@ -1,6 +1,6 @@
 package com.firmadanteklif.application.unittest.user;
 
-import com.firmadanteklif.application.entity.SiteUser;
+import com.firmadanteklif.application.domain.entity.SiteUser;
 import com.firmadanteklif.application.repository.UserRepository;
 import com.firmadanteklif.application.security.UserDetailsServiceImpl;
 import com.firmadanteklif.application.service.UserService;

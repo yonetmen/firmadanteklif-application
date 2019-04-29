@@ -1,9 +1,9 @@
 package com.firmadanteklif.application.integrationtest.user;
 
 import com.firmadanteklif.application.Application;
-import com.firmadanteklif.application.entity.SiteUser;
-import com.firmadanteklif.application.entity.enums.VerificationEvent;
-import com.firmadanteklif.application.entity.pojo.VerificationMessage;
+import com.firmadanteklif.application.domain.entity.SiteUser;
+import com.firmadanteklif.application.domain.enums.VerificationEvent;
+import com.firmadanteklif.application.domain.dto.VerificationMessage;
 import com.firmadanteklif.application.repository.UserRepository;
 import com.firmadanteklif.application.service.UserService;
 import org.junit.After;

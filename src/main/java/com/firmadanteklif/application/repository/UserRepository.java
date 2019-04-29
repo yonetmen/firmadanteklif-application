@@ -1,6 +1,6 @@
 package com.firmadanteklif.application.repository;
 
-import com.firmadanteklif.application.entity.SiteUser;
+import com.firmadanteklif.application.domain.entity.SiteUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

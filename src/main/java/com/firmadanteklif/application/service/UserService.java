@@ -1,8 +1,8 @@
 package com.firmadanteklif.application.service;
 
-import com.firmadanteklif.application.entity.SiteUser;
-import com.firmadanteklif.application.entity.enums.VerificationEvent;
-import com.firmadanteklif.application.entity.pojo.VerificationMessage;
+import com.firmadanteklif.application.domain.entity.SiteUser;
+import com.firmadanteklif.application.domain.enums.VerificationEvent;
+import com.firmadanteklif.application.domain.dto.VerificationMessage;
 import com.firmadanteklif.application.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

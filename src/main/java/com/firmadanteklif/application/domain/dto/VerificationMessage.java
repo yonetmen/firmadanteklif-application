@@ -1,6 +1,6 @@
-package com.firmadanteklif.application.entity.pojo;
+package com.firmadanteklif.application.domain.dto;
 
-import com.firmadanteklif.application.entity.enums.VerificationEvent;
+import com.firmadanteklif.application.domain.enums.VerificationEvent;
 import lombok.Data;
 
 @Data

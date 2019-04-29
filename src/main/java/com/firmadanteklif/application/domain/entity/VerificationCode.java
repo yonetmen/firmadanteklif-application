@@ -1,6 +1,6 @@
-package com.firmadanteklif.application.entity;
+package com.firmadanteklif.application.domain.entity;
 
-import com.firmadanteklif.application.entity.enums.VerificationEvent;
+import com.firmadanteklif.application.domain.enums.VerificationEvent;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;

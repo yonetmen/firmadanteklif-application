@@ -1,7 +1,7 @@
 package com.firmadanteklif.application.repository;
 
-import com.firmadanteklif.application.entity.VerificationCode;
-import com.firmadanteklif.application.entity.enums.VerificationEvent;
+import com.firmadanteklif.application.domain.entity.VerificationCode;
+import com.firmadanteklif.application.domain.enums.VerificationEvent;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
