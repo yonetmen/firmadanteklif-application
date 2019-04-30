@@ -18,7 +18,9 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "site_users")
+@Table(name = "site_users", indexes = {
+        @Index(columnList = "email", unique = true)
+})
 @EntityListeners(AuditingEntityListener.class)
 public class SiteUser implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -39,7 +41,7 @@ public class SiteUser implements Serializable {
             @Size(max = 50, message = "{email.size.max.message}")
     })
     @Email(message = "{email.format.message}")
-    @Column(length = 50)
+    @Column(name = "email", length = 50)
     private String email;
 
     @Size.List({
