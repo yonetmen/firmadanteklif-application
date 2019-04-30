@@ -42,4 +42,8 @@ public class UserService {
         Optional<SiteUser> userOptional = userRepository.findByEmail(user.getEmail());
         return userOptional.orElse(null);
     }
+
+    public boolean isEmailUnique(String email) {
+        return !userRepository.findByEmail(email).isPresent();
+    }
 }

@@ -71,6 +71,9 @@ public class UserController {
         } else if (!user.getPassword().equalsIgnoreCase(user.getConfirmPassword())) {
             bindingResult.rejectValue("password", "password.match.error");
             return "user/register";
+        } else if (!userService.isEmailUnique(user.getEmail())){
+            bindingResult.rejectValue("email", "email.not.unique");
+            return "user/register";
         } else {
             String encodedPassword = passwordEncoder.encode(user.getPassword());
             user.setPassword(encodedPassword);
