@@ -12,32 +12,6 @@
     <!--User Login Formu-->
     <div class="center mt-5 pt-5 col-md-6 mb-5 pb-5 offset-md-3">
 
-        <div class="alert alert-danger  mt-5" role="alert" th:if="${#request.getParameter('error')} == 'true'"><!--LOGIN ERROR ALERT-->
-            <strong>Kullanici adi / Sifre</strong> gecerli degil.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        <!--LOGIN ERROR ALERT-->
-        </div>
-
-        <div th:if="${session.verificationMessage != null}" th:class="|alert alert-${session.verificationMessage.type} alert-dismissable mt-5|" ><!-- ACTIVATION NEEDED ALERT-->
-            <strong th:text="${session.verificationMessage.message}"></strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <div th:text="${@sessionModificationBean.removeVerificationMessageFromSession()}"></div>
-        <!--ACCOUNT ACTIVATION ALERT-->
-        </div>
-
-        <div th:if="${verificationMessage != null}" th:class="|alert alert-${verificationMessage.type} alert-dismissable mt-5|" ><!--BAD ACTIVATION CODE ALERT-->
-            <strong th:text="${verificationMessage.message}"></strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        <!--BAD ACTIVATION CODE ALERT-->
-        </div>
-
-
         <form role="form" method="post" th:action="@{/user-giris}" th:object="${user}">
             <div class="text-center">
                 <p class="h2 mb-4 font-weight-bold text-muted text-center pt-3 pb-3">Kullanici Girisi</p>
