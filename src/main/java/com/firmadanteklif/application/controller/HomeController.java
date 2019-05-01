@@ -43,4 +43,10 @@ public class HomeController {
         }
         return "redirect:/";
     }
+
+    @GetMapping("/iletisim")
+    public String getContactPage(Model model) {
+        model.addAttribute("", "");
+        return "iletisim";
+    }
 }
