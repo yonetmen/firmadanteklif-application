@@ -1,9 +1,10 @@
 package com.firmadanteklif.application.security;
 
+import com.firmadanteklif.application.controller.exception.NotValidatedException;
 import com.firmadanteklif.application.domain.entity.SiteUser;
-import com.firmadanteklif.application.domain.dto.VerificationMessage;
 import com.firmadanteklif.application.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -13,15 +14,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Locale;
 
 @Slf4j
 @Component
-public class UserSuccessLoginHandler implements AuthenticationSuccessHandler {
+public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
-    private UserService userService;
+    private MessageSource messageSource;
 
-    public UserSuccessLoginHandler(UserService userService) {
-        this.userService = userService;
+    public LoginSuccessHandler(MessageSource messageSource) {
+        this.messageSource = messageSource;
     }
 
     @Override
@@ -34,16 +36,15 @@ public class UserSuccessLoginHandler implements AuthenticationSuccessHandler {
             UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
             SiteUser siteUser = userPrincipal.getUser();
             if(siteUser.isActive()) {
-                log.info("USER IS ACTIVE");
+                log.info("User is logged in: " + siteUser.getEmail());
                 response.setStatus(HttpServletResponse.SC_OK);
                 session.setAttribute("user", siteUser);
                 response.sendRedirect("/user-profile");
             } else {
-                log.info("USER IS NOT ACTIVE");
+                log.info("Logged in user (" + siteUser.getEmail() + "), is not activated.");
                 authentication.setAuthenticated(false);
-                VerificationMessage verificationMessage = userService.generateActivationNeededMessage(siteUser.getEmail());
-                session.setAttribute("verificationMessage", verificationMessage);
-                response.sendRedirect("/user-giris");
+                throw new NotValidatedException(
+                        messageSource.getMessage("user.activation.awaits", null, Locale.getDefault()));
             }
         }
     }

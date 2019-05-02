@@ -1,10 +1,10 @@
 package com.firmadanteklif.application.controller.exception;
 
-public class EmailNotUniqueException extends RuntimeException {
+public class NotValidatedException extends RuntimeException {
 
     private String message;
 
-    public EmailNotUniqueException(String message) {
+    public NotValidatedException(String message) {
         super(message);
         this.message = message;
     }

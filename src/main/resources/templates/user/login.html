@@ -12,6 +12,8 @@
     <!--User Login Formu-->
     <div class="center mt-5 pt-5 col-md-6 mb-5 pb-5 offset-md-3">
 
+        <div th:replace="~{layout/fragments :: alertMessage}"></div>
+
         <form role="form" method="post" th:action="@{/user-giris}" th:object="${user}">
             <div class="text-center">
                 <p class="h2 mb-4 font-weight-bold text-muted text-center pt-3 pb-3">Kullanici Girisi</p>

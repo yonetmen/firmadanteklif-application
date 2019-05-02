@@ -52,14 +52,6 @@ public class UserIT {
     }
 
     @Test
-    public void generateActivationNeededMessageTest() {
-        final String email = "kasimgul@gmail.com";
-        VerificationMessage message = userService.generateActivationNeededMessage(email);
-        assertEquals(message.getEvent(), VerificationEvent.REGISTER.name());
-        assertEquals("Giris yapmadan önce Email adresinizi onaylamaniz gerekiyor", message.getMessage());
-    }
-
-    @Test
     public void getUserTest() {
         final String email = "kasimgul@gmail.com";
         final SiteUser user = createBasicUser(email);
@@ -69,7 +61,6 @@ public class UserIT {
 
         assertEquals(email, fetched.getEmail());
     }
-
 
     /***********     Helper Methods      ***********/
 

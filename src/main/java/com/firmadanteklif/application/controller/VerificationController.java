@@ -1,8 +1,5 @@
 package com.firmadanteklif.application.controller;
 
-import com.firmadanteklif.application.domain.entity.SiteUser;
-import com.firmadanteklif.application.domain.enums.VerificationEvent;
-import com.firmadanteklif.application.domain.dto.VerificationMessage;
 import com.firmadanteklif.application.service.VerificationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +21,8 @@ public class VerificationController {
 
     @GetMapping("/activation/{email}/{verificationId}")
     public String activateAccount(@PathVariable String verificationId, @PathVariable String email, Model model) {
-        log.info("VERIFICATION CONTROLLER: V.ID: " + verificationId);
-        VerificationMessage verificationMessage = verificationService.findByIdAndVerificationType(verificationId, VerificationEvent.REGISTER, email);
-        SiteUser user = new SiteUser();
-        if(verificationMessage.getEmail() != null)
-            user.setEmail(verificationMessage.getEmail());
-        model.addAttribute("user", user);
-        model.addAttribute("verificationMessage", verificationMessage);
+        log.info("Email Activation Link. Verification ID: " + verificationId);
+        verificationService.processPendingActivationByVerificationId(verificationId, model, email);
         return "/user/login";
     }
 

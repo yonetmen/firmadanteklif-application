@@ -1,6 +1,7 @@
 package com.firmadanteklif.application.config;
 
-import com.firmadanteklif.application.security.UserSuccessLoginHandler;
+import com.firmadanteklif.application.security.LoginFailureHandler;
+import com.firmadanteklif.application.security.LoginSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -18,13 +19,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private UserDetailsService userDetailsService;
-    private UserSuccessLoginHandler successLoginHandler;
+    private LoginSuccessHandler successLoginHandler;
+    private LoginFailureHandler loginFailureHandler;
 
     @Autowired
     public SecurityConfiguration(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService,
-                                 UserSuccessLoginHandler successLoginHandler) {
+                                 LoginSuccessHandler successLoginHandler, LoginFailureHandler loginFailureHandler) {
         this.userDetailsService = userDetailsService;
         this.successLoginHandler = successLoginHandler;
+        this.loginFailureHandler = loginFailureHandler;
     }
 
     @Override
@@ -50,7 +53,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .usernameParameter("email")
                     .loginProcessingUrl("/user-giris")
                     .successHandler(successLoginHandler)
-                    .failureUrl("/user-giris?error=true")
+//                    .failureUrl("/user-giris?error=true")
+                    .failureHandler(loginFailureHandler)
                 .and()
                 .logout()
                     .logoutSuccessUrl("/")

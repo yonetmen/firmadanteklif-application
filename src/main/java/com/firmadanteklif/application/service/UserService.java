@@ -32,12 +32,6 @@ public class UserService {
         return userRepository.save(user);
     }
 
-
-    public VerificationMessage generateActivationNeededMessage(String email) {
-        return new VerificationMessage(VerificationEvent.REGISTER, VerificationMessage.Type.danger,
-                email, messageSource.getMessage("user.activation.awaits", null, Locale.getDefault()));
-    }
-
     public SiteUser getUser(@Valid SiteUser user) {
         Optional<SiteUser> userOptional = userRepository.findByEmail(user.getEmail());
         return userOptional.orElse(null);

@@ -10,5 +10,5 @@ import java.util.UUID;
 
 @Repository
 public interface VerificationRepository extends JpaRepository<VerificationCode, UUID> {
-    Optional<VerificationCode> findByUuidAndVerificationEvent(UUID verificationId, VerificationEvent event);
+    Optional<VerificationCode> findByUuid(UUID verificationId);
 }
