@@ -67,6 +67,7 @@ public class UserController {
             model.addAttribute("validationErrors", bindingResult.getAllErrors());
             if (!user.getPassword().equalsIgnoreCase(user.getConfirmPassword()))
                 bindingResult.rejectValue("password", "password.match.error");
+                bindingResult.rejectValue("confirmPassword", "password.match.error");
             return "user/register";
         } else if (!user.getPassword().equalsIgnoreCase(user.getConfirmPassword())) {
             bindingResult.rejectValue("password", "password.match.error");
