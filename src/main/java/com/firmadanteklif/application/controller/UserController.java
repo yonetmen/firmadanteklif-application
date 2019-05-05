@@ -65,15 +65,9 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("user", user);
             model.addAttribute("validationErrors", bindingResult.getAllErrors());
-            if (!user.getPassword().equalsIgnoreCase(user.getConfirmPassword()))
-                bindingResult.rejectValue("password", "password.match.error");
-                bindingResult.rejectValue("confirmPassword", "password.match.error");
             return "user/register";
         } else if (!user.getPassword().equalsIgnoreCase(user.getConfirmPassword())) {
             bindingResult.rejectValue("password", "password.match.error");
-            return "user/register";
-        } else if (!userService.isEmailUnique(user.getEmail())){
-            bindingResult.rejectValue("email", "email.not.unique");
             return "user/register";
         } else {
             String encodedPassword = passwordEncoder.encode(user.getPassword());
