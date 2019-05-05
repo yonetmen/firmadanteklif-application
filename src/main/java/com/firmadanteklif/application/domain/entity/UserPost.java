@@ -3,6 +3,7 @@ package com.firmadanteklif.application.domain.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -23,6 +24,9 @@ public class UserPost {
     @Type(type = "uuid-char")
     @Column(name = "post_id", length = 36)
     private UUID uuid;
+
+    @CreatedBy
+    private String ownerEmail;
 
     @CreatedDate
     private LocalDateTime createdDate;
