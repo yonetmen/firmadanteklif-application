@@ -11,9 +11,8 @@
 
     <!--User Login Formu-->
     <div class="center mt-5 pt-5 col-md-6 mb-5 pb-5 offset-md-3">
-
-        <div class="alert alert-danger  mt-5" role="alert" th:if="${#request.getParameter('error')} == 'true'"><!--LOGIN ERROR ALERT-->
-            <strong>Kullanıcı adı / Şifre</strong> geçerli değil.
+        <div class="alert alert-danger  mt-5" role="alert" th:if="${#request.getParameter('login-error')} == 'true'"><!--LOGIN ERROR ALERT-->
+            <strong>Kullanıcı adı / Şifre</strong> geçerli değil
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>

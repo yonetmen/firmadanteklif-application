@@ -1,5 +1,6 @@
 package com.firmadanteklif.application.domain.entity;
 
+import com.firmadanteklif.application.validator.ValidEmail;
 import com.firmadanteklif.application.domain.enums.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,15 +10,14 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
 @Table(name = "site_users", indexes = {
         @Index(columnList = "email", unique = true)
 })
@@ -36,11 +36,7 @@ public class SiteUser implements Serializable {
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
 
-    @Size.List({
-            @Size(min = 5, message = "{email.size.min.message}"),
-            @Size(max = 50, message = "{email.size.max.message}")
-    })
-    @Email(message = "{email.format.message}")
+    @ValidEmail(message = "{email.not.unique}")
     @Column(name = "email", length = 50)
     private String email;
 

@@ -63,16 +63,10 @@ public class UserController {
                                   Model model, RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("user", user);
             model.addAttribute("validationErrors", bindingResult.getAllErrors());
-            if (!user.getPassword().equalsIgnoreCase(user.getConfirmPassword()))
-                bindingResult.rejectValue("password", "password.match.error");
             return "user/register";
         } else if (!user.getPassword().equalsIgnoreCase(user.getConfirmPassword())) {
             bindingResult.rejectValue("password", "password.match.error");
-            return "user/register";
-        } else if (!userService.isEmailUnique(user.getEmail())){
-            bindingResult.rejectValue("email", "email.not.unique");
             return "user/register";
         } else {
             String encodedPassword = passwordEncoder.encode(user.getPassword());

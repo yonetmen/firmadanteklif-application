@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Description;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.data.domain.AuditorAware;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -18,6 +20,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import java.util.Properties;
 
 @Configuration
+@EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class BeanInitializer implements WebMvcConfigurer {
 
     @Bean
@@ -49,5 +52,10 @@ public class BeanInitializer implements WebMvcConfigurer {
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.debug", "true");
         return mailSender;
+    }
+
+    @Bean
+    public AuditorAware<String> auditorAware() {
+        return new AuditorAwareImpl();
     }
 }

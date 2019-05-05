@@ -31,8 +31,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/",
-                        "/css/**",
-                        "/img/**",
                         "/user-giris",
                         "/user-kayit",
                         "/firma-giris",
@@ -51,7 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .usernameParameter("email")
                     .loginProcessingUrl("/user-giris")
                     .successHandler(successLoginHandler)
-                    .failureUrl("/user-giris?error=true")
+                    .failureUrl("/user-giris?login-error=true")
                 .and()
                 .logout()
                     .logoutSuccessUrl("/")

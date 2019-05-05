@@ -4,7 +4,6 @@ import com.firmadanteklif.application.domain.enums.Role;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Type;
-import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -33,9 +32,6 @@ public class SiteCompany {
 
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
-
-    @CreatedBy
-    private String createdBy;
 
     @LastModifiedBy
     private String updatedBy;
