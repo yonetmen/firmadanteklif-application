@@ -98,20 +98,19 @@
 
 
 <!--Footer Fragment-->
-<footer class="page-footer navbar-fixed-bottom font-small blue-grey darken-3 pt-5" th:fragment="footer">
+<footer class="page-footer navbar-fixed-bottom font-small blue-grey darken-3 pt-5 text-center justify-content-between" th:fragment="footer">
 
         <!-- Footer Elements -->
         <div class="container pb-4">
 
             <!-- Grid row-->
-            <div class="row">
+            <div class="row justify-content-center">
                 <!-- Grid column -->
                 <div class="col-md-4 mb-md-0 mb-4">
                     <!-- Links -->
-                    <h5 class="text-uppercase">Firma</h5>
                     <ul class="list-unstyled">
-                        <li class="pb-2"><a th:href="@{/hakkimizda}">Hakkımızda</a></li>
-                        <li><a th:href="@{/iletisim}">İletişim</a></li>
+                        <li class="mb-3"><img th:src="@{/img/logo-footer.png}" height="50"></li>
+                        <li class="pb-2 text-white "><p><strong>FIRMADAN TEKLIF</strong></p></li>
                     </ul>
                 </div>
                 <!-- Grid column -->
@@ -119,10 +118,10 @@
                 <!-- Grid column -->
                 <div class="col-md-4 mb-md-0 mb-4">
                     <!-- Links -->
-                    <h5 class="text-uppercase">Detaylar</h5>
+                    <h5 class="text-uppercase font-weight-bold"><strong>Detaylar</strong></h5>
                     <ul class="list-unstyled">
                         <li class="pb-2"><a th:href="@{/hakkimizda}">Hakkımızda</a></li>
-                        <li><a th:href="@{/iletisim}">İletişim</a></li>
+                        <li class="pb-2"><a th:href="@{/iletisim}">İletişim</a></li>
                         <li class="pb-2"><a href="#!">Kullanım şartları</a></li>
                         <li><a href="#!">Sık Sorulan Sorular</a></li>
                     </ul>
@@ -130,35 +129,23 @@
 
                 <div class="col-md-4 mb-md-0 mb-4">
                     <!-- Call to action -->
-                    <ul class="list-unstyled list-inline text-center">
-                        <li class="list-inline-item">
-                            <h5 class="mb-1">Kazancinizi arttirin</h5>
+                    <ul class="list-unstyled list-inline">
+                        <li>
+                            <a href="#" class="btn btn-default btn-rounded">Firma kayit</a>
                         </li>
-                        <li class="list-inline-item">
-                            <a href="#!" class="btn btn-orange btn-rounded">Firmanızı kaydedin</a>
+                        <li>
+                            <div class="mt-4 inline-block">
+                                <!-- Facebook -->
+                                <a class="mr-5"><i class="fab fa-facebook-f fa-lg white-text py-2"> </i></a>
+                                <!-- Twitter -->
+                                <a class="mr-5"><i class="fab fa-twitter fa-lg white-text py-2"> </i></a>
+                                <!--Instagram-->
+                                <a><i class="fab fa-instagram fa-lg white-text py-2"> </i></a>
+                            </div>
                         </li>
                     </ul>
                     <!-- Call to action -->
                 </div>
-            </div><!-- Grid row-->
-
-            <!-- Grid row-->
-            <div class="row">
-                <!-- Grid column -->
-                <div class="col-md-12">
-                    <div class="mt-2 flex-center">
-                        <!-- Facebook -->
-                        <a><i class="fab fa-facebook-f fa-lg white-text mx-md-5 mr-3 fa-2x py-2"> </i></a>
-                        <!-- Twitter -->
-                        <a><i class="fab fa-twitter fa-lg white-text mx-md-5 mr-3 fa-2x py-2"> </i></a>
-                        <!--Instagram-->
-                        <a><i class="fab fa-instagram fa-lg white-text mx-md-5 mr-3 fa-2x py-2"> </i></a>
-                        <!--Blog-->
-                        <a><i class="fas fa-blog fa-lg white-text mx-md-5 mr-3 fa-2x py-2"> </i></a>
-                    </div>
-                </div>
-                <!-- Grid column -->
-
             </div><!-- Grid row-->
 
         </div><!-- Footer Elements -->
