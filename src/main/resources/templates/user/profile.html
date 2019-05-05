@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:replace="~{layout/fragments :: head(title = 'Kullanici Özel')}">
+<head th:replace="~{layout/fragments :: head(title = 'Kullanıcı Özel')}">
 </head>
 <body>
 
@@ -11,7 +11,7 @@
 
 <!--Page content between here-->
 
-    <h1>Welcome back: <span th:text="${session.user.getEmail()}"></span></h1>
+    <h1>Tekrar Hoşgeldiniz: <span th:text="${session.user.getEmail()}"></span></h1>
 
     <br/><br/><br/><br/><br/>
 

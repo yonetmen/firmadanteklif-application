@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:replace="~{layout/fragments :: head(title = 'Uye Girisi')}">
+<head th:replace="~{layout/fragments :: head(title = 'Üye Girişi')}">
 </head>
 <body>
 
@@ -13,7 +13,7 @@
     <div class="center mt-5 pt-5 col-md-6 mb-5 pb-5 offset-md-3">
 
         <div class="alert alert-danger  mt-5" role="alert" th:if="${#request.getParameter('error')} == 'true'"><!--LOGIN ERROR ALERT-->
-            <strong>Kullanici adi / Sifre</strong> gecerli degil.
+            <strong>Kullanıcı adı / Şifre</strong> geçerli değil.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -40,7 +40,7 @@
 
         <form role="form" method="post" th:action="@{/user-giris}" th:object="${user}">
             <div class="text-center">
-                <p class="h2 mb-4 font-weight-bold text-muted text-center pt-3 pb-3">Kullanici Girisi</p>
+                <p class="h2 mb-4 font-weight-bold text-muted text-center pt-3 pb-3">Kullanıcı Girişi</p>
             </div>
 
             <div class="md-form mb-5">
@@ -66,18 +66,18 @@
                 <div>
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" name="remember-me" class="custom-control-input" id="defaultLoginFormRemember">
-                        <label class="custom-control-label" for="defaultLoginFormRemember">Beni Hatirla</label>
+                        <label class="custom-control-label" for="defaultLoginFormRemember">Beni Hatırla</label>
                     </div>
                 </div>
                 <div>
-                    <a href="#" class="blue-text ml-1" data-toggle="modal" data-target="#userForgotPasswordModal">Sifremi unuttum</a></p>
+                    <a href="#" class="blue-text ml-1" data-toggle="modal" data-target="#userForgotPasswordModal">Şifremi unuttum</a></p>
                 </div>
             </div>
-            <button th:class="|btn #{user_primary_color} btn-block text-white my-4|" type="submit">Giris Yap</button>
+            <button th:class="|btn #{user_primary_color} btn-block text-white my-4|" type="submit">Giriş Yap</button>
 
             <div class="text-center">
-                <p>Henuz uye degil misin?
-                    <a th:href="@{/user-kayit}">Uye Ol</a>
+                <p>Henuz üye değil misiniz?
+                    <a th:href="@{/user-kayit}">Üye Ol</a>
                 </p>
             </div>
         </form>
