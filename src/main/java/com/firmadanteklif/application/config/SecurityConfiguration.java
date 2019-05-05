@@ -36,6 +36,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/firma-giris",
                         "/firma-kayit",
                         "/iletisim",
+                        "/hakkimizda",
                         "/activation/**").permitAll()
                 .anyRequest()
                     .authenticated()
