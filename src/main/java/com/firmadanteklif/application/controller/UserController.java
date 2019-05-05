@@ -63,7 +63,6 @@ public class UserController {
                                   Model model, RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
-            model.addAttribute("user", user);
             model.addAttribute("validationErrors", bindingResult.getAllErrors());
             return "user/register";
         } else if (!user.getPassword().equalsIgnoreCase(user.getConfirmPassword())) {
