@@ -35,8 +35,8 @@ public class SiteUser implements Serializable {
 
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
-    
-    @ValidEmail
+
+    @ValidEmail(message = "{email.not.unique}")
     @Column(name = "email", length = 50)
     private String email;
 

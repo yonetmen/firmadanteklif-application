@@ -17,7 +17,7 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = UniqueEmailValidator.class)
 public @interface ValidEmail {
 
-    String message() default "Girdiğiniz E-Posta adresi sistemimizde kayıtlı";
+    String message();
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
