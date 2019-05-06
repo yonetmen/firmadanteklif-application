@@ -31,6 +31,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/",
+                        "/css/**",
+                        "/js/**",
+                        "/img/**",
+                        "/static/**",
                         "/user-giris",
                         "/user-kayit",
                         "/firma-giris",

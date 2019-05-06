@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <!--Head Fragment-->
 <head th:fragment="head(title)">
@@ -19,7 +18,7 @@
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.6/css/mdb.min.css" rel="stylesheet">
 
-    <!--<link rel="icon" sizes="16x16" th:href="@{/static/favicon.ico}"/>-->
+    <link rel="icon" sizes="16x16" th:href="@{/static/favicon.ico}"/>
 </head>
 <!--Head Fragment-->
 
@@ -99,22 +98,19 @@
 
 
 <!--Footer Fragment-->
-<footer class="page-footer navbar-fixed-bottom font-small blue-grey darken-3 pt-5" th:fragment="footer">
+<footer class="page-footer navbar-fixed-bottom font-small blue-grey darken-3 pt-5 text-center justify-content-between" th:fragment="footer">
 
         <!-- Footer Elements -->
         <div class="container pb-4">
 
             <!-- Grid row-->
-            <div class="row">
+            <div class="row justify-content-center">
                 <!-- Grid column -->
                 <div class="col-md-4 mb-md-0 mb-4">
                     <!-- Links -->
-                    <h5 class="text-uppercase">Firma</h5>
                     <ul class="list-unstyled">
-                        <li class="pb-2"><a th:href="@{/hakkimizda}">Hakkımızda</a></li>
-                        <li class="pb-2"><a href="#">Blog</a></li>
-                        <li class="pb-2"><a href="#">Firmanızı ekleyin</a></li>
-                        <li><a th:href="@{/iletisim}">İletişim</a></li>
+                        <li class="mb-3"><img th:src="@{/img/logo-footer.png}" height="50"></li>
+                        <li class="pb-2 text-white "><p><strong>FIRMADAN TEKLIF</strong></p></li>
                     </ul>
                 </div>
                 <!-- Grid column -->
@@ -122,10 +118,10 @@
                 <!-- Grid column -->
                 <div class="col-md-4 mb-md-0 mb-4">
                     <!-- Links -->
-                    <h5 class="text-uppercase">Detaylar</h5>
+                    <h5 class="text-uppercase font-weight-bold"><strong>Detaylar</strong></h5>
                     <ul class="list-unstyled">
-                        <li class="pb-2"><a href="#!">Destek hattı</a></li>
-                        <li class="pb-2"><a href="#!">Kadromuz</a></li>
+                        <li class="pb-2"><a th:href="@{/hakkimizda}">Hakkımızda</a></li>
+                        <li class="pb-2"><a th:href="@{/iletisim}">İletişim</a></li>
                         <li class="pb-2"><a href="#!">Kullanım şartları</a></li>
                         <li><a href="#!">Sık Sorulan Sorular</a></li>
                     </ul>
@@ -133,66 +129,25 @@
 
                 <div class="col-md-4 mb-md-0 mb-4">
                     <!-- Call to action -->
-                    <ul class="list-unstyled list-inline text-center py-2">
-                        <li class="list-inline-item">
-                            <h5 class="mb-1">Kazancınızı arttırın</h5>
+                    <ul class="list-unstyled list-inline">
+                        <li>
+                            <a href="#" class="btn btn-default btn-rounded">Firma kayit</a>
                         </li>
-                        <li class="list-inline-item">
-                            <a href="#!" class="btn btn-outline-white btn-rounded">Firmanızı kaydedin</a>
+                        <li>
+                            <div class="mt-4 inline-block">
+                                <!-- Facebook -->
+                                <a class="mr-5"><i class="fab fa-facebook-f fa-lg white-text py-2"> </i></a>
+                                <!-- Twitter -->
+                                <a class="mr-5"><i class="fab fa-twitter fa-lg white-text py-2"> </i></a>
+                                <!--Instagram-->
+                                <a><i class="fab fa-instagram fa-lg white-text py-2"> </i></a>
+                            </div>
                         </li>
                     </ul>
                     <!-- Call to action -->
                 </div>
             </div><!-- Grid row-->
-
-            <!-- Grid row-->
-            <div class="row">
-                <!-- Grid column -->
-                <div class="col-md-12 py-5">
-                    <div class="mb-5 flex-center border-top border-bottom">
-                        <!-- Facebook -->
-                        <a class="fb-ic"><i class="fab fa-facebook-f fa-lg white-text mx-md-5 mr-3 fa-2x py-4"> </i></a>
-                        <!-- Twitter -->
-                        <a class="tw-ic"><i class="fab fa-twitter fa-lg white-text mx-md-5 mr-3 fa-2x py-4"> </i></a>
-                        <!--Instagram-->
-                        <a class="ins-ic"><i class="fab fa-instagram fa-lg white-text mx-md-5 mr-3 fa-2x py-4"> </i></a>
-                        <!--Blog-->
-                        <a class="ins-ic"><i class="fas fa-blog fa-lg white-text mx-md-5 mr-3 fa-2x py-4"> </i></a>
-                    </div>
-                </div>
-                <!-- Grid column -->
-
-            </div><!-- Grid row-->
-
-            <!--Grid row-->
-            <div class="row">
-                <!--Grid column-->
-                <div class="col-md-6 mb-4">
-                    <!-- Form -->
-                    <form class="input-group">
-                        <input type="text" class="form-control form-control-sm" placeholder="Search" aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-sm btn-outline-white my-0" type="button">Ara<i class="fas fa-search ml-2" aria-hidden="true"></i></button>
-                        </div>
-
-                    </form>
-                    <!-- Form -->
-                </div>
-                <!--Grid column-->
-
-                <!--Grid column-->
-                <div class="col-md-6 mb-4">
-
-                    <form class="input-group">
-                        <input type="text" class="form-control form-control-sm" placeholder="Your email" aria-label="Your email" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-sm btn-outline-white my-0" type="button">Detaylı bilgi gönder</button>
-                        </div>
-                    </form>
-                </div><!--Grid column-->
-            </div><!--Grid row-->
-
-
+          
         </div><!-- Footer Elements -->
 
         <!-- Copyright -->
