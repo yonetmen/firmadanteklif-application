@@ -4,26 +4,25 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
+<body class="h-100">
     <nav th:replace="~{layout/fragments :: nav}"></nav>
-
-    <div class="container text-center mt-5">
-            <!--Container - Main Content of the page-->
-          <!--Section: Contact v.2-->
-          <section class="mb-4">
-          
+  
+    <br/><br/><br/><br/><br/><br/>
+    <div class="container">
+        <!--Section: Contact v.2-->
+        <section>
             <!--Section heading-->
             <h2 class="h1-responsive font-weight-bold text-center my-4">Bizimle İletişime Geçin</h2>
             <!--Section description-->
+
             <p class="text-center w-responsive mx-auto mb-5">Bize bir sorunuz mu var ? Lütfen bizimle direkt irtibata geçmekten çekinmeyin.
                Çalışma arkadaşlarımızdan biri mümkün olan en kısa sürede size ulaşıp yardımcı olacaktır.</p>
           
-            <div class="row">
-          
+            <div class="row mb-5">
+
                 <!--Grid column-->
                 <div class="col-md-9 mb-md-0 mb-5">
-                    <form id="contact-form" name="contact-form" action="mail.php" method="POST">
-          
+                    <form id="contact-form" name="contact-form" method="POST">
                         <!--Grid row-->
                         <div class="row">
           
@@ -78,7 +77,6 @@
           
                     <div class="text-center text-md-left">
                         <button th:class="|btn #{user_primary_color} btn-block text-white my-4|" type="submit">Gönder</button>
-                        <!-- <a class="btn btn-primary" onclick="document.getElementById('contact-form').submit();">Send</a> -->
                     </div>
                     <div class="status"></div>
                 </div>
