@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:replace="~{layout/fragments :: head(title = 'Yeni Uye')}">
+<head th:replace="~{layout/fragments :: head(title = 'Yeni Üye')}">
 </head>
 <body>
 
@@ -13,7 +13,7 @@
     <div class="center mt-5 pt-5 col-md-6 mb-5 pb-5 offset-md-3">
         <form role="form" method="post" th:action="@{/user-kayit}" th:object="${user}">
             <div class="text-center">
-                <p class="h2 mb-4 font-weight-bold text-muted text-center pt-3 pb-3">Yeni Uye Kaydi</p>
+                <p class="h2 mb-4 font-weight-bold text-muted text-center pt-3 pb-3">Yeni Üye Kaydı</p>
             </div>
 
             <div class="md-form mb-5">
@@ -58,11 +58,11 @@
                 </li>
             </ul>
 
-            <button th:class="|btn #{user_primary_color} text-white btn-block my-4|" type="submit">Kayit Ol</button>
+            <button th:class="|btn #{user_primary_color} text-white btn-block my-4|" type="submit">Kayıt Ol</button>
 
             <div class="text-center">
-                <p>Uyeliginiz var mi?
-                    <a th:href="@{user-giris}">Uye Girisi</a>
+                <p>Üyeliğiniz var mı?
+                    <a th:href="@{user-giris}">Üye Girişi</a>
                 </p>
             </div>
         </form>
