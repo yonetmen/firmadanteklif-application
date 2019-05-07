@@ -33,12 +33,20 @@ public class VerificationService {
     }
 
     public VerificationMessage findByIdAndVerificationType(String verificationId, VerificationEvent event, String email) {
+
         UUID uuid;
         try { // Check if incoming UUID has the right format.
             uuid = UUID.fromString(verificationId);
         } catch (Exception ex) {
             return new VerificationMessage(event, VerificationMessage.Type.danger, null,
                     messageSource.getMessage("user.activation.fail", null, Locale.getDefault()));
+        }
+
+        // Check if 'email' parameter is valid.
+        Optional<SiteUser> userOptional = userRepository.findByEmail(email);
+        if(!userOptional.isPresent()) {
+            return new VerificationMessage(event, VerificationMessage.Type.danger, null,
+                    messageSource.getMessage("user.activation.email.error", null, Locale.getDefault()));
         }
 
         Optional<VerificationCode> codeOptional = verificationRepository.findByUuidAndVerificationEvent(uuid, event);
