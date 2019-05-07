@@ -1,14 +1,13 @@
 package com.firmadanteklif.application.security;
 
-import com.firmadanteklif.application.domain.entity.SiteUser;
 import com.firmadanteklif.application.domain.dto.VerificationMessage;
+import com.firmadanteklif.application.domain.entity.SiteUser;
 import com.firmadanteklif.application.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -26,7 +25,7 @@ public class UserSuccessLoginHandler implements AuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-                                        Authentication authentication) throws IOException, ServletException {
+                                        Authentication authentication) throws IOException {
 
         HttpSession session = request.getSession();
 
@@ -34,12 +33,13 @@ public class UserSuccessLoginHandler implements AuthenticationSuccessHandler {
             UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
             SiteUser siteUser = userPrincipal.getUser();
             if(siteUser.isActive()) {
-                log.info("USER IS ACTIVE");
+                log.info("User successfully logged in: " + siteUser.getEmail());
                 response.setStatus(HttpServletResponse.SC_OK);
                 session.setAttribute("user", siteUser);
                 response.sendRedirect("/user-profile");
             } else {
-                log.info("USER IS NOT ACTIVE");
+                log.info("User is not activate yet: " + siteUser.getEmail());
+                // todo: implement re-send verification mail in case user lost or didn't receive the first mail.
                 authentication.setAuthenticated(false);
                 VerificationMessage verificationMessage = userService.generateActivationNeededMessage(siteUser.getEmail());
                 session.setAttribute("verificationMessage", verificationMessage);

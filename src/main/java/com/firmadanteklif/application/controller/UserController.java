@@ -85,7 +85,7 @@ public class UserController {
         VerificationCode activation = new VerificationCode();
         activation.setVerificationEvent(VerificationEvent.REGISTER);
         activation.setOwnerId(user.getUuid());
-        activation.setExpirationDate(LocalDateTime.now().plusDays(1));
+        activation.setExpirationDate(LocalDateTime.now().plusDays(2));
         UUID verificationID = verificationService.save(activation);
         return verificationID.toString();
     }
