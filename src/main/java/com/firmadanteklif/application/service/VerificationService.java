@@ -1,11 +1,12 @@
 package com.firmadanteklif.application.service;
 
+import com.firmadanteklif.application.domain.dto.FlashMessage;
 import com.firmadanteklif.application.domain.entity.SiteUser;
 import com.firmadanteklif.application.domain.entity.VerificationCode;
 import com.firmadanteklif.application.domain.enums.VerificationEvent;
-import com.firmadanteklif.application.domain.dto.VerificationMessage;
 import com.firmadanteklif.application.repository.UserRepository;
 import com.firmadanteklif.application.repository.VerificationRepository;
+import com.firmadanteklif.application.utility.FlashUtility;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -32,53 +33,46 @@ public class VerificationService {
         this.messageSource = messageSource;
     }
 
-    public VerificationMessage findByIdAndVerificationType(String verificationId, VerificationEvent event, String email) {
+    public UUID save(VerificationCode activation) {
+        VerificationCode verificationCode = verificationRepository.save(activation);
+        return verificationCode.getUuid();
+    }
 
-        UUID uuid;
-        try { // Check if incoming UUID has the right format.
-            uuid = UUID.fromString(verificationId);
-        } catch (Exception ex) {
-            return new VerificationMessage(event, VerificationMessage.Type.danger, null,
-                    messageSource.getMessage("user.activation.fail", null, Locale.getDefault()));
-        }
+    public FlashMessage getVerificationOpResult(UUID verificationId, VerificationEvent event, String email) {
 
-        // Check if 'email' parameter is valid.
-        Optional<SiteUser> userOptional = userRepository.findByEmail(email);
-        if(!userOptional.isPresent()) {
-            return new VerificationMessage(event, VerificationMessage.Type.danger, null,
-                    messageSource.getMessage("user.activation.email.error", null, Locale.getDefault()));
-        }
+        FlashMessage flashMessage = new FlashMessage();
+        Optional<VerificationCode> codeOptional =
+                verificationRepository.findByUuidAndVerificationEvent(verificationId, event);
 
-        Optional<VerificationCode> codeOptional = verificationRepository.findByUuidAndVerificationEvent(uuid, event);
         if(codeOptional.isPresent()) { // Check if there is a valid pending activation code
             VerificationCode code = codeOptional.get();
             UUID userId = code.getOwnerId();
-            boolean updated = updateUserStatus(userId);
+            boolean updated = updateUserStatus(userId, email);
+
             if(updated) {
                 verificationRepository.delete(code);
-                return new VerificationMessage(event, VerificationMessage.Type.success, email,
-                        messageSource.getMessage("user.activation.success", null, Locale.getDefault()));
+                flashMessage.setKind(FlashUtility.FLASH_SUCCESS);
+                flashMessage.setMessage(messageSource
+                        .getMessage("user.activation.success", null, Locale.getDefault()));
+                return flashMessage;
             }
         }
-        return new VerificationMessage(event, VerificationMessage.Type.danger, email,
-                messageSource.getMessage("user.activation.fail", null, Locale.getDefault()));
+
+        flashMessage.setKind(FlashUtility.FLASH_DANGER);
+        flashMessage.setMessage(messageSource
+                .getMessage("user.activation.fail", null, Locale.getDefault()));
+        return flashMessage;
     }
 
-    private boolean updateUserStatus(UUID userId) {
+    private boolean updateUserStatus(UUID userId, String email) {
         Optional<SiteUser> byId = userRepository.findById(userId);
-        if(byId.isPresent()) {
+        if(byId.isPresent() && byId.get().getEmail().equalsIgnoreCase(email)) {
             SiteUser user = byId.get();
             user.setActive(true);
             userRepository.save(user);
             return true;
         }
-        log.error("No user with given ID [" + userId + "] has found.");
+        log.error("No User with given ID [" + userId + "] or given E-mail [" + email + "] has found.");
         return false;
-    }
-
-
-    public UUID save(VerificationCode activation) {
-        VerificationCode verificationCode = verificationRepository.save(activation);
-        return verificationCode.getUuid();
     }
 }

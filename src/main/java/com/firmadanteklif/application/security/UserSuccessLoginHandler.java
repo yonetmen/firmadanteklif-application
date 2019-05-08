@@ -1,9 +1,11 @@
 package com.firmadanteklif.application.security;
 
-import com.firmadanteklif.application.domain.dto.VerificationMessage;
+import com.firmadanteklif.application.domain.dto.FlashMessage;
 import com.firmadanteklif.application.domain.entity.SiteUser;
-import com.firmadanteklif.application.service.UserService;
+import com.firmadanteklif.application.utility.FlashUtility;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -12,15 +14,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Locale;
 
 @Slf4j
 @Component
 public class UserSuccessLoginHandler implements AuthenticationSuccessHandler {
 
-    private UserService userService;
+    private MessageSource messageSource;
 
-    public UserSuccessLoginHandler(UserService userService) {
-        this.userService = userService;
+    @Autowired
+    public UserSuccessLoginHandler(MessageSource messageSource) {
+        this.messageSource = messageSource;
     }
 
     @Override
@@ -41,8 +45,9 @@ public class UserSuccessLoginHandler implements AuthenticationSuccessHandler {
                 log.info("User is neither registered nor validated: " + siteUser.getEmail());
                 // todo: implement re-send verification mail in case user lost or didn't receive the first mail.
                 authentication.setAuthenticated(false);
-                VerificationMessage verificationMessage = userService.generateActivationNeededMessage(siteUser.getEmail());
-                session.setAttribute("verificationMessage", verificationMessage);
+                FlashMessage flashMessage = FlashUtility.getFlashMessage(FlashUtility.FLASH_DANGER,
+                        messageSource.getMessage("user.activation.awaits", null, Locale.getDefault()));
+                session.setAttribute("flashMessage", flashMessage);
                 response.sendRedirect("/user-giris");
             }
         }

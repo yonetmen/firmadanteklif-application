@@ -12,11 +12,12 @@ import javax.servlet.http.HttpSession;
 @Component
 public class SessionModificationBean {
 
-    public void removeVerificationMessageFromSession() {
+    public void removeFlashMessageFromSession() {
         try {
-            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+            HttpServletRequest request = ((ServletRequestAttributes)
+                    RequestContextHolder.getRequestAttributes()).getRequest();
             HttpSession session = request.getSession();
-            session.removeAttribute("verificationMessage");
+            session.removeAttribute("flashMessage");
         } catch (RuntimeException ex) {
             log.error("No Request: ", ex);
         }

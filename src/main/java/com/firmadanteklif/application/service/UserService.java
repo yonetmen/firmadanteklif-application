@@ -1,16 +1,12 @@
 package com.firmadanteklif.application.service;
 
 import com.firmadanteklif.application.domain.entity.SiteUser;
-import com.firmadanteklif.application.domain.enums.VerificationEvent;
-import com.firmadanteklif.application.domain.dto.VerificationMessage;
 import com.firmadanteklif.application.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
-import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -32,11 +28,6 @@ public class UserService {
         return userRepository.save(user);
     }
 
-
-    public VerificationMessage generateActivationNeededMessage(String email) {
-        return new VerificationMessage(VerificationEvent.REGISTER, VerificationMessage.Type.danger,
-                email, messageSource.getMessage("user.activation.awaits", null, Locale.getDefault()));
-    }
 
     public Optional<SiteUser> findUserByEmail(String email) {
         return userRepository.findByEmail(email);

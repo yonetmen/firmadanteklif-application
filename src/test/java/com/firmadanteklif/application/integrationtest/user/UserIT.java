@@ -2,8 +2,6 @@ package com.firmadanteklif.application.integrationtest.user;
 
 import com.firmadanteklif.application.Application;
 import com.firmadanteklif.application.domain.entity.SiteUser;
-import com.firmadanteklif.application.domain.enums.VerificationEvent;
-import com.firmadanteklif.application.domain.dto.VerificationMessage;
 import com.firmadanteklif.application.repository.UserRepository;
 import com.firmadanteklif.application.service.UserService;
 import org.junit.After;
@@ -50,14 +48,6 @@ public class UserIT {
 
         SiteUser created = userService.register(user);
         assertNotNull(created.getUuid());
-    }
-
-    @Test
-    public void generateActivationNeededMessageTest() {
-        final String email = "kasimgul@gmail.com";
-        VerificationMessage message = userService.generateActivationNeededMessage(email);
-        assertEquals(message.getEvent(), VerificationEvent.REGISTER.name());
-        assertEquals("Giris yapmadan önce Email adresinizi onaylamaniz gerekiyor", message.getMessage());
     }
 
     @Test

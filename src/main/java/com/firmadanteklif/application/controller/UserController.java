@@ -110,7 +110,7 @@ public class UserController {
         String verificationCodeId = createVerificationCodeForRecoverPassword(siteUser.getUuid());
         // Todo: Create password reset mail template.
 //        mailService.sendResetPasswordEmail(siteUser, verificationCodeId);
-        FlashMessage flashMessage = FlashUtility.getFlashMessage("success",
+        FlashMessage flashMessage = FlashUtility.getFlashMessage(FlashUtility.FLASH_SUCCESS,
                 messageSource.getMessage("user.password.reset.mail.sent", null, Locale.getDefault()));
         model.addAttribute("flashMessage", flashMessage);
         return "user/password-reset";
