@@ -11,7 +11,7 @@
 
             <br/><br/><br/>
             <!--User Login Formu-->
-            <div class="center mt-5 pt-5 col-md-6 mb-5 pb-5 offset-md-3">
+            <div class="center col-md-6 mb-5 pb-5 offset-md-3">
                 <div class="alert alert-danger alert-dismissable mt-5" role="alert" th:if="${#request.getParameter('login-error')} == 'true'"><!--LOGIN ERROR ALERT-->
                     <button type="button" class="close" data-dismiss="alert">
                         <span aria-hidden="true">&times;</span>
@@ -37,6 +37,7 @@
                 <!--ACTIVATION CODE ALERT-->
                 </div>
 
+                <div th:replace="~{layout/fragments :: alertMessage}"></div>
 
                 <form role="form" method="post" th:action="@{/user-giris}" th:object="${user}">
                     <div class="text-center">

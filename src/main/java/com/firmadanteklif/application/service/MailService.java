@@ -69,6 +69,13 @@ public class MailService {
     }
 
     @Async
+    public void sendResetPasswordEmail(SiteUser user, String verificationCode) {
+        log.debug("Sending activation email to '{}'", user.getEmail());
+        sendEmailFromTemplate(user, "email/activation",
+                "Firmadan Teklif Uyelik Onayi", verificationCode);
+    }
+
+    @Async
     public void sendWelcomeEmail(SiteUser user) {
         log.debug("Sending welcome email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "email/welcome",
