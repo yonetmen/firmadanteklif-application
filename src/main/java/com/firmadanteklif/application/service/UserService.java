@@ -38,9 +38,8 @@ public class UserService {
                 email, messageSource.getMessage("user.activation.awaits", null, Locale.getDefault()));
     }
 
-    public SiteUser getUser(@Valid SiteUser user) {
-        Optional<SiteUser> userOptional = userRepository.findByEmail(user.getEmail());
-        return userOptional.orElse(null);
+    public Optional<SiteUser> findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     public boolean isEmailUnique(String email) {

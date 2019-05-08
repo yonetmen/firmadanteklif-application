@@ -15,8 +15,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import java.util.Optional;
+
+import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(
@@ -65,9 +66,12 @@ public class UserIT {
         final SiteUser user = createBasicUser(email);
 
         SiteUser created = userService.register(user);
-        SiteUser fetched = userService.getUser(created);
-
-        assertEquals(email, fetched.getEmail());
+        Optional<SiteUser> optional = userService.findUserByEmail(email);
+        if(!optional.isPresent()) {
+            fail();
+        }
+        SiteUser fetched = optional.get();
+        assertEquals(created.getEmail(), fetched.getEmail());
     }
 
 

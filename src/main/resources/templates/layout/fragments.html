@@ -26,7 +26,6 @@
 
 <!--Navbar Fragment-->
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark scrolling-navbar" th:classappend="#{navbar_color}" th:fragment="navigation">
-    <!--<a class="navbar-brand" th:href="@{/}" th:text="#{company_name}"></a>-->
 <div class="container">
     <a class="navbar-brand px-4" th:href="@{/}">
         <img th:src="@{/img/logo.png}" height="30" alt="FT">
@@ -66,32 +65,15 @@
 </nav>
 <!--Navbar Fragment-->
 
-
-<!--User Sifre Hatirlatma Modal Fragment-->
-<div class="modal fade" id="userForgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" th:fragment="pass-reminder">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header text-center" th:classappend="#{modal_primary_color}">
-                <h4 class="modal-title w-100 font-weight-bold text-white">Sifre Hatirlatma</h4>
-                <button type="button" class="close text-white" data-dismiss="modal" data-toggle="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body mx-3">
-                <div class="md-form mb-4">
-                    <i class="fas fa-envelope prefix grey-text"></i>
-                    <input type="email" id="user-forgot-password-input" class="form-control validate">
-                    <label data-error="hatali" data-success="gecerli" for="user-forgot-password-input">Email Adresiniz</label>
-                </div>
-
-            </div>
-            <div class="modal-footer d-flex justify-content-center">
-                <button type="submit" th:class="|btn #{modal_accent_color} text-white waves-effect|">Gönder</button>
-            </div>
+<div th:fragment="alertMessage"><!--Flash Message-->
+    <div th:if="${flashMessage != null}" th:class="|alert alert-${flashMessage.kind} alert-dismissable mt-5|" >
+            <strong th:text="${flashMessage.message}"></strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
-    </div>
+    <!--Flash Message-->
 </div>
-<!--User Sifre Hatirlatma Modal Fragment-->
 
 
 <!--Footer Fragment-->

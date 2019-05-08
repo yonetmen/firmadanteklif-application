@@ -3,6 +3,7 @@ package com.firmadanteklif.application.controller;
 import com.firmadanteklif.application.domain.entity.SiteUser;
 import com.firmadanteklif.application.domain.entity.VerificationCode;
 import com.firmadanteklif.application.domain.enums.VerificationEvent;
+import com.firmadanteklif.application.exception.UserNotFoundException;
 import com.firmadanteklif.application.service.MailService;
 import com.firmadanteklif.application.service.UserService;
 import com.firmadanteklif.application.service.VerificationService;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -79,6 +81,27 @@ public class UserController {
                     .addFlashAttribute("userRegisterSuccess", true);
             return "redirect:/";
         }
+    }
+
+    @GetMapping("sifre-hatirlatma")
+    public String passwordReminder(Model model) {
+        model.addAttribute("user", new SiteUser());
+        return "user/password-reset";
+    }
+
+    @PostMapping("/sifre-hatirlatma")
+    public String passwordReminder(@ModelAttribute("user") SiteUser user) {
+
+        Optional<SiteUser> optional = userService.findUserByEmail(user.getEmail());
+
+        if(!optional.isPresent()) {
+            log.error("User is not Present");
+            throw new UserNotFoundException(user.getEmail());
+        }
+
+        SiteUser siteUser = optional.get();
+        // Todo: Send reset password link
+        return "user/password-reset";
     }
 
     private String createVerificationCodeForRegister(SiteUser user) {

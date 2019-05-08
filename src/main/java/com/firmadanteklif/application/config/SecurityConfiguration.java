@@ -39,6 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/user-kayit",
                         "/firma-giris",
                         "/firma-kayit",
+                        "/sifre-hatirlatma",
                         "/iletisim",
                         "/hakkimizda",
                         "/activation/**").permitAll()
@@ -57,6 +58,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .failureUrl("/user-giris?login-error=true")
                 .and()
                 .logout()
+                    .invalidateHttpSession(true)
+                    .clearAuthentication(true)
                     .logoutSuccessUrl("/")
                     .deleteCookies("JSESSIONID")
                 .and()

@@ -70,7 +70,7 @@
                             </div>
                         </div>
                         <div>
-                            <a href="#" class="blue-text ml-1" data-toggle="modal" data-target="#userForgotPasswordModal">Şifremi unuttum</a></p>
+                            <a th:href="@{/sifre-hatirlatma}" class="blue-text ml-1">Şifremi unuttum</a></p>
                         </div>
                     </div>
                     <button th:class="|btn #{user_primary_color} btn-block text-white my-4|" type="submit">Giriş Yap</button>
@@ -83,10 +83,6 @@
                 </form>
             </div>
             <!--User Login Formu-->
-
-            <div th:replace="~{layout/fragments :: pass-reminder}"></div>
-
-            <br/><br/><br/><br/> <!-- Needed to avoid empty space below footer -->
 
         </div>  <!-- Container-->
 

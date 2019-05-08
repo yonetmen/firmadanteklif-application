@@ -38,7 +38,7 @@ public class UserSuccessLoginHandler implements AuthenticationSuccessHandler {
                 session.setAttribute("user", siteUser);
                 response.sendRedirect("/user-profile");
             } else {
-                log.info("User is not activate yet: " + siteUser.getEmail());
+                log.info("User is neither registered nor validated: " + siteUser.getEmail());
                 // todo: implement re-send verification mail in case user lost or didn't receive the first mail.
                 authentication.setAuthenticated(false);
                 VerificationMessage verificationMessage = userService.generateActivationNeededMessage(siteUser.getEmail());
