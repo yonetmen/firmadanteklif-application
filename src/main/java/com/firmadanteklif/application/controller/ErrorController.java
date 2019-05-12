@@ -15,13 +15,13 @@ import org.springframework.web.servlet.ModelAndView;
 public class ErrorController {
 
     @ExceptionHandler(UserNotFoundException.class)
-    public ModelAndView handleEmailNotUniqueException(UserNotFoundException exception) {
+    public ModelAndView handleUserNotFoundException(UserNotFoundException exception) {
         return getModelAndView(exception.getMessage(), "user/password-reset");
     }
 
     @ExceptionHandler(InvalidUuidFormatException.class)
     public ModelAndView handleInvalidUuidFormatException(InvalidUuidFormatException exception) {
-        return getModelAndView(exception.getMessage(), "user/login");
+        return getModelAndView(exception.getMessage(), exception.getRedirectTarget());
     }
 
     private ModelAndView getModelAndView(String message, String viewName) {

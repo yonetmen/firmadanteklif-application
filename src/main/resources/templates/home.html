@@ -17,6 +17,16 @@
         </script>
     </div>
 
+    <div th:if="${flashMessage} != null">
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function(event) {
+                // Your code to run since DOM is loaded and ready
+                openFlashMessageModal();
+            });
+
+        </script>
+    </div>
+
     <!-- Add new UserPost-->
     <div id="home-intro" class="text-center py-5">
         <!-- Title -->
@@ -223,6 +233,10 @@
         function openRegisterSuccessModal() {
             $('#userRegisterSuccessModal').modal('show');
         };
+
+        function openFlashMessageModal() {
+            $('#flashMessageModal').modal('show');
+        };
     </script>
 
     <!--Modal: userRegisterSuccessModal-->
@@ -236,6 +250,24 @@
 
                         <p class="pt-3 pr-2"> Uyeliginizi <strong th:text="${userEmail}"></strong> adresine gönderdigimiz linke tiklayarak onaylayabilirsiniz.</p>
                         <a type="button" class="btn btn-default waves-effect" data-dismiss="modal">KAPAT</a>
+                    </div>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div><!--Modal: userRegisterSuccessModal-->
+
+    <!--Modal: userRegisterSuccessModal-->
+    <div id="flashMessageModal" class="modal fade top" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="true">
+        <div class="modal-dialog modal-frame modal-top modal-notify modal-info" role="document">
+            <!--Content-->
+            <div class="modal-content">
+                <!--Body-->
+                <div class="modal-body">
+                    <div class="row d-flex justify-content-center align-items-center">
+
+                        <p class="pt-3 pr-2" th:text="${flashMessage.message}"></p>
+                        <a type="button" class="btn btn-danger waves-effect" data-dismiss="modal">KAPAT</a>
                     </div>
                 </div>
             </div>

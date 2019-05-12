@@ -20,7 +20,7 @@ import java.util.Locale;
 public class MailService {
 
     private static final Logger log = LoggerFactory.getLogger(MailService.class);
-    private static final String BASE_ACTIVATION_URL = "http://localhost:8080/activation/";
+    private static final String BASE_URL = "http://localhost:8080/";
     private final SpringTemplateEngine templateEngine;
     private final JavaMailSender javaMailSender;
     private final String logoFileName = "email-logo";
@@ -39,7 +39,7 @@ public class MailService {
         context.setVariable("user", user);
         context.setVariable("logo", logoFileName);
         context.setVariable("verificationCode", verificationCode);
-        context.setVariable("baseURL", BASE_ACTIVATION_URL);
+        context.setVariable("baseURL", BASE_URL);
         String content = templateEngine.process(templateName, context);
         sendEmail(user.getEmail(), subject, content,true,true);
     }
@@ -65,14 +65,14 @@ public class MailService {
     public void sendActivationEmail(SiteUser user, String verificationCode) {
         log.debug("Sending activation email to '{}'", user.getEmail());
         sendEmailFromTemplate(user, "email/activation",
-                "Firmadan Teklif Uyelik Onayi", verificationCode);
+                "Firmadan Teklif - Uyelik Onayi", verificationCode);
     }
 
     @Async
     public void sendResetPasswordEmail(SiteUser user, String verificationCode) {
         log.debug("Sending activation email to '{}'", user.getEmail());
-        sendEmailFromTemplate(user, "email/activation",
-                "Firmadan Teklif Uyelik Onayi", verificationCode);
+        sendEmailFromTemplate(user, "email/reset-password",
+                "Firmadan Teklif - Sifre Degisikligi", verificationCode);
     }
 
     @Async

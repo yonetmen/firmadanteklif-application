@@ -42,7 +42,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/sifre-hatirlatma",
                         "/iletisim",
                         "/hakkimizda",
-                        "/activation/**").permitAll()
+                        "/sifre-yenile",
+                        "/activation/**",
+                        "/reset-password/**").permitAll()
                 .anyRequest()
                     .authenticated()
                 .antMatchers("/user-profile")

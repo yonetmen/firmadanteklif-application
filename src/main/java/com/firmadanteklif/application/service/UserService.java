@@ -36,4 +36,8 @@ public class UserService {
     public boolean isEmailUnique(String email) {
         return !userRepository.findByEmail(email).isPresent();
     }
+
+    public SiteUser updateUser(SiteUser fetchedUser) {
+        return userRepository.save(fetchedUser);
+    }
 }

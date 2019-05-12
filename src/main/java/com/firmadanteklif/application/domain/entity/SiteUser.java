@@ -50,6 +50,7 @@ public class SiteUser implements Serializable {
     @Transient
     private String confirmPassword;
 
+    @Column(name = "active")
     private boolean active;
 
     @Column(name = "role", length = 12)

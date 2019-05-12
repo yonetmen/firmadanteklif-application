@@ -4,6 +4,8 @@ import com.firmadanteklif.application.domain.dto.FlashMessage;
 import com.firmadanteklif.application.domain.entity.SiteUser;
 import com.firmadanteklif.application.domain.enums.VerificationEvent;
 import com.firmadanteklif.application.exception.InvalidUuidFormatException;
+import com.firmadanteklif.application.exception.UserNotFoundException;
+import com.firmadanteklif.application.service.UserService;
 import com.firmadanteklif.application.service.VerificationService;
 import com.firmadanteklif.application.utility.FlashUtility;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Locale;
+import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -23,21 +26,24 @@ public class VerificationController {
 
     private VerificationService verificationService;
     private MessageSource messageSource;
+    private UserService userService;
 
     @Autowired
     public VerificationController(VerificationService verificationService,
-                                  MessageSource messageSource) {
+                                  MessageSource messageSource,
+                                  UserService userService) {
         this.verificationService = verificationService;
         this.messageSource = messageSource;
+        this.userService = userService;
     }
 
     @GetMapping("/activation/{email}/{verificationId}")
     public String activateAccount(@PathVariable String verificationId, @PathVariable String email, Model model) {
-        log.info("VerificationCode: " + verificationId);
+        log.info("Email activation ID: " + verificationId);
 
-        UUID uuid = validateVerificationUUID(verificationId);
+        UUID uuid = validateVerificationUUID(verificationId, "user/login");
 
-        FlashMessage flashMessage = verificationService.getVerificationOpResult(uuid, VerificationEvent.REGISTER, email);
+        FlashMessage flashMessage = verificationService.getVerificationResultForUserRegister(uuid, VerificationEvent.REGISTER, email);
         SiteUser user = new SiteUser();
         if(flashMessage.getKind().equalsIgnoreCase(FlashUtility.FLASH_SUCCESS))
             user.setEmail(email);
@@ -46,13 +52,38 @@ public class VerificationController {
         return "/user/login";
     }
 
-    private UUID validateVerificationUUID(String verificationId) {
+    @GetMapping("/reset-password/{email}/{verificationId}")
+    public String resetPassword(@PathVariable String verificationId, @PathVariable String email, Model model) {
+        log.info("Reset Password ID: " + verificationId);
+
+        UUID uuid = validateVerificationUUID(verificationId, "home");
+        SiteUser user = validateSiteUser(email);
+
+
+        FlashMessage flashMessage = verificationService.getVerificationResultForPasswordReset(uuid, VerificationEvent.FORGOT_PASSWORD, email);
+
+        if(flashMessage.getKind().equalsIgnoreCase(FlashUtility.FLASH_SUCCESS))
+            user.setEmail(email);
+        model.addAttribute("user", user);
+        model.addAttribute("flashMessage", flashMessage);
+        return "/user/password-new";
+    }
+
+    private UUID validateVerificationUUID(String verificationId, String redirectTarget) {
         try { // Check if incoming UUID has the right format.
             return UUID.fromString(verificationId);
         } catch (Exception ex) {
-            throw new InvalidUuidFormatException(messageSource
-                    .getMessage("user.activation.fail", null, Locale.getDefault()));
+            // Todo: Make this message generic. It says 'Activation' but used in resetPassword as well.
+            // Todo: And it redirects to login page. It should redirect to reset password for resetPassword.
+            String errorMessage = messageSource.getMessage("user.activation.fail", null, Locale.getDefault());
+            throw new InvalidUuidFormatException(errorMessage, redirectTarget);
         }
+    }
+
+    private SiteUser validateSiteUser(String email) {
+        Optional<SiteUser> userOptional = userService.findUserByEmail(email);
+        // Todo: this exception message is not generic. Refactor it asap.
+        return userOptional.orElseThrow(()-> new UserNotFoundException(email));
     }
 
 }

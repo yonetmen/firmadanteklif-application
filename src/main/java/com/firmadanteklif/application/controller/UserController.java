@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.Locale;
@@ -108,12 +110,43 @@ public class UserController {
 
         SiteUser siteUser = optional.get();
         String verificationCodeId = createVerificationCodeForRecoverPassword(siteUser.getUuid());
-        // Todo: Create password reset mail template.
+        log.info("Password Reset URL: localhost:8080/reset-password/kasimgul@hotmail.com/" + verificationCodeId);
 //        mailService.sendResetPasswordEmail(siteUser, verificationCodeId);
         FlashMessage flashMessage = FlashUtility.getFlashMessage(FlashUtility.FLASH_SUCCESS,
                 messageSource.getMessage("user.password.reset.mail.sent", null, Locale.getDefault()));
         model.addAttribute("flashMessage", flashMessage);
         return "user/password-reset";
+    }
+
+    @PostMapping("/sifre-yenileme")
+    public String updatePassword(HttpServletRequest request, @ModelAttribute("user") @Valid SiteUser user, Model model,
+                                 BindingResult bindingResult, RedirectAttributes attributes) {
+
+        if(bindingResult.hasErrors()) {
+            model.addAttribute("validationErrors", bindingResult.getAllErrors());
+            return "user/password-new";
+        }
+        else if (!user.getPassword().equalsIgnoreCase(user.getConfirmPassword())) {
+            bindingResult.rejectValue("password", "password.match.error");
+            return "user/password-new";
+        } else {
+            Optional<SiteUser> userOptional = userService.findUserByEmail(user.getEmail());
+            SiteUser existingUser = userOptional.orElseThrow(() -> new UserNotFoundException(user.getEmail()));
+            existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
+            SiteUser updateUser = userService.updateUser(existingUser);
+            authWithHttpServletRequest(request, user.getEmail(), user.getPassword());
+            request.setAttribute("user", updateUser);
+            return "user/profile";
+
+        }
+    }
+
+    private void authWithHttpServletRequest(HttpServletRequest request, String username, String password) {
+        try {
+            request.login(username, password);
+        } catch (ServletException e) {
+            log.error("Error while auto login after new password", e);
+        }
     }
 
     private String createVerificationCodeForRecoverPassword(UUID userId) {
