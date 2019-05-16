@@ -11,6 +11,8 @@
 
 <!--Page content between here-->
 
+    <div th:replace="~{layout/fragments :: alertMessage}"></div>
+
     <h1>Tekrar Hoşgeldiniz: <span th:text="${session.user.getEmail()}"></span></h1>
 
     <br/><br/><br/><br/><br/>

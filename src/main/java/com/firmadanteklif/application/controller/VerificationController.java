@@ -39,51 +39,48 @@ public class VerificationController {
 
     @GetMapping("/activation/{email}/{verificationId}")
     public String activateAccount(@PathVariable String verificationId, @PathVariable String email, Model model) {
-        log.info("Email activation ID: " + verificationId);
 
-        UUID uuid = validateVerificationUUID(verificationId, "user/login");
+        UUID uuid = validateVerificationUUID(verificationId);
+        String returnPage = "home";
 
         FlashMessage flashMessage = verificationService.getVerificationResultForUserRegister(uuid, VerificationEvent.REGISTER, email);
         SiteUser user = new SiteUser();
-        if(flashMessage.getKind().equalsIgnoreCase(FlashUtility.FLASH_SUCCESS))
+        if(flashMessage.getKind().equalsIgnoreCase(FlashUtility.FLASH_SUCCESS)) {
             user.setEmail(email);
+            returnPage = "/user/login";
+        }
         model.addAttribute("user", user);
         model.addAttribute("flashMessage", flashMessage);
-        return "/user/login";
+        return returnPage;
     }
 
     @GetMapping("/reset-password/{email}/{verificationId}")
     public String resetPassword(@PathVariable String verificationId, @PathVariable String email, Model model) {
-        log.info("Reset Password ID: " + verificationId);
 
-        UUID uuid = validateVerificationUUID(verificationId, "home");
+        UUID uuid = validateVerificationUUID(verificationId);
         SiteUser user = validateSiteUser(email);
-
 
         FlashMessage flashMessage = verificationService.getVerificationResultForPasswordReset(uuid, VerificationEvent.FORGOT_PASSWORD, email);
 
-        if(flashMessage.getKind().equalsIgnoreCase(FlashUtility.FLASH_SUCCESS))
+        if(flashMessage.getKind().equalsIgnoreCase(FlashUtility.FLASH_SUCCESS)) {
             user.setEmail(email);
+        }
         model.addAttribute("user", user);
         model.addAttribute("flashMessage", flashMessage);
         return "/user/password-new";
     }
 
-    private UUID validateVerificationUUID(String verificationId, String redirectTarget) {
+    private UUID validateVerificationUUID(String verificationId) {
         try { // Check if incoming UUID has the right format.
             return UUID.fromString(verificationId);
         } catch (Exception ex) {
-            // Todo: Make this message generic. It says 'Activation' but used in resetPassword as well.
-            // Todo: And it redirects to login page. It should redirect to reset password for resetPassword.
             String errorMessage = messageSource.getMessage("user.activation.fail", null, Locale.getDefault());
-            throw new InvalidUuidFormatException(errorMessage, redirectTarget);
+            throw new InvalidUuidFormatException(errorMessage, "home");
         }
     }
 
     private SiteUser validateSiteUser(String email) {
         Optional<SiteUser> userOptional = userService.findUserByEmail(email);
-        // Todo: this exception message is not generic. Refactor it asap.
         return userOptional.orElseThrow(()-> new UserNotFoundException(email));
     }
-
 }

@@ -100,7 +100,7 @@ public class VerificationService {
             }
         }
 
-        flashMessage.setKind(FlashUtility.FLASH_SUCCESS);
+        flashMessage.setKind(FlashUtility.FLASH_DANGER);
         flashMessage.setMessage(messageSource
                 .getMessage("user.password.reset.fail", null, Locale.getDefault()));
         return flashMessage;

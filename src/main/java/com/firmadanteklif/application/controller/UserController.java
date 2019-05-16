@@ -12,6 +12,7 @@ import com.firmadanteklif.application.utility.FlashUtility;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,8 +22,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.Locale;
@@ -38,18 +37,21 @@ public class UserController {
     private BCryptPasswordEncoder passwordEncoder;
     private MailService mailService;
     private MessageSource messageSource;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     public UserController(UserService userService,
                           BCryptPasswordEncoder passwordEncoder,
                           VerificationService verificationService,
                           MailService mailService,
-                          MessageSource messageSource) {
+                          MessageSource messageSource,
+                          AuthenticationManager authenticationManager) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
         this.verificationService = verificationService;
         this.mailService = mailService;
         this.messageSource = messageSource;
+        this.authenticationManager = authenticationManager;
     }
 
     @GetMapping("user-giris")
@@ -76,7 +78,7 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("validationErrors", bindingResult.getAllErrors());
             return "user/register";
-        } else if (!user.getPassword().equalsIgnoreCase(user.getConfirmPassword())) {
+        } else if (!user.getPassword().equals(user.getConfirmPassword())) {
             bindingResult.rejectValue("password", "password.match.error");
             return "user/register";
         } else {
@@ -93,13 +95,13 @@ public class UserController {
     }
 
     @GetMapping("sifre-hatirlatma")
-    public String passwordReminder(Model model) {
+    public String getResetPasswordForm(Model model) {
         model.addAttribute("user", new SiteUser());
         return "user/password-reset";
     }
 
     @PostMapping("/sifre-hatirlatma")
-    public String passwordReminder(@ModelAttribute("user") SiteUser user, Model model) {
+    public String sendResetPasswordEmail(@ModelAttribute("user") SiteUser user, Model model) {
 
         Optional<SiteUser> optional = userService.findUserByEmail(user.getEmail());
 
@@ -111,7 +113,7 @@ public class UserController {
         SiteUser siteUser = optional.get();
         String verificationCodeId = createVerificationCodeForRecoverPassword(siteUser.getUuid());
         log.info("Password Reset URL: localhost:8080/reset-password/kasimgul@hotmail.com/" + verificationCodeId);
-//        mailService.sendResetPasswordEmail(siteUser, verificationCodeId);
+        mailService.sendResetPasswordEmail(siteUser, verificationCodeId);
         FlashMessage flashMessage = FlashUtility.getFlashMessage(FlashUtility.FLASH_SUCCESS,
                 messageSource.getMessage("user.password.reset.mail.sent", null, Locale.getDefault()));
         model.addAttribute("flashMessage", flashMessage);
@@ -119,34 +121,32 @@ public class UserController {
     }
 
     @PostMapping("/sifre-yenileme")
-    public String updatePassword(HttpServletRequest request, @ModelAttribute("user") @Valid SiteUser user, Model model,
-                                 BindingResult bindingResult, RedirectAttributes attributes) {
+    public String updatePassword(@ModelAttribute("user") SiteUser user, Model model, BindingResult bindingResult) {
 
-        if(bindingResult.hasErrors()) {
-            model.addAttribute("validationErrors", bindingResult.getAllErrors());
+        if(user.getPassword().length() < 6) {
+            bindingResult.rejectValue("password", null, "Şifre alanı en az 6 karakter olmalıdır.");
             return "user/password-new";
         }
-        else if (!user.getPassword().equalsIgnoreCase(user.getConfirmPassword())) {
-            bindingResult.rejectValue("password", "password.match.error");
+        if(user.getPassword().length() > 50) {
+            bindingResult.rejectValue("password", null, "Şifre alanı en fazla 50 karakter olmalıdır.");
             return "user/password-new";
-        } else {
-            Optional<SiteUser> userOptional = userService.findUserByEmail(user.getEmail());
-            SiteUser existingUser = userOptional.orElseThrow(() -> new UserNotFoundException(user.getEmail()));
-            existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
-            SiteUser updateUser = userService.updateUser(existingUser);
-            authWithHttpServletRequest(request, user.getEmail(), user.getPassword());
-            request.setAttribute("user", updateUser);
-            return "user/profile";
-
         }
-    }
-
-    private void authWithHttpServletRequest(HttpServletRequest request, String username, String password) {
-        try {
-            request.login(username, password);
-        } catch (ServletException e) {
-            log.error("Error while auto login after new password", e);
+        if (!user.getPassword().equals(user.getConfirmPassword())) {
+            bindingResult.rejectValue("password", null, "Şifreler birbirinden farklı.");
+            return "user/password-new";
         }
+
+        Optional<SiteUser> userOptional = userService.findUserByEmail(user.getEmail());
+        SiteUser existingUser = userOptional.orElseThrow(() -> new UserNotFoundException(user.getEmail()));
+        existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        SiteUser updateUser = userService.updateUser(existingUser);
+
+        FlashMessage flashMessage = FlashUtility.getFlashMessage(FlashUtility.FLASH_SUCCESS,
+                messageSource.getMessage("user.password.reset.success", null, Locale.getDefault()));
+        model.addAttribute("flashMessage", flashMessage);
+        model.addAttribute("user", updateUser);
+        return "user/login";
+
     }
 
     private String createVerificationCodeForRecoverPassword(UUID userId) {
