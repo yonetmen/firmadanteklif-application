@@ -44,12 +44,13 @@ public class SiteUser implements Serializable {
             @Size(min = 6, message = "{password.size.min.message}"),
             @Size(max = 100, message = "{password.size.max.message}")
     })
-    @Column(length = 100, nullable = false)
+    @Column(length = 50, nullable = false)
     private String password;
 
     @Transient
     private String confirmPassword;
 
+    @Column(name = "active")
     private boolean active;
 
     @Column(name = "role", length = 12)

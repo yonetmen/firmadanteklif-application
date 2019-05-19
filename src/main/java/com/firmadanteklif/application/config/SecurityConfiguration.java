@@ -39,9 +39,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/user-kayit",
                         "/firma-giris",
                         "/firma-kayit",
+                        "/sifre-hatirlatma",
                         "/iletisim",
                         "/hakkimizda",
-                        "/activation/**").permitAll()
+                        "/sifre-yenileme",
+                        "/activation/**",
+                        "/reset-password/**",
+                        "/password-new/**").permitAll()
                 .anyRequest()
                     .authenticated()
                 .antMatchers("/user-profile")
@@ -57,6 +61,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .failureUrl("/user-giris?login-error=true")
                 .and()
                 .logout()
+                    .invalidateHttpSession(true)
+                    .clearAuthentication(true)
                     .logoutSuccessUrl("/")
                     .deleteCookies("JSESSIONID")
                 .and()
@@ -68,8 +74,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .headers().frameOptions().disable();
     }
 
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 

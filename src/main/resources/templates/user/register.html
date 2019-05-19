@@ -10,7 +10,7 @@
 <div class="container"><!-- Container-->
 
     <!--Login Form-->
-    <div class="center mt-5 pt-5 col-md-6 mb-5 pb-5 offset-md-3">
+    <div class="center mt-4 pt-5 col-md-6 mb-5 pb-5 offset-md-3">
         <form role="form" method="post" th:action="@{/user-kayit}" th:object="${user}">
             <div class="text-center">
                 <p class="h2 mb-4 font-weight-bold text-muted text-center pt-3 pb-3">Yeni Üye Kaydı</p>
@@ -69,12 +69,7 @@
     </div>
     <!--Login Form-->
 
-    <br/><br/><br/><br/> <!-- Needed to avoid empty space below footer -->
-
-
 </div>  <!-- Container-->
-
-<div th:replace="~{layout/fragments :: footer}"></div>
 
 </body>
 </html>

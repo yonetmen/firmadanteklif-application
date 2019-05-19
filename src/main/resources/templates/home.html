@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="~{layout/fragments :: head(title = 'FirmadanTeklif')}">
 </head>
@@ -14,6 +14,15 @@
                 openRegisterSuccessModal();
             });
 
+        </script>
+    </div>
+
+    <div th:if="${flashMessage} != null">
+        <script type="text/javascript">
+            document.addEventListener("DOMContentLoaded", function(event) {
+                // Your code to run since DOM is loaded and ready
+                openFlashMessageModal();
+            });
         </script>
     </div>
 
@@ -223,6 +232,10 @@
         function openRegisterSuccessModal() {
             $('#userRegisterSuccessModal').modal('show');
         };
+
+        function openFlashMessageModal() {
+            $('#flashMessageModal').modal('show');
+        };
     </script>
 
     <!--Modal: userRegisterSuccessModal-->
@@ -242,6 +255,24 @@
             <!--/.Content-->
         </div>
     </div><!--Modal: userRegisterSuccessModal-->
+
+    <!--Modal: flashMessageModal-->
+    <div id="flashMessageModal" class="modal fade top" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="true">
+        <div class="modal-dialog modal-frame modal-top modal-notify modal-info" role="document">
+            <!--Content-->
+            <div class="modal-content">
+                <!--Body-->
+                <div class="modal-body">
+                    <div class="row d-flex justify-content-center align-items-center">
+
+                        <p class="pt-3 pr-2" th:text="${flashMessage?.message}"></p>
+                        <a type="button" class="btn btn-danger waves-effect" data-dismiss="modal">KAPAT</a>
+                    </div>
+                </div>
+            </div>
+            <!--/.Content-->
+        </div>
+    </div><!--Modal: flashMessageModal-->
 
 </body>
 </html>
