@@ -8,16 +8,38 @@
 
 <body>
 
-    <div th:replace="~{layout/fragments :: alertMessage}"></div>
+    <div class="jumbotron" th:style="'background-image:url(' + @{/img/profile-bg.jpg} + ');'" >
+        <div class="text-dark text-center py-5 px-4">
+            <div>
+                <h2 class="card-title h1-responsive pt-3 mb-5 font-bold"><strong>Yeni Ilan Ver</strong></h2>
+            </div>
+
+            <div class="pt-2">
+                <form role="form" id="addNewPostForm" th:action="@{/add-new-post}" th:object="${selectedCity}" th:method="post">
+                    <select class="btn btn-info waves-effect" data-live-search=true name="selectedCity">
+                        <option selected disabled>Sehir seciniz</option>
+                        <option th:each="city : ${cities}"
+                                th:value="${city.id}"
+                                th:text="${city.name}"
+                                th:data="${city.id}"></option>
+                    </select>
+                    <button type="submit" class="btn btn-info text-white waves-effect" th:classappend="#{navbar_color}">Ilan Ver <i class="fas fa-search ml-1"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <div class="container">
-        <div class="row my-5">
+
+        <div th:replace="~{layout/fragments :: alertMessage}"></div>
+
+        <div class="row my-5 gray">
             <!-- Card Regular -->
             <div class="card card-cascade col-lg-3 col-md-12 col-sm-12 mb-5">
 
                 <!-- Card image -->
                 <div class="view view-cascade overlay pt-2">
-                    <img class="card-img-top" th:src="@{img/profile-photo.jpg}" alt="Card image cap">
+                    <img class="img-fluid z-depth-1 rounded-circle" th:src="@{img/profile-photo1.jpg}" alt="Card image cap">
                     <a>
                         <div class="mask rgba-white-slight"></div>
                     </a>
@@ -29,7 +51,8 @@
                     <!-- Title -->
                     <h4 class="card-title"><strong>Kasim Gul</strong></h4>
                     <!-- Subtitle -->
-                    <h6 class="py-3"><span class="font-weight-bold indigo-text" th:text="${session.user.getEmail()}"></span></h6>
+                    <h6 class="py-3"><span class="font-weight-bold indigo-text" th:text ="${#authentication.getPrincipal().getUsername()}"></span></h6>
+
                     <!-- Text -->
                     <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, ex, recusandae. Facere modi sunt, quod quibusdam.
                     </p>
@@ -67,9 +90,9 @@
                             <div class="col-md-6 my-5">
                                 <h6 class="h6">Aktivitelerim</h6>
                                 <hr>
-                                <span class="badge badge-primary">Verdigim Ilan 900</span><br/>
-                                <span class="badge badge-success">Aldigim Teklif 224</span><br/>
-                                <span class="badge badge-danger">Kabul ettigim teklif 25</span>
+                                <span class="badge badge-primary p-2 mb-2">Verdigim Ilan 900</span><br/>
+                                <span class="badge badge-success p-2 mb-2">Aldigim Teklif 224</span><br/>
+                                <span class="badge badge-danger p-2">Kabul ettigim teklif 25</span>
                             </div>
                             <div class="col-md-12">
                                 <h5 class="mt-5 h5"><i class="far fa-clock text-muted"></i> En son verdigim ilanlar</h5>
