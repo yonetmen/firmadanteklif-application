@@ -42,9 +42,9 @@ public class SiteUser implements Serializable {
 
     @Size.List({
             @Size(min = 6, message = "{password.size.min.message}"),
-            @Size(max = 100, message = "{password.size.max.message}")
+            @Size(max = 99, message = "{password.size.max.message}")
     })
-    @Column(length = 50, nullable = false)
+    @Column(length = 99, nullable = false)
     private String password;
 
     @Transient
@@ -56,6 +56,12 @@ public class SiteUser implements Serializable {
     @Column(name = "role", length = 12)
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Column(name = "full_name", length = 50)
+    private String fullName;
+
+    @Column(name = "alias", length = 50)
+    private String alias;
 
     @PrePersist
     public void generateUuid() {

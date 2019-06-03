@@ -39,6 +39,8 @@ public class UserSuccessLoginHandler implements AuthenticationSuccessHandler {
             if(siteUser.isActive()) {
                 log.info("User successfully logged in: " + siteUser.getEmail());
                 response.setStatus(HttpServletResponse.SC_OK);
+                session.setAttribute("username", siteUser.getEmail());
+                session.setAttribute("authority", siteUser.getRole().name());
                 response.sendRedirect("/user-profile");
             } else {
                 log.info("User is neither registered nor validated: " + siteUser.getEmail());
