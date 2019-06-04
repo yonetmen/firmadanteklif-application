@@ -49,8 +49,8 @@
                 <!-- Card content -->
                 <div class="card-body card-body-cascade text-center">
 
-                    <h6 class="card-title text-muted" th:text="${user.getFullName() != null} ? ${user.getFullName()} : 'Kasim Gul'"></h6>
-                    <h6 class="card-title text-muted" th:text="${user.getAlias() != null} ? ${user.getAlias()} : 'reaLdeaL'"></h6>
+                    <h6 class="card-title text-muted" th:text="${user.getFullName() != null} ? ${user.getFullName()} : ''"></h6>
+                    <h6 class="card-title text-muted" th:text="${user.getAlias() != null} ? ${user.getAlias()} : ''"></h6>
                     <h6 class="card-title text-muted" th:text ="${user.getEmail()}"></h6>
                     <hr>
                     <div class="container">
@@ -146,35 +146,63 @@
                         <!--/row-->
                     </div>
                     <div class="tab-pane" id="edit">
-                        <form role="form">
+                        <form role="form" method="post" th:action="@{/user-update}" th:object="${user}">
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">Adiniz</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" type="text" placeholder="Adiniz ve Soyadiniz">
+                                    <input class="form-control"
+                                           type="text"
+                                           th:field="*{fullName}"
+                                           th:placeholder="${user.getFullName() != null} ? ${user.getFullName()} : '...'">
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-lg-3 col-form-label form-control-label">E-posta</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" type="email" placeholder="e-posta adresiniz">
+                                    <input class="form-control"
+                                           type="email"
+                                           th:field="*{email}"
+                                           th:placeholder="${user.getEmail() != null} ? ${user.getEmail()} : '...'">
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row mb-4">
                                 <label class="col-lg-3 col-form-label form-control-label">Kullanici Adi</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" type="text" placeholder="kullanici adiniz">
+                                    <input class="form-control"
+                                           type="text"
+                                           th:field="*{alias}"
+                                           th:placeholder="${user.getAlias() != null} ? ${user.getAlias()} : '...'">
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="form-group row mt-4">
+                                <label class="col-lg-3 col-form-label form-control-label">Eski Sifre</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control"
+                                           type="password"
+                                           th:field="*{password}"
+                                           placeholder="***"
+                                           required >
+                                    <label class="col-form-label font-small blue-grey-text font-italic">* Profil bilgilerinizi guncellemek icin luften sifrenizi giriniz.</label>
+                                </div>
+                            </div>
+                            <div class="form-group row mt-4">
+                                <label class="col-lg-3 col-form-label form-control-label">Yeni Sifre</label>
+                                <div class="col-lg-9">
+                                    <input class="form-control"
+                                           type="password"
+                                           th:field="*{newPassword}"
+                                           placeholder="***">
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Sifre</label>
+                                <label class="col-lg-3 col-form-label form-control-label">Yeni Sifre Onay</label>
                                 <div class="col-lg-9">
-                                    <input class="form-control" type="password" placeholder="Sifreniz">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-lg-3 col-form-label form-control-label">Sifre (tekrar)</label>
-                                <div class="col-lg-9">
-                                    <input class="form-control" type="password" placeholder="Sifre Onay">
+                                    <input class="form-control"
+                                           type="password"
+                                           th:field="*{confirmPassword}"
+                                           placeholder="***">
+                                    <label class="col-form-label font-small blue-grey-text font-italic">* Bu kismi sadece Sifrenizi degistirmek isterseniz doldurun.</label>
                                 </div>
                             </div>
                             <div class="form-group row">

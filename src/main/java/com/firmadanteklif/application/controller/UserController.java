@@ -11,15 +11,13 @@ import com.firmadanteklif.application.service.MailService;
 import com.firmadanteklif.application.service.UserService;
 import com.firmadanteklif.application.service.VerificationService;
 import com.firmadanteklif.application.utility.FlashUtility;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,10 +26,14 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.UUID;
 
 @Slf4j
 @Controller
+@AllArgsConstructor
 public class UserController {
 
     private UserService userService;
@@ -40,21 +42,6 @@ public class UserController {
     private MailService mailService;
     private MessageSource messageSource;
     private HomeService homeService;
-
-    @Autowired
-    public UserController(UserService userService,
-                          BCryptPasswordEncoder passwordEncoder,
-                          VerificationService verificationService,
-                          MailService mailService,
-                          MessageSource messageSource,
-                          HomeService homeService) {
-        this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
-        this.verificationService = verificationService;
-        this.mailService = mailService;
-        this.messageSource = messageSource;
-        this.homeService = homeService;
-    }
 
     @GetMapping("user-giris")
     public String loginUser(Model model) {
@@ -83,7 +70,7 @@ public class UserController {
             user.setPassword(encodedPassword);
             SiteUser newUser = userService.register(user);
             String codeForRegister = createVerificationCodeForEvent(newUser.getUuid(), VerificationEvent.REGISTER);
-            log.info("Password Reset URL: localhost:8080/activation/kasimgul@hotmail.com/" + codeForRegister);
+            log.info("Register Verification URL: localhost:8080/activation/"+ user.getEmail() + "/" + codeForRegister);
 //            mailService.sendActivationEmail(newUser, codeForRegister);
             redirectAttributes
                     .addFlashAttribute("userEmail", newUser.getEmail())
@@ -110,7 +97,7 @@ public class UserController {
 
         SiteUser siteUser = optional.get();
         String verificationCodeId = createVerificationCodeForEvent(siteUser.getUuid(), VerificationEvent.FORGOT_PASSWORD);
-        log.info("Password Reset URL: localhost:8080/reset-password/kasimgul@hotmail.com/" + verificationCodeId);
+        log.info("Password Reset URL: localhost:8080/reset-password/"+ user.getEmail() + "/" + verificationCodeId);
 //        mailService.sendResetPasswordEmail(siteUser, verificationCodeId);
         FlashMessage flashMessage = FlashUtility.getFlashMessage(FlashUtility.FLASH_SUCCESS,
                 messageSource.getMessage("user.password.reset.mail.sent", null, Locale.getDefault()));
@@ -121,11 +108,11 @@ public class UserController {
     @PostMapping("/sifre-yenileme")
     public String updatePassword(@ModelAttribute("user") SiteUser user, Model model, BindingResult bindingResult) {
 
-        if(user.getPassword().length() < 6) {
+        if(user.getPassword().trim().length() < 6) {
             bindingResult.rejectValue("password", null, "Şifre alanı en az 6 karakter olmalıdır.");
             return "user/password-new";
         }
-        if(user.getPassword().length() > 50) {
+        if(user.getPassword().trim().length() > 50) {
             bindingResult.rejectValue("password", null, "Şifre alanı en fazla 99 karakter olmalıdır.");
             return "user/password-new";
         }
@@ -145,7 +132,6 @@ public class UserController {
         model.addAttribute("flashMessage", flashMessage);
         model.addAttribute("user", updateUser);
         return "user/login";
-
     }
 
     @GetMapping("user-profile")
@@ -156,6 +142,36 @@ public class UserController {
         model.addAttribute("cities", cities);
         model.addAttribute("user", user.get());
         return "user/profile";
+    }
+
+    @PostMapping("/user-update")
+    public String updateUser(@ModelAttribute("user") SiteUser user, Model model, BindingResult bindingResult) {
+
+        if(user.getPassword().trim().length() < 6) {
+            bindingResult.rejectValue("password", null, "Şifre alanı en az 6 karakter olmalıdır.");
+            return "user/user-profile";
+        }
+        if(user.getPassword().trim().length() > 50) {
+            bindingResult.rejectValue("password", null, "Şifre alanı en fazla 99 karakter olmalıdır.");
+            return "user/user-profile";
+        }
+        if (!user.getPassword().equals(user.getConfirmPassword())) {
+            bindingResult.rejectValue("password", null,
+                    messageSource.getMessage("password.match.error", null, Locale.getDefault()));
+            return "user/user-profile";
+        }
+
+        Optional<SiteUser> userOptional = userService.findUserByEmail(user.getEmail());
+        SiteUser existingUser = userOptional.orElseThrow(() -> new UserNotFoundException(user.getEmail()));
+        existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
+        SiteUser updateUser = userService.updateUser(existingUser);
+
+        FlashMessage flashMessage = FlashUtility.getFlashMessage(FlashUtility.FLASH_SUCCESS,
+                messageSource.getMessage("user.password.reset.success", null, Locale.getDefault()));
+        model.addAttribute("flashMessage", flashMessage);
+        model.addAttribute("user", updateUser);
+        return "user/login";
+
     }
 
     private String createVerificationCodeForEvent(UUID userId, VerificationEvent event) {

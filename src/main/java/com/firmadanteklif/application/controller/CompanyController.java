@@ -2,20 +2,16 @@ package com.firmadanteklif.application.controller;
 
 import com.firmadanteklif.application.domain.entity.SiteCompany;
 import com.firmadanteklif.application.service.CompanyService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
+@AllArgsConstructor
 public class CompanyController {
 
     private CompanyService companyService;
-
-    @Autowired
-    public CompanyController(CompanyService companyService) {
-        this.companyService = companyService;
-    }
 
     @GetMapping("firma-giris")
     public String loginFirma(Model model) {

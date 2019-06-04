@@ -8,8 +8,8 @@ import com.firmadanteklif.application.exception.UserNotFoundException;
 import com.firmadanteklif.application.service.UserService;
 import com.firmadanteklif.application.service.VerificationService;
 import com.firmadanteklif.application.utility.FlashUtility;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,20 +22,12 @@ import java.util.UUID;
 
 @Slf4j
 @Controller
+@AllArgsConstructor
 public class VerificationController {
 
     private VerificationService verificationService;
     private MessageSource messageSource;
     private UserService userService;
-
-    @Autowired
-    public VerificationController(VerificationService verificationService,
-                                  MessageSource messageSource,
-                                  UserService userService) {
-        this.verificationService = verificationService;
-        this.messageSource = messageSource;
-        this.userService = userService;
-    }
 
     @GetMapping("/activation/{email}/{verificationId}")
     public String activateAccount(@PathVariable String verificationId, @PathVariable String email, Model model) {

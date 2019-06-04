@@ -48,6 +48,9 @@ public class SiteUser implements Serializable {
     private String password;
 
     @Transient
+    private String newPassword;
+
+    @Transient
     private String confirmPassword;
 
     @Column(name = "active")
