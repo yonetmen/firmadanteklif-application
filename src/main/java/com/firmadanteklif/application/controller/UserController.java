@@ -149,16 +149,16 @@ public class UserController {
 
         if(user.getPassword().trim().length() < 6) {
             bindingResult.rejectValue("password", null, "Şifre alanı en az 6 karakter olmalıdır.");
-            return "user/user-profile";
+            return "user/profile";
         }
         if(user.getPassword().trim().length() > 50) {
-            bindingResult.rejectValue("password", null, "Şifre alanı en fazla 99 karakter olmalıdır.");
-            return "user/user-profile";
+            bindingResult.rejectValue("password", null, "Şifre alanı en fazla 50 karakter olmalıdır.");
+            return "user/profile";
         }
-        if (!user.getPassword().equals(user.getConfirmPassword())) {
+        if (!user.getNewPassword().equals(user.getConfirmPassword())) {
             bindingResult.rejectValue("password", null,
                     messageSource.getMessage("password.match.error", null, Locale.getDefault()));
-            return "user/user-profile";
+            return "user/profile";
         }
 
         Optional<SiteUser> userOptional = userService.findUserByEmail(user.getEmail());
