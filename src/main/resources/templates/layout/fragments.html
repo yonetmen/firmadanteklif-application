@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <!--Head Fragment-->
 <head th:fragment="head(title)">
@@ -37,10 +37,10 @@
     </button>
     <div class="collapse navbar-collapse px-2" id="navbarSupportedContent-333">
         <ul class="navbar-nav ml-auto nav-flex-icons">
-            <div th:if="${#request.getRemoteUser() == null}"><!--USER LOGIN LINK-->
+            <div sec:authorize="!isAuthenticated()">
                 <li class="nav-item text-white">
                     <a class="nav-link" th:href="@{/user-giris}"><i class="fas fa-user-alt"></i> Kullanici Girisi</a>
-                </li>
+                    </li>
             </div>
 
             <div th:if="${#request.isUserInRole('USER')}"><!--USER DROPDOWN MENU-->
@@ -52,7 +52,7 @@
                         <a class="dropdown-item" href="/user-profile" onmouseover="this.style.backgroundColor='#4297db';
                         this.style.color='white'" onmouseleave="this.style.backgroundColor=''; this.style.color='';">Profilim</a>
                         <a class="dropdown-item" href="#" onmouseover="this.style.backgroundColor='#4297db';
-                        this.style.color='white'" onmouseleave="this.style.backgroundColor=''; this.style.color='';">Mesajlarim</a>
+                        this.style.color='white'" onmouseleave="this.style.backgroundColor=''; this.style.color='';">Mesajlarim <span class="badge badge-default ml-2">4</span></a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#" th:href="@{/logout}" onmouseover="this.style.backgroundColor='#4297db';
                         this.style.color='white'" onmouseleave="this.style.backgroundColor=''; this.style.color='';">Cikis</a>
