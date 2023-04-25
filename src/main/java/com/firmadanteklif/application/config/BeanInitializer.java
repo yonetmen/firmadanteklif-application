@@ -39,8 +39,8 @@ public class BeanInitializer implements WebMvcConfigurer {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("in-v3.mailjet.com");
         mailSender.setPort(587);
-        mailSender.setUsername("12ada582463d12c329f6ead145d49e21");
-        mailSender.setPassword("7e3032d6eb58ba5f5027d3532918947b");
+        mailSender.setUsername("user_name");
+        mailSender.setPassword("passowrd");
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
         props.put("mail.smtp.auth", "true");
